@@ -1,5 +1,15 @@
 # Experience
 
+## Tamaggo — Montreal, Canada
+**Firmware / Embedded C++ Engineer**  
+March 2013 – May 2014
+
+Embedded engineer focused on image processing applications.
+
+- Developed firmware and embedded software in C++ (and Assembler) for microcontrollers and on-board processors.
+- Applied extensive background in video processing algorithms, noise filtering, and real-time image processing.
+- Worked on product features related to video and potentially audio processing in a real-time embedded environment.
+
 ## Star Systems — Tokyo, Japan
 **Embedded Systems Design (Contract)**  
 March 2010 – June 2010
