@@ -26,3 +26,10 @@
 ## DEC – Technical College Degree in Electronics
 **Specialization:** Computer Hardware Design  
 **Date:** May 1994
+
+## Awards, Grants & Scholarships
+
+- Research Associate Grant — École Polytechnique
+- Scholarship Grant — Gennum
+- Monbukagakusho Scholarship — Japanese Ministry of Education
+- Research Associate Grant — Global Center of Excellence
