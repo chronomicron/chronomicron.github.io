@@ -30,4 +30,7 @@ I’m happy to connect about opportunities, collaboration, or shared interests.
 
 - **University of Tokyo PhD Thesis** — [Thesis record](https://gakui.dl.itc.u-tokyo.ac.jp/cgi-bin/gazo.cgi?no=127214)  
   Official doctoral thesis entry.
-  
+
+## Online Presence
+- **X (Twitter)** — [x.com/chronomicron](https://x.com/chronomicron)
+- **Personal blog (2000s–Japan era)** — [chronomicron.wordpress.com](https://chronomicron.wordpress.com/)
