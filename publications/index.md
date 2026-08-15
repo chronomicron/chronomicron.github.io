@@ -46,3 +46,9 @@ You can also view my IEEE author profile here:
   WSEAS Transactions on Electronics, 2004  
   [PDF](../assets/publications/WSEAS%20Transactions%20on%20Electronics%202004_grangercatudalGrouSavaria.pdf)
   
+## 2000
+
+- **INTIME: a multi-tool specification environment for ensuring timing constraints integrity for SOC design**  
+  P. Nsame, Robert Grou-Szabo, Yvon Savaria  
+  IP Based Design 2000, Grenoble, France  
+  [PolyPublie record](https://publications.polymtl.ca/27957/)
