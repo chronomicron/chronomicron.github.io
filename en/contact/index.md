@@ -10,8 +10,8 @@ I’m happy to connect about opportunities, collaboration, or shared interests.
 - **GitHub** — [github.com/chronomicron](https://github.com/chronomicron)  
   Source code and personal projects.
 
-- **LinkedIn** — [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)  
-  Professional experience and recommendations. *(placeholder – replace with your real URL)*
+- **LinkedIn** — [https://www.linkedin.com/in/robert-grou-szabo](https://www.linkedin.com/in/robert-grou-szabo)  
+  Professional experience and recommendations.
 
 - **IEEE Xplore Author Profile** — [ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)  
   Peer-reviewed IEEE publications.
