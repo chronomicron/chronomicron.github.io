@@ -10,6 +10,14 @@
                     left sidebar, and main content area). All content
                     is loaded dynamically from the Markdown files in
                     the /en/ folder (later /fr/ and /ja/ will be added).
+
+    NAVIGATION MODEL (updated):
+      Top bar = high-level modes / audiences
+        • Profile / Resume  → professional content for HR & managers
+        • Projects          → technical & collaboration oriented
+        • Personal          → interests & personality
+        • Contact           → how to reach me + verification links
+      Left sidebar = the actual pages belonging to the selected mode
     ============================================================
   -->
   <meta charset="UTF-8" />
@@ -27,19 +35,17 @@
   <!-- ========== TOP HORIZONTAL NAVIGATION BAR ========== -->
   <header id="top-nav">
     <div class="nav-brand">
-      <a href="#" data-section="about">Robert Grou-Szabo</a>
+      <a href="#" data-mode="profile">Robert Grou-Szabo</a>
     </div>
+
     <nav class="nav-links">
-      <!-- These buttons correspond to the top-level categories -->
-      <button class="nav-btn active" data-section="about">About</button>
-      <button class="nav-btn" data-section="experience">Experience</button>
-      <button class="nav-btn" data-section="academic">Academic</button>
-      <button class="nav-btn" data-section="publications">Publications</button>
-      <button class="nav-btn" data-section="projects">Projects</button>
-      <button class="nav-btn" data-section="personal_interests">Personal Interests</button>
-      <button class="nav-btn" data-section="skills">Skills</button>
-      <button class="nav-btn" data-section="contact">Contact</button>
+      <!-- High-level modes -->
+      <button class="nav-btn active" data-mode="profile">Profile / Resume</button>
+      <button class="nav-btn" data-mode="projects">Projects</button>
+      <button class="nav-btn" data-mode="personal">Personal</button>
+      <button class="nav-btn" data-mode="contact">Contact</button>
     </nav>
+
     <!-- Language switcher (placeholder for later) -->
     <div class="lang-switcher">
       <button class="lang-btn active" data-lang="en">EN</button>
@@ -51,9 +57,9 @@
   <!-- ========== MAIN LAYOUT: LEFT SIDEBAR + CONTENT ========== -->
   <div id="main-layout">
 
-    <!-- Left contextual sidebar – changes according to the selected top section -->
+    <!-- Left contextual sidebar – changes according to the selected top mode -->
     <aside id="sidebar">
-      <h2 id="sidebar-title">About</h2>
+      <h2 id="sidebar-title">Profile / Resume</h2>
       <ul id="sidebar-menu">
         <!-- Populated dynamically by JavaScript -->
       </ul>
