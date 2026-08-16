@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    ============================================================
+    FILE: index.html
+    PURPOSE: Main entry point of the personal digital profile site.
+    ROLE IN PROJECT: This is the single page that users land on.
+                    It contains the overall layout (top navigation bar,
+                    left sidebar, and main content area). All content
+                    is loaded dynamically from the Markdown files in
+                    the /en/ folder (later /fr/ and /ja/ will be added).
+    ============================================================
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robert Grou-Szabo — Personal Profile</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Markdown parser (Marked.js) from CDN – converts .md files to HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+  <!-- ========== TOP HORIZONTAL NAVIGATION BAR ========== -->
+  <header id="top-nav">
+    <div class="nav-brand">
+      <a href="#" data-section="about">Robert Grou-Szabo</a>
+    </div>
+    <nav class="nav-links">
+      <!-- These buttons correspond to the top-level categories -->
+      <button class="nav-btn active" data-section="about">About</button>
+      <button class="nav-btn" data-section="experience">Experience</button>
+      <button class="nav-btn" data-section="academic">Academic</button>
+      <button class="nav-btn" data-section="publications">Publications</button>
+      <button class="nav-btn" data-section="projects">Projects</button>
+      <button class="nav-btn" data-section="personal_interests">Personal Interests</button>
+      <button class="nav-btn" data-section="skills">Skills</button>
+      <button class="nav-btn" data-section="contact">Contact</button>
+    </nav>
+    <!-- Language switcher (placeholder for later) -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="ja">JA</button>
+    </div>
+  </header>
+
+  <!-- ========== MAIN LAYOUT: LEFT SIDEBAR + CONTENT ========== -->
+  <div id="main-layout">
+
+    <!-- Left contextual sidebar – changes according to the selected top section -->
+    <aside id="sidebar">
+      <h2 id="sidebar-title">About</h2>
+      <ul id="sidebar-menu">
+        <!-- Populated dynamically by JavaScript -->
+      </ul>
+    </aside>
+
+    <!-- Main content area – displays the selected Markdown content -->
+    <main id="content">
+      <div id="content-body">
+        <!-- Markdown content will be rendered here -->
+        <p>Loading…</p>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Main application logic -->
+  <script src="js/main.js"></script>
+</body>
+</html>
