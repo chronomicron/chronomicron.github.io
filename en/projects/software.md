@@ -10,8 +10,6 @@ Built a dedicated AI computer with GPU to run large language models entirely loc
 - Self-hosted Git server for private repositories
 - Early-stage experiment: using Amazon Alexa as a voice entry point to query the local Ollama instance from anywhere in the house
 
-This project combines hardware building, systems administration, and applied AI.
-
 ## ChronoVault
 **Status:** In development
 
@@ -21,6 +19,8 @@ It searches through all of these locations, finds media files, and consolidates 
 
 **The problem it solves**  
 Over the years photos and videos accumulate across phones, cameras, cloud backups, and forgotten external drives. There is rarely one clean place where everything lives. Duplicates, messy phone dumps, and inconsistent folder structures only make it worse. ChronoVault pulls all of that material together into one coherent, dated archive so you don’t have to sort everything by hand.
+
+![GitHub](/assets/icons/alpha/github-logo.png) [GitHub Repository](https://github.com/chronomicron/ChronoVault)
 
 ## Scheduled VLC Media Player
 **Status:** Completed
@@ -33,6 +33,8 @@ Designed for my mother so the television would automatically turn on and play:
 - Older dramas in the evening
 
 No channel changing required — the same shows appeared at the same times every day.
+
+![GitHub](/assets/icons/alpha/github-logo.png) [GitHub Repository](https://github.com/chronomicron/VLC_scheduler)
 
 ## Game Mods
 **Status:** Completed / Occasional
