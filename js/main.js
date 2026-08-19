@@ -40,7 +40,8 @@ const navigation = {
   projects: {
     title: "Projects",
     items: [
-      { id: "projects", label: "All Projects", file: "projects/index.md" }
+      { id: "software", label: "Software Applications", file: "projects/software.md" },
+      { id: "hardware", label: "Hardware Applications", file: "projects/hardware.md" }
     ]
   },
   personal: {
@@ -188,3 +189,4 @@ async function loadMarkdown(path) {
     console.error(err);
   }
 }
+
