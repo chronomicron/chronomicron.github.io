@@ -1,6 +1,7 @@
 # Experience
 
 ## Tamaggo — Montreal, Canada
+![Tamaggo](../../assets/icons/alpha/tamaggo-logo.png) Tamaggo  
 **Firmware / Embedded C++ Engineer**  
 March 2013 – May 2014
 
@@ -11,6 +12,7 @@ Embedded engineer focused on image processing applications.
 - Worked on product features related to video and potentially audio processing in a real-time embedded environment.
 
 ## Star Systems — Tokyo, Japan
+![Star Systems](../../assets/icons/alpha/star-systems-logo.png) Star Systems  
 **Embedded Systems Design (Contract)**  
 March 2010 – June 2010
 
@@ -22,6 +24,7 @@ Worked on the next-generation motion sensor for the Axbo alarm clock (a sleep-tr
 - Focused on extremely low power consumption and very small footprint/memory constraints.
 
 ## Toin Corporation — Tokyo, Japan
+![Toin](../../assets/icons/alpha/toin-corp-logo.png) Toin Corporation  
 **Japanese–English Translator / Proof-reader (Contract)**  
 December 2008 – April 2010
 
@@ -29,6 +32,7 @@ December 2008 – April 2010
 - Performed linguistic and contextual QA for applications on PC, game consoles, PSP, Nintendo DS, and mobile phones.
 
 ## The University of Tokyo — Tokyo, Japan
+![University of Tokyo](../../assets/icons/alpha/university-of-tokyo-logo.png) The University of Tokyo  
 **Research Associate**  
 April 2005 – March 2006
 
@@ -38,6 +42,7 @@ April 2005 – March 2006
   - Edge & corner detection, optical flow, Hough transform, template matching
 
 ## Gennum Corporation — Burlington, Ontario, Canada
+![Gennum](../../assets/icons/alpha/gennum_corporation-logo.png) Gennum Corporation  
 **Software Programmer**  
 June 2003 – December 2005
 
@@ -53,6 +58,7 @@ Designed and implemented a flexible, reconfigurable Kalman video noise filter ca
   - C# GUI for ease of use
 
 ## École Polytechnique de Montréal — Montreal, Canada
+![Polytechnique Montréal](../../assets/icons/alpha/polytechnique-montreal-logo.png) École Polytechnique de Montréal  
 **Research Associate**  
 March 2001 – September 2002
 
@@ -60,6 +66,7 @@ March 2001 – September 2002
 - Performed hardware/software co-design, testing, and simulation.
 
 ## IBM — Essex Junction, Vermont, USA
+![IBM](../../assets/icons/alpha/ibm-logo.png) IBM  
 **GUI Designer / Software Programmer**  
 June 2000 – March 2001
 
