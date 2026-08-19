@@ -48,6 +48,26 @@ html, body {
   line-height: 1.6;
   color: var(--color-text);
   background-color: #f1f5f9;
+  /* Custom rocket cursor – hotspot at top-left (0,0) */
+  cursor: url("/assets/pointer/rocket_small.png") 0 0, auto;
+}
+
+/* Ensure top bar, sidebar and main layout also use the rocket */
+#top-nav,
+#sidebar,
+#main-layout,
+#content {
+  cursor: url("/assets/pointer/rocket_small.png") 0 0, auto;
+}
+
+/* Clickable elements also use the rocket cursor */
+a,
+button,
+.nav-btn,
+.sidebar-btn,
+summary,
+.lang-btn {
+  cursor: url("/assets/pointer/rocket_small.png") 0 0, pointer;
 }
 
 a {
