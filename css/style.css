@@ -49,7 +49,7 @@ html, body {
   color: var(--color-text);
   background-color: #f1f5f9;
   /* Custom rocket cursor – hotspot at top-left (0,0) */
-  cursor: url("/assets/pointer/rocket_small.png") 0 0, auto;
+  cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, auto;
 }
 
 /* Ensure top bar, sidebar and main layout also use the rocket */
@@ -57,7 +57,7 @@ html, body {
 #sidebar,
 #main-layout,
 #content {
-  cursor: url("/assets/pointer/rocket_small.png") 0 0, auto;
+  cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, auto;
 }
 
 /* Clickable elements also use the rocket cursor */
@@ -66,8 +66,26 @@ button,
 .nav-btn,
 .sidebar-btn,
 summary,
-.lang-btn {
-  cursor: url("/assets/pointer/rocket_small.png") 0 0, pointer;
+.lang-btn,
+#menu-toggle {
+  cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, pointer;
+}
+
+/* Pressed / click-down cursor (toggled by JS class on <html>) */
+html.cursor-pressed,
+html.cursor-pressed body,
+html.cursor-pressed #top-nav,
+html.cursor-pressed #sidebar,
+html.cursor-pressed #main-layout,
+html.cursor-pressed #content,
+html.cursor-pressed a,
+html.cursor-pressed button,
+html.cursor-pressed .nav-btn,
+html.cursor-pressed .sidebar-btn,
+html.cursor-pressed summary,
+html.cursor-pressed .lang-btn,
+html.cursor-pressed #menu-toggle {
+  cursor: url("/assets/pointer/retro_rocket2_48px.png") 0 0, pointer !important;
 }
 
 a {
@@ -209,6 +227,22 @@ a:hover {
   background: var(--color-primary);
   color: white;
   font-weight: 500;
+}
+
+/* Nested sidebar items (e.g. Skills → Technical / Other) */
+.sidebar-child {
+  margin-left: 0.75rem;
+}
+
+.sidebar-btn-child {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  padding-left: 1rem;
+}
+
+.sidebar-btn-child::before {
+  content: "↳ ";
+  opacity: 0.5;
 }
 
 /* Main content area – graph-paper + optional photo background */
@@ -405,21 +439,144 @@ a:hover {
   margin-bottom: 1rem;
 }
 
-/* ---------- RESPONSIVE (basic) ---------- */
+/* ---------- HAMBURGER BUTTON (hidden on desktop) ---------- */
+#menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-topnav-text);
+  border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Animate to X when menu is open */
+#top-nav.menu-open .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+#top-nav.menu-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+#top-nav.menu-open .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
+  #top-nav {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--topnav-height);
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .nav-brand {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-brand a {
+    font-size: 1rem;
+  }
+
+  /* Show hamburger, hide inline lang on the first row if needed */
+  #menu-toggle {
+    display: flex;
+  }
+
+  .lang-switcher {
+    margin-left: 0;
+    order: 3;
+  }
+
+  /* Mode links become a full-width dropdown under the top bar */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    order: 4;
+    gap: 0.25rem;
+    padding: 0.5rem 0 0.25rem 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  #top-nav.menu-open .nav-links {
+    display: flex;
+  }
+
+  .nav-btn {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 0.85rem;
+    font-size: 1rem;
+  }
+
+  /* Stack sidebar above content */
   #main-layout {
     flex-direction: column;
   }
+
   #sidebar {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--color-border);
-    padding: 1rem;
+    padding: 0.75rem 1rem;
+    max-height: none;
   }
+
+  /* Sidebar items as horizontal scroll chips on mobile */
+  #sidebar-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+
+  #sidebar-menu li {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .sidebar-btn {
+    white-space: nowrap;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  #sidebar-title {
+    margin-bottom: 0.5rem;
+  }
+
   #content {
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
   }
-  .nav-links {
-    display: none; /* simple mobile fallback – can improve later */
+
+  #content-body {
+    max-width: 100%;
+  }
+
+  #content-body h1 {
+    font-size: 1.5rem;
+  }
+
+  #content-body h2 {
+    font-size: 1.2rem;
   }
 }

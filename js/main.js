@@ -40,13 +40,19 @@ const navigation = {
   profile: {
     title: "Profile / Resume",
     items: [
-      { id: "about",       label: "About",               file: "about/index.md" },
-      { id: "experience",  label: "Experience",          file: "experience/index.md" },
-      { id: "academic",    label: "Academic",            file: "academic/index.md" },
-      { id: "publications",label: "Publications",        file: "publications/index.md" },
-      { id: "skills",      label: "Skills – Overview",   file: "skills/index.md" },
-      { id: "technical",   label: "Skills – Technical",  file: "skills/technical.md" },
-      { id: "other",       label: "Skills – Other",      file: "skills/other.md" }
+      { id: "about",        label: "About",        file: "about/index.md" },
+      { id: "experience",   label: "Experience",   file: "experience/index.md" },
+      { id: "academic",     label: "Academic",     file: "academic/index.md" },
+      { id: "publications", label: "Publications", file: "publications/index.md" },
+      {
+        id: "skills",
+        label: "Skills",
+        file: "skills/index.md",
+        children: [
+          { id: "technical", label: "Technical", file: "skills/technical.md" },
+          { id: "other",     label: "Other",     file: "skills/other.md" }
+        ]
+      }
     ]
   },
   projects: {
@@ -72,11 +78,27 @@ const navigation = {
 
 // ---------- INITIALISATION ----------
 document.addEventListener("DOMContentLoaded", () => {
+  // Custom cursor: switch image while mouse button is held down
+  document.addEventListener("mousedown", () => {
+    document.documentElement.classList.add("cursor-pressed");
+  });
+  document.addEventListener("mouseup", () => {
+    document.documentElement.classList.remove("cursor-pressed");
+  });
+  document.addEventListener("mouseleave", () => {
+    document.documentElement.classList.remove("cursor-pressed");
+  });
+  // Safety: if drag ends outside the window
+  window.addEventListener("blur", () => {
+    document.documentElement.classList.remove("cursor-pressed");
+  });
+
   // Top navigation (modes)
   document.querySelectorAll(".nav-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const mode = btn.dataset.mode;
       switchMode(mode);
+      closeMobileMenu();
     });
   });
 
@@ -84,7 +106,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".nav-brand a").addEventListener("click", (e) => {
     e.preventDefault();
     switchMode("profile");
+    closeMobileMenu();
   });
+
+  // Hamburger toggle (mobile)
+  const menuToggle = document.getElementById("menu-toggle");
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const topNav = document.getElementById("top-nav");
+      const open = topNav.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+  }
 
   // Language switcher (only EN fully supported for now)
   document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -105,6 +139,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start on Profile / Resume → About
   switchMode("profile");
 });
+
+/** Close the mobile hamburger menu */
+function closeMobileMenu() {
+  const topNav = document.getElementById("top-nav");
+  const menuToggle = document.getElementById("menu-toggle");
+  if (topNav) topNav.classList.remove("menu-open");
+  if (menuToggle) {
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open menu");
+  }
+}
 
 // ---------- MODE SWITCHING ----------
 /**
@@ -151,6 +196,7 @@ function setBackgroundForMode(modeId) {
 
 /**
  * Builds the left sidebar menu for the given mode.
+ * Supports one level of children (e.g. Skills → Technical / Other).
  */
 function buildSidebar(modeId) {
   const mode = navigation[modeId];
@@ -161,19 +207,53 @@ function buildSidebar(modeId) {
   menuEl.innerHTML = "";
 
   mode.items.forEach(item => {
-    const li = document.createElement("li");
-    const btn = document.createElement("button");
-    btn.className = "sidebar-btn";
-    btn.textContent = item.label;
-    btn.dataset.page = item.id;
+    menuEl.appendChild(createSidebarItem(item, false));
 
-    btn.addEventListener("click", () => {
-      loadPage(item.id);
-    });
-
-    li.appendChild(btn);
-    menuEl.appendChild(li);
+    if (item.children && item.children.length) {
+      item.children.forEach(child => {
+        menuEl.appendChild(createSidebarItem(child, true));
+      });
+    }
   });
+}
+
+/**
+ * Creates a single sidebar <li><button> entry.
+ * @param {object} item - navigation item with id, label, file
+ * @param {boolean} isChild - if true, styled as a sub-item
+ */
+function createSidebarItem(item, isChild) {
+  const li = document.createElement("li");
+  if (isChild) li.className = "sidebar-child";
+
+  const btn = document.createElement("button");
+  btn.className = "sidebar-btn" + (isChild ? " sidebar-btn-child" : "");
+  btn.textContent = item.label;
+  btn.dataset.page = item.id;
+
+  btn.addEventListener("click", () => {
+    loadPage(item.id);
+  });
+
+  li.appendChild(btn);
+  return li;
+}
+
+/**
+ * Finds a navigation item by id, including nested children.
+ */
+function findNavItem(pageId) {
+  const mode = navigation[currentMode];
+  if (!mode) return null;
+
+  for (const item of mode.items) {
+    if (item.id === pageId) return item;
+    if (item.children) {
+      const child = item.children.find(c => c.id === pageId);
+      if (child) return child;
+    }
+  }
+  return null;
 }
 
 /**
@@ -187,9 +267,7 @@ function loadPage(pageId) {
     btn.classList.toggle("active", btn.dataset.page === pageId);
   });
 
-  // Find the file path
-  const mode = navigation[currentMode];
-  const item = mode.items.find(i => i.id === pageId);
+  const item = findNavItem(pageId);
   if (!item) return;
 
   const mdPath = `${currentLang}/${item.file}`;

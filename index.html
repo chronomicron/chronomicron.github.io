@@ -11,13 +11,17 @@
                     is loaded dynamically from the Markdown files in
                     the /en/ folder (later /fr/ and /ja/ will be added).
 
-    NAVIGATION MODEL (updated):
+    NAVIGATION MODEL:
       Top bar = high-level modes / audiences
         • Profile / Resume  → professional content for HR & managers
         • Projects          → technical & collaboration oriented
         • Personal          → interests & personality
         • Contact           → how to reach me + verification links
       Left sidebar = the actual pages belonging to the selected mode
+
+    RESPONSIVE:
+      On narrow screens a hamburger button opens the mode menu.
+      The left sidebar stacks above the content.
     ============================================================
   -->
   <meta charset="UTF-8" />
@@ -38,7 +42,14 @@
       <a href="#" data-mode="profile">Robert Grou-Szabo</a>
     </div>
 
-    <nav class="nav-links">
+    <!-- Hamburger – visible only on small screens -->
+    <button id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <nav class="nav-links" id="nav-links">
       <!-- High-level modes -->
       <button class="nav-btn active" data-mode="profile">Profile / Resume</button>
       <button class="nav-btn" data-mode="projects">Projects</button>
