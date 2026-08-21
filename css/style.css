@@ -211,7 +211,7 @@ a:hover {
   font-weight: 500;
 }
 
-/* Main content area – graph-paper background (slightly rotated) */
+/* Main content area – graph-paper + optional photo background */
 #content {
   flex: 1;
   padding: 2rem 2.5rem;
@@ -220,15 +220,46 @@ a:hover {
   background-color: #f8fafc;
 }
 
-/* Rotated millimeter-style graph paper (thin lines + thicker every 10) */
-#content::before {
+/* Photo background layer (semi-transparent, behind the grid) */
+#content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.18; /* overall strength of the photo – adjust 0.12–0.28 */
+  transition: background-image 0.4s ease, opacity 0.4s ease;
+}
+
+/* Per-mode background images */
+#content[data-bg="transceiver"]::after {
+  background-image: url("/assets/background/transceiver.jpeg");
+}
+#content[data-bg="neural-network"]::after {
+  background-image: url("/assets/background/neural-network.jpeg");
+}
+#content[data-bg="himeji-jo"]::after {
+  background-image: url("/assets/background/himeji-jo.jpeg");
+}
+#content[data-bg="lagrange-point"]::after {
+  background-image: url("/assets/background/lagrange-point.jpeg");
+}
+#content[data-bg="energy-levels"]::after {
+  background-image: url("/assets/background/energy-levels.jpeg");
+}
+
+/* Rotated millimeter-style graph paper – only shown when .show-graph-paper is set */
+#content.show-graph-paper::before {
   content: "";
   position: absolute;
   top: -40%;
   left: -40%;
   width: 180%;
   height: 180%;
-  z-index: 0;
+  z-index: 1; /* grid above the photo */
   pointer-events: none;
   opacity: 0.40;
   transform: rotate(12deg);
@@ -249,10 +280,10 @@ a:hover {
     100px 100px;
 }
 
-/* Keep actual text/content above the grid */
+/* Keep actual text/content above the grid and photo */
 #content-body {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 820px;
   margin: 0 auto;
 }

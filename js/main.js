@@ -20,6 +20,18 @@ let currentLang = "en";
 let currentMode = "profile";
 let currentPage = null;
 
+// Set to true to show the millimeter graph-paper overlay
+const SHOW_GRAPH_PAPER = false;
+
+// Available background images (in /assets/background/)
+const BACKGROUND_IMAGES = [
+  "transceiver",
+  "neural-network",
+  "himeji-jo",
+  "lagrange-point",
+  "energy-levels"
+];
+
 /*
   Navigation structure – grouped by high-level mode.
   Each mode contains the pages that appear in the left sidebar.
@@ -108,6 +120,9 @@ function switchMode(modeId) {
     btn.classList.toggle("active", btn.dataset.mode === modeId);
   });
 
+  // Set semi-transparent background image for this mode
+  setBackgroundForMode(modeId);
+
   // Rebuild left sidebar
   buildSidebar(modeId);
 
@@ -116,6 +131,22 @@ function switchMode(modeId) {
   if (mode && mode.items.length > 0) {
     loadPage(mode.items[0].id);
   }
+}
+
+/**
+ * Sets a random semi-transparent background image and optionally the graph paper.
+ * Images live in /assets/background/
+ */
+function setBackgroundForMode(modeId) {
+  const content = document.getElementById("content");
+  if (!content) return;
+
+  // Random background each time the top-level mode changes
+  const bg = BACKGROUND_IMAGES[Math.floor(Math.random() * BACKGROUND_IMAGES.length)];
+  content.setAttribute("data-bg", bg);
+
+  // Toggle graph paper on/off via the boolean at the top of this file
+  content.classList.toggle("show-graph-paper", SHOW_GRAPH_PAPER);
 }
 
 /**
@@ -189,4 +220,3 @@ async function loadMarkdown(path) {
     console.error(err);
   }
 }
-
