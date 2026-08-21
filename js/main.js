@@ -5,9 +5,10 @@
   ROLE IN PROJECT:
     - Handles top navigation (high-level modes)
     - Builds the left sidebar menu according to the selected mode
-    - Loads the correct Markdown file from /en/ (later /fr/, /ja/)
+    - Loads the correct Markdown file from /en/, /fr/, or /ja/
     - Converts Markdown to HTML using the Marked library
     - Updates the main content area
+    - UI labels (top bar + sidebar) are translated via UI object
 
   NAVIGATION MODEL:
     Top bar buttons = modes (Profile/Resume, Projects, Personal, Contact)
@@ -33,48 +34,138 @@ const BACKGROUND_IMAGES = [
 ];
 
 /*
-  Navigation structure – grouped by high-level mode.
-  Each mode contains the pages that appear in the left sidebar.
+  UI strings shared by all languages (top bar, sidebar titles, item labels).
+  When you translate Japanese content later, these labels are already ready.
+*/
+const UI = {
+  en: {
+    modes: {
+      profile: "Profile / Resume",
+      projects: "Projects",
+      personal: "Personal",
+      contact: "Contact"
+    },
+    pages: {
+      about: "About",
+      experience: "Experience",
+      academic: "Academic",
+      publications: "Publications",
+      skills: "Skills",
+      technical: "Technical",
+      other: "Other",
+      software: "Software Applications",
+      hardware: "Hardware Applications",
+      interests: "Personal Interests",
+      contact: "Get in Touch"
+    },
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    jaComingSoon: "Japanese version coming soon."
+  },
+  fr: {
+    modes: {
+      profile: "Profil / CV",
+      projects: "Projets",
+      personal: "Personnel",
+      contact: "Contact"
+    },
+    pages: {
+      about: "À propos",
+      experience: "Expérience",
+      academic: "Formation",
+      publications: "Publications",
+      skills: "Compétences",
+      technical: "Techniques",
+      other: "Autres",
+      software: "Applications logicielles",
+      hardware: "Applications matérielles",
+      interests: "Intérêts personnels",
+      contact: "Me joindre"
+    },
+    menuOpen: "Ouvrir le menu",
+    menuClose: "Fermer le menu",
+    jaComingSoon: "La version japonaise sera disponible bientôt."
+  },
+  ja: {
+    modes: {
+      profile: "プロフィール / 履歴書",
+      projects: "プロジェクト",
+      personal: "個人",
+      contact: "連絡先"
+    },
+    pages: {
+      about: "自己紹介",
+      experience: "職歴",
+      academic: "学歴",
+      publications: "論文・発表",
+      skills: "スキル",
+      technical: "技術",
+      other: "その他",
+      software: "ソフトウェア",
+      hardware: "ハードウェア",
+      interests: "個人的な関心",
+      contact: "お問い合わせ"
+    },
+    menuOpen: "メニューを開く",
+    menuClose: "メニューを閉じる",
+    jaComingSoon: "日本語版は近日公開予定です。"
+  }
+};
+
+/*
+  Navigation structure – ids and file paths only.
+  Display labels come from UI[currentLang].
 */
 const navigation = {
   profile: {
-    title: "Profile / Resume",
+    modeKey: "profile",
     items: [
-      { id: "about",        label: "About",        file: "about/index.md" },
-      { id: "experience",   label: "Experience",   file: "experience/index.md" },
-      { id: "academic",     label: "Academic",     file: "academic/index.md" },
-      { id: "publications", label: "Publications", file: "publications/index.md" },
+      { id: "about",        file: "about/index.md" },
+      { id: "experience",   file: "experience/index.md" },
+      { id: "academic",     file: "academic/index.md" },
+      { id: "publications", file: "publications/index.md" },
       {
         id: "skills",
-        label: "Skills",
         file: "skills/index.md",
         children: [
-          { id: "technical", label: "Technical", file: "skills/technical.md" },
-          { id: "other",     label: "Other",     file: "skills/other.md" }
+          { id: "technical", file: "skills/technical.md" },
+          { id: "other",     file: "skills/other.md" }
         ]
       }
     ]
   },
   projects: {
-    title: "Projects",
+    modeKey: "projects",
     items: [
-      { id: "software", label: "Software Applications", file: "projects/software.md" },
-      { id: "hardware", label: "Hardware Applications", file: "projects/hardware.md" }
+      { id: "software", file: "projects/software.md" },
+      { id: "hardware", file: "projects/hardware.md" }
     ]
   },
   personal: {
-    title: "Personal",
+    modeKey: "personal",
     items: [
-      { id: "interests", label: "Personal Interests", file: "personal_interests/index.md" }
+      { id: "interests", file: "personal_interests/index.md" }
     ]
   },
   contact: {
-    title: "Contact",
+    modeKey: "contact",
     items: [
-      { id: "contact", label: "Get in Touch", file: "contact/index.md" }
+      { id: "contact", file: "contact/index.md" }
     ]
   }
 };
+
+function t() {
+  return UI[currentLang] || UI.en;
+}
+
+function pageLabel(id) {
+  return t().pages[id] || id;
+}
+
+function modeLabel(modeId) {
+  return t().modes[modeId] || modeId;
+}
 
 // ---------- INITIALISATION ----------
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mouseleave", () => {
     document.documentElement.classList.remove("cursor-pressed");
   });
-  // Safety: if drag ends outside the window
   window.addEventListener("blur", () => {
     document.documentElement.classList.remove("cursor-pressed");
   });
@@ -116,29 +206,46 @@ document.addEventListener("DOMContentLoaded", () => {
       const topNav = document.getElementById("top-nav");
       const open = topNav.classList.toggle("menu-open");
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      menuToggle.setAttribute("aria-label", open ? t().menuClose : t().menuOpen);
     });
   }
 
-  // Language switcher (only EN fully supported for now)
+  // Language switcher (EN, FR, JA – JA UI ready; content can follow)
   document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const lang = btn.dataset.lang;
-      if (lang !== "en") {
-        alert("French and Japanese translations will be available soon.");
-        return;
-      }
+      if (!UI[lang]) return;
+
       currentLang = lang;
+      document.documentElement.lang = lang === "ja" ? "ja" : lang;
+
       document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      // Reload current page in the selected language
+
+      // Update all chrome labels, then reload content
+      updateChromeLabels();
+      buildSidebar(currentMode);
       if (currentPage) loadPage(currentPage);
     });
   });
 
   // Start on Profile / Resume → About
+  updateChromeLabels();
   switchMode("profile");
 });
+
+/** Update top-bar mode button labels for the current language */
+function updateChromeLabels() {
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    const mode = btn.dataset.mode;
+    btn.textContent = modeLabel(mode);
+  });
+
+  const menuToggle = document.getElementById("menu-toggle");
+  if (menuToggle && !document.getElementById("top-nav").classList.contains("menu-open")) {
+    menuToggle.setAttribute("aria-label", t().menuOpen);
+  }
+}
 
 /** Close the mobile hamburger menu */
 function closeMobileMenu() {
@@ -147,50 +254,34 @@ function closeMobileMenu() {
   if (topNav) topNav.classList.remove("menu-open");
   if (menuToggle) {
     menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open menu");
+    menuToggle.setAttribute("aria-label", t().menuOpen);
   }
 }
 
 // ---------- MODE SWITCHING ----------
-/**
- * Called when a top-level mode button is clicked.
- * Updates the active state, rebuilds the left sidebar, and loads the first page.
- */
 function switchMode(modeId) {
   currentMode = modeId;
   currentPage = null;
 
-  // Highlight the active top button
   document.querySelectorAll(".nav-btn").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.mode === modeId);
   });
 
-  // Set semi-transparent background image for this mode
   setBackgroundForMode(modeId);
-
-  // Rebuild left sidebar
   buildSidebar(modeId);
 
-  // Load the first item of this mode
   const mode = navigation[modeId];
   if (mode && mode.items.length > 0) {
     loadPage(mode.items[0].id);
   }
 }
 
-/**
- * Sets a random semi-transparent background image and optionally the graph paper.
- * Images live in /assets/background/
- */
 function setBackgroundForMode(modeId) {
   const content = document.getElementById("content");
   if (!content) return;
 
-  // Random background each time the top-level mode changes
   const bg = BACKGROUND_IMAGES[Math.floor(Math.random() * BACKGROUND_IMAGES.length)];
   content.setAttribute("data-bg", bg);
-
-  // Toggle graph paper on/off via the boolean at the top of this file
   content.classList.toggle("show-graph-paper", SHOW_GRAPH_PAPER);
 }
 
@@ -203,7 +294,7 @@ function buildSidebar(modeId) {
   const menuEl = document.getElementById("sidebar-menu");
   const titleEl = document.getElementById("sidebar-title");
 
-  titleEl.textContent = mode.title;
+  titleEl.textContent = modeLabel(modeId);
   menuEl.innerHTML = "";
 
   mode.items.forEach(item => {
@@ -217,18 +308,13 @@ function buildSidebar(modeId) {
   });
 }
 
-/**
- * Creates a single sidebar <li><button> entry.
- * @param {object} item - navigation item with id, label, file
- * @param {boolean} isChild - if true, styled as a sub-item
- */
 function createSidebarItem(item, isChild) {
   const li = document.createElement("li");
   if (isChild) li.className = "sidebar-child";
 
   const btn = document.createElement("button");
   btn.className = "sidebar-btn" + (isChild ? " sidebar-btn-child" : "");
-  btn.textContent = item.label;
+  btn.textContent = pageLabel(item.id);
   btn.dataset.page = item.id;
 
   btn.addEventListener("click", () => {
@@ -239,9 +325,6 @@ function createSidebarItem(item, isChild) {
   return li;
 }
 
-/**
- * Finds a navigation item by id, including nested children.
- */
 function findNavItem(pageId) {
   const mode = navigation[currentMode];
   if (!mode) return null;
@@ -256,13 +339,9 @@ function findNavItem(pageId) {
   return null;
 }
 
-/**
- * Loads a specific page (Markdown file) into the main content area.
- */
 function loadPage(pageId) {
   currentPage = pageId;
 
-  // Highlight the active sidebar item
   document.querySelectorAll(".sidebar-btn").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.page === pageId);
   });
@@ -274,9 +353,6 @@ function loadPage(pageId) {
   loadMarkdown(mdPath);
 }
 
-/**
- * Fetches a Markdown file and renders it as HTML.
- */
 async function loadMarkdown(path) {
   const contentBody = document.getElementById("content-body");
   contentBody.innerHTML = "<p>Loading…</p>";
@@ -298,3 +374,4 @@ async function loadMarkdown(path) {
     console.error(err);
   }
 }
+
