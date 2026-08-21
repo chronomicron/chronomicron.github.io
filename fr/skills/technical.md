@@ -1,49 +1,49 @@
-# Technical Skills
+# Compétences techniques
 
-## Programming Languages
+## Langages de programmation
 - C / C++ / C# (MFC, .NET, OpenGL, SystemC)
-- Assembler (Intel, Motorola, Atmel AVR)
+- Assembleur (Intel, Motorola, Atmel AVR)
 - Python
 - Matlab / Simulink
 - VHDL / SystemVerilog
 - Java (Android)
 - HTML
 
-## Hardware & Embedded
-- Xilinx and Altera / Intel FPGAs
-- Microcontrollers: Atmel AVR, Intel 80x, Motorola 68k, Arduino
+## Matériel et embarqué
+- FPGA Xilinx et Altera / Intel
+- Microcontrôleurs : Atmel AVR, Intel 80x, Motorola 68k, Arduino
 - Raspberry Pi
-- Hardware/software co-design
-- Low-power embedded design
+- Co-conception matériel/logiciel
+- Conception embarquée basse consommation
 - Bluetooth, I²C, USB
-- Embedded Linux (Yocto, Buildroot)
+- Linux embarqué (Yocto, Buildroot)
 - FreeRTOS / Zephyr RTOS
-- ARM Cortex-M / Cortex-A toolchains
+- Chaînes d’outils ARM Cortex-M / Cortex-A
 
-## Computer Vision & Video
+## Vision par ordinateur et vidéo
 - OpenCV
 - FFmpeg
 - GStreamer
 
-## Tools & Environments
-- IDEs: VS Code (primary), Eclipse, Microsoft Visual Studio, Atmel Studio
-- Version control: Git, CVS
-- Operating systems: Linux (extensive use), Windows, Unix, VxWorks
-- CAD / EDA: Synopsys, Mentor Graphics, Cadence, OrCAD
-- Simulation & validation: SystemC, Matlab
+## Outils et environnements
+- IDE : VS Code (principal), Eclipse, Microsoft Visual Studio, Atmel Studio
+- Contrôle de versions : Git, CVS
+- Systèmes d’exploitation : Linux (utilisation intensive), Windows, Unix, VxWorks
+- CAD / EDA : Synopsys, Mentor Graphics, Cadence, OrCAD
+- Simulation et validation : SystemC, Matlab
 - Docker
 - CMake
 - Jupyter notebooks
 
-## Creative & Media
+## Création et médias
 - Adobe Creative Suite (Photoshop, Illustrator, Premiere, Dreamweaver)
-- 3D: 3D Studio MAX, LightWave 3D
-- Audio & video editing (professional graphic artist and post-production tools)
+- 3D : 3D Studio MAX, LightWave 3D
+- Montage audio et vidéo (outils professionnels de graphisme et de postproduction)
 - Avid Pro Tools, Sound Forge
-- Broadcast television production experience
+- Expérience en production télévisuelle
 
-## Currently Learning
-Actively studying and building personal projects with:
+## En apprentissage
+Étude active et projets personnels avec :
 - PyTorch
 - TensorFlow / Keras
 - CUDA

@@ -1,77 +1,116 @@
-# Experience
+# Expérience
 
-## Tamaggo — Montreal, Canada
-**Firmware / Embedded C++ Engineer**  
-March 2013 – May 2014
+## Tamaggo — Montréal, Canada
+![Tamaggo](/assets/icons/alpha/tamaggo-logo.png) Tamaggo  
+**Ingénieur firmware / C++ embarqué**  
+mars 2013 – mai 2014
 
-Embedded engineer focused on image processing applications.
+<details>
+<summary>Lire la suite</summary>
 
-- Developed firmware and embedded software in C++ (and Assembler) for microcontrollers and on-board processors.
-- Applied extensive background in video processing algorithms, noise filtering, and real-time image processing.
-- Worked on product features related to video and potentially audio processing in a real-time embedded environment.
+Ingénieur embarqué axé sur les applications de traitement d’images.
 
-## Star Systems — Tokyo, Japan
-**Embedded Systems Design (Contract)**  
-March 2010 – June 2010
+- Développement de firmware et de logiciels embarqués en C++ (et assembleur) pour microcontrôleurs et processeurs embarqués.
+- Mise à profit d’une solide expérience en algorithmes de traitement vidéo, filtrage de bruit et traitement d’images en temps réel.
+- Travail sur des fonctions liées au vidéo et, le cas échéant, au traitement audio dans un environnement embarqué temps réel.
+</details>
 
-Worked on the next-generation motion sensor for the Axbo alarm clock (a sleep-tracking wristband that wakes the user based on movement patterns).
+## Star Systems — Tokyo, Japon
+![Star Systems](/assets/icons/alpha/star-systems-logo.png) Star Systems  
+**Conception de systèmes embarqués (contrat)**  
+mars 2010 – juin 2010
 
-- Designed a low-power motion sensor module centered on an Atmel AVR microcontroller programmed in assembler.
-- Integrated two 2-axis tilt sensors and BlueGiga WT12 Bluetooth module (I²C communication).
-- Implemented USB charging and firmware update for the Li-Ion battery.
-- Focused on extremely low power consumption and very small footprint/memory constraints.
+<details>
+<summary>Lire la suite</summary>
 
-## Toin Corporation — Tokyo, Japan
-**Japanese–English Translator / Proof-reader (Contract)**  
-December 2008 – April 2010
+Travail sur le capteur de mouvement de nouvelle génération pour le réveil Axbo (bracelet qui réveille l’utilisateur selon ses mouvements et son cycle de sommeil).
 
-- Proofreading and quality control of Japanese–English translations.
-- Performed linguistic and contextual QA for applications on PC, game consoles, PSP, Nintendo DS, and mobile phones.
+- Conception d’un module de capteur basse consommation centré sur un microcontrôleur Atmel AVR programmé en assembleur.
+- Intégration de deux capteurs d’inclinaison 2 axes et du module Bluetooth BlueGiga WT12 (communication I²C).
+- Mise en œuvre de la charge USB et de la mise à jour du firmware pour la batterie Li-Ion.
+- Priorité à la très faible consommation et à un encombrement / mémoire très réduits.
+</details>
 
-## The University of Tokyo — Tokyo, Japan
-**Research Associate**  
-April 2005 – March 2006
+## Toin Corporation — Tokyo, Japon
+![Toin](/assets/icons/alpha/toin-corp-logo.png) Toin Corporation  
+**Traducteur / réviseur japonais–anglais (contrat)**  
+décembre 2008 – avril 2010
 
-- Researched and implemented video noise detection and noise reduction algorithms.
-- Developed Matlab and C++ implementations for:
-  - Color correction, histogram equalization, JPEG quantization noise, motion blur
-  - Edge & corner detection, optical flow, Hough transform, template matching
+<details>
+<summary>Lire la suite</summary>
+
+- Révision et contrôle de qualité de traductions japonais–anglais.
+- Assurance qualité linguistique et contextuelle pour des applications sur PC, consoles de jeux, PSP, Nintendo DS et téléphones mobiles.
+</details>
+
+## The University of Tokyo — Tokyo, Japon
+![University of Tokyo](/assets/icons/alpha/university-of-tokyo-logo.png) The University of Tokyo  
+**Associé de recherche**  
+avril 2005 – mars 2006
+
+<details>
+<summary>Lire la suite</summary>
+
+- Recherche et mise en œuvre d’algorithmes de détection et de réduction de bruit vidéo.
+- Développements Matlab et C++ pour :
+  - Correction des couleurs, égalisation d’histogramme, bruit de quantification JPEG, flou de mouvement
+  - Détection de contours et de coins, flux optique, transformée de Hough, appariement de modèles
+</details>
 
 ## Gennum Corporation — Burlington, Ontario, Canada
-**Software Programmer**  
-June 2003 – December 2005
+![Gennum](/assets/icons/alpha/gennum_corporation-logo.png) Gennum Corporation  
+**Programmeur logiciel**  
+juin 2003 – décembre 2005
 
-Designed and implemented a flexible, reconfigurable Kalman video noise filter capable of operating at HDTV speeds.
+<details>
+<summary>Lire la suite</summary>
 
-- Made data bus width, pipeline depth, and buffer sizes fully configurable.
-- Built a reusable library of typical noise filters.
-- Full design flow:
-  - Matlab simulations
-  - SystemC for design validation
-  - VHDL implementation
-  - Testing on Xilinx Virtex FPGA
-  - C# GUI for ease of use
+Conception et mise en œuvre d’un filtre de bruit vidéo de Kalman flexible et reconfigurable, capable de fonctionner aux débits HDTV.
 
-## École Polytechnique de Montréal — Montreal, Canada
-**Research Associate**  
-March 2001 – September 2002
+- Largeur de bus de données, profondeur de pipeline et tailles de tampons entièrement configurables.
+- Bibliothèque réutilisable de filtres de bruit typiques.
+- Chaîne de conception complète :
+  - Simulations Matlab
+  - SystemC pour la validation
+  - Implémentation VHDL
+  - Tests sur FPGA Xilinx Virtex
+  - Interface graphique en C#
+</details>
 
-- Supported Ph.D. students with software (C++, Assembler) and hardware (VHDL) development.
-- Performed hardware/software co-design, testing, and simulation.
+## École Polytechnique de Montréal — Montréal, Canada
+![Polytechnique Montréal](/assets/icons/alpha/polytechnique-montreal-logo.png) École Polytechnique de Montréal  
+**Associé de recherche**  
+mars 2001 – septembre 2002
 
-## IBM — Essex Junction, Vermont, USA
-**GUI Designer / Software Programmer**  
-June 2000 – March 2001
+<details>
+<summary>Lire la suite</summary>
 
-Designed a C++ (MFC) GUI application that allowed IBM clients to convert and edit large volumes of design files between Synopsys formats and IBM’s proprietary formats.
+- Soutien aux doctorants : logiciel (C++, assembleur) et matériel (VHDL).
+- Co-conception matériel/logiciel, tests et simulations.
+</details>
 
-- Parsed and converted Tcl/Tk, VHDL, Verilog, Primetime, and Einstimer files.
-- Enabled modification of the files through the GUI before exporting to IBM’s format.
+## IBM — Essex Junction, Vermont, É.-U.
+![IBM](/assets/icons/alpha/ibm-logo.png) IBM  
+**Concepteur d’interface / programmeur logiciel**  
+juin 2000 – mars 2001
 
-## Metronome Productions Inc. — Montreal, Canada
-**3D Graphic Designer / Modeller (Contract)**  
-September 1995 – May 1996
+<details>
+<summary>Lire la suite</summary>
 
-- Created 3D models and renderings for broadcast television commercials using LightWave 3D and 3D Studio MAX.
-- Edited video sequences and created sound effects (Adobe Premiere, Pro Tools, Sound Forge).
-- Gained experience with blue-screen compositing, lighting, and special effects.
+Conception d’une application GUI en C++ (MFC) permettant aux clients d’IBM de convertir et de modifier de grands volumes de fichiers de conception entre les formats Synopsys et les formats propriétaires d’IBM.
+
+- Analyse et conversion de fichiers Tcl/Tk, VHDL, Verilog, Primetime et Einstimer.
+- Modification des fichiers via l’interface avant export vers le format IBM.
+</details>
+
+## Metronome Productions Inc. — Montréal, Canada
+**Designer / modeleur 3D (contrat)**  
+septembre 1995 – mai 1996
+
+<details>
+<summary>Lire la suite</summary>
+
+- Création de modèles et de rendus 3D pour des publicités télévisées (LightWave 3D, 3D Studio MAX).
+- Montage vidéo et effets sonores (Adobe Premiere, Pro Tools, Sound Forge).
+- Expérience en compositing fond bleu, éclairage et effets spéciaux.
+</details>

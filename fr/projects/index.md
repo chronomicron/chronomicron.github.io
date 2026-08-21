@@ -1,41 +1,7 @@
-# Projects
+# Projets
 
-## ChronoVault
-**Status:** In development
+Je travaille sur un large éventail de projets, des applications logicielles plus ambitieuses jusqu’aux petites expériences matérielles et aux réparations d’électronique.
 
-ChronoVault is a personal media archiving tool for people whose photos and videos are scattered across many places — old hard drives, USB keys, DVDs, NAS boxes, Google Drive, Dropbox, and more.
+Beaucoup de choses que je fais me semblent modestes ou routinières — scripts rapides, réparations au niveau d’une carte, restauration d’une vieille console ou d’une radio, débogage d’un capteur — et ne font souvent l’objet d’aucune description formelle. Elles font pourtant partie importante de la façon dont j’occupe mon temps : comprendre le fonctionnement des choses, faire durer le matériel ancien et réduire les déchets électroniques lorsque c’est possible.
 
-It searches through all of these locations, finds media files, and consolidates them into a single, organized, chronological archive. When the software is unsure about a date or detail, it helps you review and correct the information using whatever evidence is available: camera metadata, GPS data, editing software history, or even an OCR scan of a printed date stamp on the image itself.
-
-**The problem it solves**  
-Over the years photos and videos accumulate across phones, cameras, cloud backups, and forgotten external drives. There is rarely one clean place where everything lives. Duplicates, messy phone dumps, and inconsistent folder structures only make it worse. ChronoVault pulls all of that material together into one coherent, dated archive so you don’t have to sort everything by hand.
-
-## Personal Home AI & Local Server
-**Status:** Ongoing
-
-Built a dedicated AI computer with GPU to run large language models entirely locally using Ollama and related tools. The goal is to have capable AI available without relying on external cloud services.
-
-- Local AI inference with Ollama
-- Personal home server accessible from the internet
-- Self-hosted Git server for private repositories
-- Early-stage experiment: using Amazon Alexa as a voice entry point to query the local Ollama instance from anywhere in the house
-
-This project combines hardware building, systems administration, and applied AI.
-
-## Scheduled VLC Media Player
-**Status:** Completed
-
-A custom application that controls VLC Media Player through its API. It maintains a local database of TV shows and movies and plays them on a set schedule every day.
-
-Designed for my mother so the television would automatically turn on and play:
-- Game shows in the morning
-- Soap operas in the afternoon
-- Older dramas in the evening
-
-No channel changing required — the same shows appeared at the same times every day.
-
-## Game Mods
-**Status:** Completed / Occasional
-
-- Valheim mod
-- RimWorld mod
+Les pages de cette section présentent certains des travaux plus complets ou en cours, regroupés en **Applications logicielles** et **Applications matérielles**.

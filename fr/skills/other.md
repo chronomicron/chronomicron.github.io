@@ -1,54 +1,54 @@
-# Other Skills & Interests
+# Autres compétences et intérêts
 
-## Languages
-- English — Native
-- French — Native
-- Japanese — Intermediate (continuously studying and improving)
-- Hungarian — Conversational understanding
-- Chinese (Mandarin) — Beginner
+## Langues
+- Anglais — langue maternelle
+- Français — langue maternelle
+- Japonais — niveau intermédiaire (étude continue)
+- Hongrois — compréhension conversationnelle
+- Chinois (mandarin) — débutant
 
-## Licenses
-- Driver’s license
-- Motorcycle license
+## Permis
+- Permis de conduire automobile
+- Permis de moto
 
-## Food & Fermentation
-- Home cooking
-- Sourdough bread
-- Making alcohol
-- Fermented foods: kimchi, sauerkraut, miso, and experimental soy sauce
+## Alimentation et fermentation
+- Cuisine maison
+- Pain au levain
+- Fabrication d’alcool
+- Aliments fermentés : kimchi, choucroute, miso et sauce soya expérimentale
 
-## Hands-on Trades & Repair
-- Electrical work and house wiring (trained as an electrotechnician; learned alongside a licensed electrician father)
-- Telephone / low-voltage wiring
-- Plumbing
-- Carpentry and general home renovations
-- Small engine repair (cars, motorcycles, go-karts) — experience since childhood
+## Métiers pratiques et réparation
+- Électricité et câblage résidentiel (formation d’électrotechnicien ; appris aux côtés d’un père électricien certifié)
+- Câblage téléphonique / basse tension
+- Plomberie
+- Menuiserie et rénovations générales
+- Réparation de petits moteurs (voitures, motos, go-karts) — depuis l’enfance
 
-## Nature & Outdoor
-- Gardening
-- Beekeeping (hive care)
-- Hiking, camping, and backpacking (in many countries)
-- Cycling
-- Snowboarding
+## Nature et plein air
+- Jardinage
+- Apiculture
+- Randonnée, camping et trekking (dans de nombreux pays)
+- Cyclisme
+- Planche à neige
 
-## Creative
-- Photography
-- Cinematography
+## Créativité
+- Photographie
+- Cinématographie
 
-## Reading & Learning
-- Avid reader — always has a book on hand and maintains a home library
-- Continuous self-directed learning
+## Lecture et apprentissage
+- Lecteur assidu — toujours un livre à portée de main et une bibliothèque à la maison
+- Apprentissage autonome continu
 
-## Lifestyle
-- Strong interest in homesteading and self-sufficiency
+## Mode de vie
+- Fort intérêt pour l’autosuffisance et un mode de vie de type « homesteading »
 
-## Gaming & Computing History
-- Video games since the 1980s, with a particular love for retro and classic games
-- Started on Commodore 64 and Amiga systems
+## Jeux et histoire de l’informatique
+- Jeux vidéo depuis les années 1980, avec un attachement particulier aux jeux rétro et classiques
+- Débuts sur Commodore 64 et Amiga
 
-## Travel
-- Extensive travel to more than 20 countries
+## Voyages
+- Voyages étendus dans plus de 20 pays
 
-## Learning & Personal Projects
-- Actively learning how to use and customize AI tools
-- Several personal AI-related projects currently underway
+## Apprentissage et projets personnels
+- Apprentissage actif de l’utilisation et de la personnalisation d’outils d’IA
+- Plusieurs projets personnels liés à l’IA en cours

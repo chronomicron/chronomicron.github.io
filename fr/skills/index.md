@@ -1,8 +1,8 @@
-# Skills
+# Compétences
 
-This section is divided into two parts:
+Cette section est divisée en deux parties :
 
-- **Technical Skills** — programming languages, hardware, embedded systems, computer vision, tools, and technologies I use (or am currently learning).
-- **Other Skills** — soft skills, personal strengths, cross-cultural experience, and other non-technical abilities.
+- **Compétences techniques** — langages de programmation, matériel, systèmes embarqués, vision par ordinateur, outils et technologies que j’utilise (ou que j’apprends actuellement).
+- **Autres compétences** — compétences transversales, forces personnelles, expérience interculturelle et autres aptitudes non techniques.
 
-Use the left menu to switch between the two categories.
+Utilisez le menu de gauche pour passer d’une catégorie à l’autre.
