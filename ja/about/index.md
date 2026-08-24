@@ -1,18 +1,17 @@
-# About
+# 自己紹介
 
-I’m an **electrical engineer** specializing in **hardware** and **firmware** development, with deep experience in **ASIC** and **FPGA** design. My core focus has been **VLSI** design for **computer vision** and **video processing** algorithms. I also bring a strong academic background, with several publications in **IEEE** journals, conferences, and other peer-reviewed venues.
+私は**電気工学エンジニア**で、**ハードウェア**および**ファームウェア**の開発を専門としています。**ASIC**や**FPGA**の設計にも長く携わり、主な研究・実務の対象は**コンピュータビジョン**と**映像処理**向けの**VLSI**アルゴリズム設計です。学術面でも実績があり、**IEEE**をはじめとする査読付きの論文誌・国際会議に複数の論文を発表してきました。
 
-## Background
+## 初期の影響
 
-My interest in **computer vision** grew out of an early hobby in graphic design and short 3D animation. While studying engineering, it felt natural to steer my work toward the technical side of those creative interests. I later moved deeper into **hardware** and **firmware** through close collaboration with leading researchers in **VLSI**, including doctoral work at the University of Tokyo.
+**コンピュータビジョン**への関心は、若い頃の趣味だったグラフィックデザインや短い3Dアニメーション制作から始まりました。工学部で学ぶなかで、そうした創造的な興味を技術的な側面から深めるのは自然な流れでした。その後、東京大学での博士課程を含め、第一線の**VLSI**研究者と密に協働しながら、ハードウェアとファームウェアの理解をさらに広げました。
 
-## Early influences
-I’ve been involved with computers since 1986. Over the years I lived through the progression from an Apple IIe, Commodore 64, TI-99, and TRS-80 to the Amiga 1000, 486-class machines, and the Windows 3.1 era. Gaming was a big part of that journey — I started playing on the Commodore 64 and Amiga in the 1980s and have kept a lasting interest in both classic and modern games. Growing up alongside the rapid evolution of personal computing shaped my curiosity and made staying current with new technologies feel natural.
+コンピュータには**1986年**から触れています。Apple IIe、コモドール64、TI-99、TRS-80から始まり、Amiga 1000、486クラスのマシン、Windows 3.1の時代まで、パソコンの変遷をその場で見てきました。ゲームもその一部で、1980年代にコモドール64やAmigaで遊び始め、クラシックな作品から現代のタイトルまで、長く関心を持ち続けています。パーソナルコンピュータの急速な進化と並走して育った経験が、好奇心の土台になり、新しい技術を追い続けることを自然な習慣にしてくれました。
 
-## What I enjoy
+## 大切にしていること
 
-What I enjoy most is solving complex technical problems and then seeing the result become physical. There’s something uniquely satisfying about designing a system, having it manufactured, and holding in your hand a tangible outcome of that effort — not just a graph on a screen.
+複雑な技術課題を解き、その結果が**物理的なかたち**になる瞬間を何より楽しみにしています。システムを設計し、製造し、その努力の成果を手に取れることには、画面上のグラフだけでは得られない特別な満足感があります。
 
-## Looking ahead
+## 今後の展望
 
-I’m always looking for new challenges and new things to learn. That’s a big part of why **AI** has captured my attention so strongly. It is currently one of the fastest-moving areas in research and engineering. In many ways it feels similar to the early days of the internet — those who engage with it early build lasting advantages.
+常に新しい挑戦と学びを求めています。その意味でも、いま**AI**に強く惹かれています。研究・工学の現場で最も変化の速い分野の一つであり、インターネット黎明期に似たところがあります。早くから本気で取り組む人ほど、長く効く経験と優位性を積み重ねていける領域だと感じています。

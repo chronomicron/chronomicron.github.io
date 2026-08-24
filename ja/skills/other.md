@@ -1,54 +1,54 @@
-# Other Skills & Interests
+# その他のスキルと関心
 
-## Languages
-- English — Native
-- French — Native
-- Japanese — Intermediate (continuously studying and improving)
-- Hungarian — Conversational understanding
-- Chinese (Mandarin) — Beginner
+## 言語
+- 英語 — ネイティブ
+- フランス語 — ネイティブ
+- 日本語 — 中級（継続学習中）
+- ハンガリー語 — 会話レベルの理解
+- 中国語（普通話） — 初級
 
-## Licenses
-- Driver’s license
-- Motorcycle license
+## 免許
+- 普通自動車免許
+- 自動二輪免許
 
-## Food & Fermentation
-- Home cooking
-- Sourdough bread
-- Making alcohol
-- Fermented foods: kimchi, sauerkraut, miso, and experimental soy sauce
+## 食と発酵
+- 家庭料理
+- サワードウ・パン
+- 自家製アルコール
+- 発酵食品：キムチ、ザワークラウト、味噌、試作中の醤油
 
-## Hands-on Trades & Repair
-- Electrical work and house wiring (trained as an electrotechnician; learned alongside a licensed electrician father)
-- Telephone / low-voltage wiring
-- Plumbing
-- Carpentry and general home renovations
-- Small engine repair (cars, motorcycles, go-karts) — experience since childhood
+## 実務的な技能・修理
+- 電気工事・住宅配線（電気技術の訓練あり。認定電気工事士の父のもとで学び、後に専門課程も修了）
+- 電話・低電圧配線
+- 配管
+- 木工および住宅リフォーム全般
+- 小型エンジン修理（車、バイク、ゴーカート）— 幼少期から
 
-## Nature & Outdoor
-- Gardening
-- Beekeeping (hive care)
-- Hiking, camping, and backpacking (in many countries)
-- Cycling
-- Snowboarding
+## 自然・アウトドア
+- ガーデニング
+- 養蜂
+- ハイキング、キャンプ、バックパッキング（多くの国で）
+- サイクリング
+- スノーボード
 
-## Creative
-- Photography
-- Cinematography
+## 創作
+- 写真
+- 映像制作
 
-## Reading & Learning
-- Avid reader — always has a book on hand and maintains a home library
-- Continuous self-directed learning
+## 読書と学習
+- 読書好き — 常に本を手元に置き、自宅に蔵書がある
+- 継続的な自己学習
 
-## Lifestyle
-- Strong interest in homesteading and self-sufficiency
+## ライフスタイル
+- 自給的な暮らし（ホームステディング）への強い関心
 
-## Gaming & Computing History
-- Video games since the 1980s, with a particular love for retro and classic games
-- Started on Commodore 64 and Amiga systems
+## ゲームとコンピュータ史
+- 1980年代からのビデオゲーム。レトロ・クラシック作品への愛着が特に強い
+- コモドール64や Amiga から開始
 
-## Travel
-- Extensive travel to more than 20 countries
+## 旅行
+- 20か国以上への渡航経験
 
-## Learning & Personal Projects
-- Actively learning how to use and customize AI tools
-- Several personal AI-related projects currently underway
+## 学習と個人プロジェクト
+- AI ツールの利用・カスタマイズを積極的に学習中
+- AI 関連の個人プロジェクトを複数進行中

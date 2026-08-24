@@ -1,77 +1,116 @@
-# Experience
+# 職歴
 
-## Tamaggo — Montreal, Canada
-**Firmware / Embedded C++ Engineer**  
-March 2013 – May 2014
+## Tamaggo — カナダ・モントリオール
+![Tamaggo](/assets/icons/alpha/tamaggo-logo.png) Tamaggo  
+**ファームウェア / 組込み C++ エンジニア**  
+2013年3月 – 2014年5月
 
-Embedded engineer focused on image processing applications.
+<details>
+<summary>続きを読む</summary>
 
-- Developed firmware and embedded software in C++ (and Assembler) for microcontrollers and on-board processors.
-- Applied extensive background in video processing algorithms, noise filtering, and real-time image processing.
-- Worked on product features related to video and potentially audio processing in a real-time embedded environment.
+画像処理アプリケーションを中心とした組込みエンジニア。
 
-## Star Systems — Tokyo, Japan
-**Embedded Systems Design (Contract)**  
-March 2010 – June 2010
+- マイクロコントローラおよびオンボードプロセッサ向けに、C++（およびアセンブラ）でファームウェア・組込みソフトウェアを開発。
+- 映像処理アルゴリズム、ノイズ除去、リアルタイム画像処理の経験を活用。
+- リアルタイム組込み環境における映像、および必要に応じた音声処理関連機能の開発。
+</details>
 
-Worked on the next-generation motion sensor for the Axbo alarm clock (a sleep-tracking wristband that wakes the user based on movement patterns).
+## Star Systems — 日本・東京
+![Star Systems](/assets/icons/alpha/star-systems-logo.png) Star Systems  
+**組込みシステム設計（契約）**  
+2010年3月 – 2010年6月
 
-- Designed a low-power motion sensor module centered on an Atmel AVR microcontroller programmed in assembler.
-- Integrated two 2-axis tilt sensors and BlueGiga WT12 Bluetooth module (I²C communication).
-- Implemented USB charging and firmware update for the Li-Ion battery.
-- Focused on extremely low power consumption and very small footprint/memory constraints.
+<details>
+<summary>続きを読む</summary>
 
-## Toin Corporation — Tokyo, Japan
-**Japanese–English Translator / Proof-reader (Contract)**  
-December 2008 – April 2010
+睡眠パターンに基づいて起床を促すリストバンド型アラーム「Axbo」向けの、次世代モーションセンサの開発。
 
-- Proofreading and quality control of Japanese–English translations.
-- Performed linguistic and contextual QA for applications on PC, game consoles, PSP, Nintendo DS, and mobile phones.
+- Atmel AVR マイクロコントローラを中核とした低消費電力モーションセンサモジュールを設計（アセンブラで実装）。
+- 2軸傾斜センサ2個と BlueGiga WT12 Bluetooth モジュール（I²C）を統合。
+- Li-Ion バッテリの USB 充電およびファームウェア更新を実装。
+- 極めて低い消費電力と、小さな実装面積・メモリ制約への対応を重視。
+</details>
 
-## The University of Tokyo — Tokyo, Japan
-**Research Associate**  
-April 2005 – March 2006
+## Toin Corporation — 日本・東京
+![Toin](/assets/icons/alpha/toin-corp-logo.png) Toin Corporation  
+**日英翻訳・校正（契約）**  
+2008年12月 – 2010年4月
 
-- Researched and implemented video noise detection and noise reduction algorithms.
-- Developed Matlab and C++ implementations for:
-  - Color correction, histogram equalization, JPEG quantization noise, motion blur
-  - Edge & corner detection, optical flow, Hough transform, template matching
+<details>
+<summary>続きを読む</summary>
 
-## Gennum Corporation — Burlington, Ontario, Canada
-**Software Programmer**  
-June 2003 – December 2005
+- 日英翻訳の校正および品質管理。
+- PC、ゲーム機、PSP、ニンテンドーDS、携帯電話向けアプリの、言語・文脈両面の品質確認。
+</details>
 
-Designed and implemented a flexible, reconfigurable Kalman video noise filter capable of operating at HDTV speeds.
+## 東京大学 — 日本・東京
+![University of Tokyo](/assets/icons/alpha/university-of-tokyo-logo.png) 東京大学  
+**研究助手（Research Associate）**  
+2005年4月 – 2006年3月
 
-- Made data bus width, pipeline depth, and buffer sizes fully configurable.
-- Built a reusable library of typical noise filters.
-- Full design flow:
-  - Matlab simulations
-  - SystemC for design validation
-  - VHDL implementation
-  - Testing on Xilinx Virtex FPGA
-  - C# GUI for ease of use
+<details>
+<summary>続きを読む</summary>
 
-## École Polytechnique de Montréal — Montreal, Canada
-**Research Associate**  
-March 2001 – September 2002
+- 映像ノイズの検出・低減アルゴリズムの調査および実装。
+- Matlab および C++ による以下の実装：
+  - 色補正、ヒストグラム平坦化、JPEG 量子化ノイズ、動きぼかし
+  - エッジ・コーナー検出、オプティカルフロー、ハフ変換、テンプレートマッチング
+</details>
 
-- Supported Ph.D. students with software (C++, Assembler) and hardware (VHDL) development.
-- Performed hardware/software co-design, testing, and simulation.
+## Gennum Corporation — カナダ・オンタリオ州バーリントン
+![Gennum](/assets/icons/alpha/gennum_corporation-logo.png) Gennum Corporation  
+**ソフトウェア・プログラマ**  
+2003年6月 – 2005年12月
 
-## IBM — Essex Junction, Vermont, USA
-**GUI Designer / Software Programmer**  
-June 2000 – March 2001
+<details>
+<summary>続きを読む</summary>
 
-Designed a C++ (MFC) GUI application that allowed IBM clients to convert and edit large volumes of design files between Synopsys formats and IBM’s proprietary formats.
+HDTV レートで動作可能な、柔軟で再構成可能なカルマン映像ノイズフィルタの設計・実装。
 
-- Parsed and converted Tcl/Tk, VHDL, Verilog, Primetime, and Einstimer files.
-- Enabled modification of the files through the GUI before exporting to IBM’s format.
+- データバス幅、パイプライン段数、バッファサイズをすべて設定可能に設計。
+- 典型的なノイズフィルタの再利用可能なライブラリを構築。
+- 設計フロー全体：
+  - Matlab シミュレーション
+  - SystemC による設計検証
+  - VHDL 実装
+  - Xilinx Virtex FPGA 上でのテスト
+  - C# による GUI
+</details>
 
-## Metronome Productions Inc. — Montreal, Canada
-**3D Graphic Designer / Modeller (Contract)**  
-September 1995 – May 1996
+## モントリオール工科大学 — カナダ・モントリオール
+![Polytechnique Montréal](/assets/icons/alpha/polytechnique-montreal-logo.png) モントリオール工科大学（École Polytechnique de Montréal）  
+**研究助手（Research Associate）**  
+2001年3月 – 2002年9月
 
-- Created 3D models and renderings for broadcast television commercials using LightWave 3D and 3D Studio MAX.
-- Edited video sequences and created sound effects (Adobe Premiere, Pro Tools, Sound Forge).
-- Gained experience with blue-screen compositing, lighting, and special effects.
+<details>
+<summary>続きを読む</summary>
+
+- 博士課程学生の支援：ソフトウェア（C++、アセンブラ）およびハードウェア（VHDL）。
+- ハードウェア／ソフトウェア協調設計、テスト、シミュレーション。
+</details>
+
+## IBM — 米国バーモント州エセックスジャンクション
+![IBM](/assets/icons/alpha/ibm-logo.png) IBM  
+**GUI 設計 / ソフトウェア・プログラマ**  
+2000年6月 – 2001年3月
+
+<details>
+<summary>続きを読む</summary>
+
+Synopsys 形式と IBM 独自形式の間で、大量の設計ファイルを変換・編集できる C++（MFC）GUI アプリケーションを設計。
+
+- Tcl/Tk、VHDL、Verilog、Primetime、Einstimer ファイルの解析と変換。
+- GUI 上でファイルを編集したうえで、IBM 形式へエクスポート。
+</details>
+
+## Metronome Productions Inc. — カナダ・モントリオール
+**3D グラフィックデザイナー / モデラー（契約）**  
+1995年9月 – 1996年5月
+
+<details>
+<summary>続きを読む</summary>
+
+- テレビ CM 向けの 3D モデルおよびレンダリング（LightWave 3D、3D Studio MAX）。
+- 映像編集と効果音制作（Adobe Premiere、Pro Tools、Sound Forge）。
+- ブルースクリーン合成、照明、特殊効果の経験。
+</details>

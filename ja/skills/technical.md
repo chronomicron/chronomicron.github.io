@@ -1,49 +1,49 @@
-# Technical Skills
+# 技術スキル
 
-## Programming Languages
-- C / C++ / C# (MFC, .NET, OpenGL, SystemC)
-- Assembler (Intel, Motorola, Atmel AVR)
+## プログラミング言語
+- C / C++ / C#（MFC、.NET、OpenGL、SystemC）
+- アセンブラ（Intel、Motorola、Atmel AVR）
 - Python
 - Matlab / Simulink
 - VHDL / SystemVerilog
-- Java (Android)
+- Java（Android）
 - HTML
 
-## Hardware & Embedded
-- Xilinx and Altera / Intel FPGAs
-- Microcontrollers: Atmel AVR, Intel 80x, Motorola 68k, Arduino
+## ハードウェア・組込み
+- Xilinx および Altera / Intel FPGA
+- マイクロコントローラ：Atmel AVR、Intel 80x、Motorola 68k、Arduino
 - Raspberry Pi
-- Hardware/software co-design
-- Low-power embedded design
-- Bluetooth, I²C, USB
-- Embedded Linux (Yocto, Buildroot)
+- ハードウェア／ソフトウェア協調設計
+- 低消費電力組込み設計
+- Bluetooth、I²C、USB
+- 組込み Linux（Yocto、Buildroot）
 - FreeRTOS / Zephyr RTOS
-- ARM Cortex-M / Cortex-A toolchains
+- ARM Cortex-M / Cortex-A ツールチェーン
 
-## Computer Vision & Video
+## コンピュータビジョン・映像
 - OpenCV
 - FFmpeg
 - GStreamer
 
-## Tools & Environments
-- IDEs: VS Code (primary), Eclipse, Microsoft Visual Studio, Atmel Studio
-- Version control: Git, CVS
-- Operating systems: Linux (extensive use), Windows, Unix, VxWorks
-- CAD / EDA: Synopsys, Mentor Graphics, Cadence, OrCAD
-- Simulation & validation: SystemC, Matlab
+## ツール・環境
+- IDE：VS Code（主）、Eclipse、Microsoft Visual Studio、Atmel Studio
+- バージョン管理：Git、CVS
+- OS：Linux（常用）、Windows、Unix、VxWorks
+- CAD / EDA：Synopsys、Mentor Graphics、Cadence、OrCAD
+- シミュレーション・検証：SystemC、Matlab
 - Docker
 - CMake
 - Jupyter notebooks
 
-## Creative & Media
-- Adobe Creative Suite (Photoshop, Illustrator, Premiere, Dreamweaver)
-- 3D: 3D Studio MAX, LightWave 3D
-- Audio & video editing (professional graphic artist and post-production tools)
-- Avid Pro Tools, Sound Forge
-- Broadcast television production experience
+## クリエイティブ・メディア
+- Adobe Creative Suite（Photoshop、Illustrator、Premiere、Dreamweaver）
+- 3D：3D Studio MAX、LightWave 3D
+- 音声・映像編集（プロ向けグラフィック／ポストプロダクションツール）
+- Avid Pro Tools、Sound Forge
+- テレビ放送向け制作の経験
 
-## Currently Learning
-Actively studying and building personal projects with:
+## 学習中
+個人プロジェクトを通じて学習・実験中：
 - PyTorch
 - TensorFlow / Keras
 - CUDA

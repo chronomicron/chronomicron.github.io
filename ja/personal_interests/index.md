@@ -1,36 +1,36 @@
-# Personal Interests
+# 個人的な関心
 
-## Learning & Mindset
-One of the most valuable things my long academic path taught me is *how to learn*. I enjoy picking up new skills and diving deeply into unfamiliar subjects.
+## 学びと姿勢
+長い学生生活のなかで得た最も大切なものの一つは、「学び方を学ぶ」ことです。新しいスキルを身につけたり、なじみのない分野に深く入り込んだりすることを楽しんでいます。
 
-## Food, Fermentation & Self-Sufficiency
-- Home cooking and baking (including sourdough)
-- Making alcohol
-- Fermented foods: kimchi, sauerkraut, miso, and experimental soy sauce
-- Gardening
-- Bonsai and tree culture
-- Broader interest in homesteading and self-sufficiency
+## 食・発酵・自給
+- 家庭での料理とパン作り（サワードウを含む）
+- 自家製の酒・アルコール類
+- 発酵食品：キムチ、ザワークラウト、味噌、試作中の醤油
+- ガーデニング
+- 盆栽と樹木の育成
+- 自給的な暮らし（ホームステディング）への関心
 
-## Nature & Outdoors
-- Beekeeping
-- Hiking, camping, and backpacking (in many countries)
-- Cycling — I use a bicycle as a primary way to get around
-- Snowboarding
-- Astronomy and sky watching (including dedicated trips to see the aurora borealis and other celestial events)
+## 自然とアウトドア
+- 養蜂
+- ハイキング、キャンプ、バックパッキング（多くの国で）
+- サイクリング — 移動手段としても日常的に自転車を使う
+- スノーボード
+- 天体観測（オーロラやその他の天文現象を見るための移動を含む）
 
-## Games
-- Video games since the 1980s, with a lasting love for retro and classic games
-- Tabletop games and role-playing games
+## ゲーム
+- 1980年代からのビデオゲーム。レトロ・クラシック作品への愛着が特に強い
+- テーブルトーク RPG やボードゲーム
 
-## Creative & Media
-- Photography and cinematography
-- Movies, especially science fiction
-- Favorite author: Isaac Asimov
+## 創作とメディア
+- 写真と映像制作
+- 映画、とくに SF
+- 好きな作家：アイザック・アシモフ
 
-## Travel
-I love traveling and discovering new places — particularly destinations where I don’t speak the local language. Being dropped into an unfamiliar environment and finding a way to navigate it is something I genuinely enjoy.
+## 旅行
+旅をして新しい場所を発見するのが好きです。とくに、現地の言語を話さない土地に身を置き、状況を読みながら道を見つけることに魅力を感じます。
 
-## Hands-on Making & Repair
-- Home renovations (electrical, plumbing, carpentry)
-- Small engine repair
-- General DIY and building projects
+## 手仕事と修理
+- 住宅の修繕（電気、配管、木工）
+- 小型エンジンの修理
+- DIY やものづくり全般

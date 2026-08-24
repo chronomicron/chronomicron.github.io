@@ -1,8 +1,8 @@
-# Skills
+# スキル
 
-This section is divided into two parts:
+このセクションは次の二つに分かれています。
 
-- **Technical Skills** — programming languages, hardware, embedded systems, computer vision, tools, and technologies I use (or am currently learning).
-- **Other Skills** — soft skills, personal strengths, cross-cultural experience, and other non-technical abilities.
+- **技術スキル** — プログラミング言語、ハードウェア、組込み、コンピュータビジョン、ツール、現在学習中の技術など
+- **その他のスキル** — ソフトスキル、個人的な強み、異文化経験、技術以外の能力
 
-Use the left menu to switch between the two categories.
+左のメニューから切り替えてご覧ください。
