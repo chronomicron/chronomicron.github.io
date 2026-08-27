@@ -7,9 +7,10 @@
 - Hungarian — Conversational understanding
 - Chinese (Mandarin) — Beginner
 
-## Licenses
-- Driver’s license
-- Motorcycle license
+## Licences & documents
+- Driver’s licence (automobile)
+- Motorcycle licence
+- Valid **European (EU) passport** — allows living and working in the EU / EEA without a work visa, and free movement in the Schengen area. Practical for on-site visits with clients and short- or longer-term work in Europe.
 
 ## Food & Fermentation
 - Home cooking

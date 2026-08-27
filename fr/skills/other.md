@@ -7,9 +7,10 @@
 - Hongrois — compréhension conversationnelle
 - Chinois (mandarin) — débutant
 
-## Permis
+## Permis et documents
 - Permis de conduire automobile
 - Permis de moto
+- **Passeport européen (UE)** en cours de validité — permet de vivre et de travailler dans l’UE / l’EEE sans visa de travail, et de circuler librement dans l’espace Schengen. Utile pour des déplacements sur site chez des clients et pour du travail de courte ou plus longue durée en Europe.
 
 ## Alimentation et fermentation
 - Cuisine maison
