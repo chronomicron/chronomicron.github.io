@@ -11,17 +11,23 @@
 
 /* ---------- CSS VARIABLES (easy to customize later) ---------- */
 :root {
-  /* Colors – neutral starting point, easy to replace */
-  --color-bg: #f7f8fa;
-  --color-surface: #ffffff;
+  /* Colors – light mode (default) */
+  --color-bg: #f1f5f9;
+  --color-surface: #f8fafc;
   --color-text: #1a1a1a;
   --color-text-muted: #555;
-  --color-primary: #2563eb;          /* main accent (blue) */
+  --color-primary: #2563eb;
   --color-primary-hover: #1d4ed8;
+  --color-nav-active: #2563eb;           /* selected item in left sidebar */
   --color-border: #e2e8f0;
-  --color-sidebar-bg: #f1f5f9;
-  --color-topnav-bg: #0f172a;        /* dark top bar */
+  --color-sidebar-bg: rgba(241, 245, 249, 0.88);
+  --color-topnav-bg: #0f172a;
   --color-topnav-text: #f8fafc;
+  --color-details-bg: rgba(255, 255, 255, 0.25);
+  --color-details-bg-open: rgba(255, 255, 255, 0.35);
+  --color-code-bg: #f1f5f9;
+  --color-photo-opacity: 0.18;
+  --color-sidebar-hover: rgba(0, 0, 0, 0.05);
 
   /* Typography */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -32,6 +38,54 @@
   --sidebar-width: 240px;
   --radius: 6px;
   --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/*
+  Dark mode palette: deep blue–aquamarine, soft text, teal accent.
+  Applied when:
+    - OS/browser is dark AND user has not forced light, OR
+    - user forced dark via the theme button (data-theme="dark")
+*/
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #0a1628;
+    --color-surface: #0d2137;
+    --color-text: #e8eef4;
+    --color-text-muted: #9db0c4;
+    --color-primary: #2dd4bf;
+    --color-primary-hover: #5eead4;
+    --color-nav-active: #1e6bb8;
+    --color-border: #1e3a5f;
+    --color-sidebar-bg: rgba(12, 28, 48, 0.92);
+    --color-topnav-bg: #060f1a;
+    --color-topnav-text: #e8eef4;
+    --color-details-bg: rgba(15, 40, 65, 0.55);
+    --color-details-bg-open: rgba(15, 40, 65, 0.75);
+    --color-code-bg: #12263a;
+    --color-photo-opacity: 0.12;
+    --color-sidebar-hover: rgba(255, 255, 255, 0.06);
+    --shadow: 0 1px 3px rgba(0,0,0,0.35);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0a1628;
+  --color-surface: #0d2137;
+  --color-text: #e8eef4;
+  --color-text-muted: #9db0c4;
+  --color-primary: #2dd4bf;
+  --color-primary-hover: #5eead4;
+  --color-nav-active: #1e6bb8;
+  --color-border: #1e3a5f;
+  --color-sidebar-bg: rgba(12, 28, 48, 0.92);
+  --color-topnav-bg: #060f1a;
+  --color-topnav-text: #e8eef4;
+  --color-details-bg: rgba(15, 40, 65, 0.55);
+  --color-details-bg-open: rgba(15, 40, 65, 0.75);
+  --color-code-bg: #12263a;
+  --color-photo-opacity: 0.12;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --shadow: 0 1px 3px rgba(0,0,0,0.35);
 }
 
 /* ---------- RESET & BASE ---------- */
@@ -47,7 +101,7 @@ html, body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-text);
-  background-color: #f1f5f9;
+  background-color: var(--color-bg);
   /* Custom rocket cursor – hotspot at top-left (0,0) */
   cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, auto;
 }
@@ -151,9 +205,36 @@ a:hover {
   font-weight: 600;
 }
 
-/* Language switcher (right side of top bar) */
-.lang-switcher {
+/* Theme + language controls (right side of top bar) */
+.top-controls {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--color-topnav-text);
+  width: 2rem;
+  height: 1.75rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.theme-btn:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.15);
+}
+
+.lang-switcher {
   display: flex;
   gap: 0.25rem;
 }
@@ -184,7 +265,7 @@ a:hover {
 #sidebar {
   width: var(--sidebar-width);
   flex-shrink: 0;
-  background-color: rgba(241, 245, 249, 0.88);
+  background-color: var(--color-sidebar-bg);
   border-right: 1px solid var(--color-border);
   padding: 1.5rem 1rem;
   overflow-y: auto;
@@ -221,10 +302,10 @@ a:hover {
   transition: background 0.15s;
 }
 .sidebar-btn:hover {
-  background: rgba(0,0,0,0.05);
+  background: var(--color-sidebar-hover);
 }
 .sidebar-btn.active {
-  background: var(--color-primary);
+  background: var(--color-nav-active);
   color: white;
   font-weight: 500;
 }
@@ -251,7 +332,7 @@ a:hover {
   padding: 2rem 2.5rem;
   overflow-y: auto;
   position: relative;
-  background-color: #f8fafc;
+  background-color: var(--color-surface);
 }
 
 /* Photo background layer (semi-transparent, behind the grid) */
@@ -264,7 +345,7 @@ a:hover {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.18; /* overall strength of the photo – adjust 0.12–0.28 */
+  opacity: var(--color-photo-opacity);
   transition: background-image 0.4s ease, opacity 0.4s ease;
 }
 
@@ -339,13 +420,13 @@ a:hover {
 #content-body details {
   margin: 0.75rem 0 1.25rem 0;
   padding: 0.6rem 0.9rem;
-  background: rgba(255, 255, 255, 0.25);   /* more transparent so graph paper shows */
-  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: var(--color-details-bg);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
 }
 
 #content-body details[open] {
-  background: rgba(255, 255, 255, 0.35);   /* still light when expanded */
+  background: var(--color-details-bg-open);
 }
 
 #content-body summary {
@@ -419,13 +500,13 @@ a:hover {
 #content-body code {
   font-family: var(--font-mono);
   font-size: 0.9em;
-  background: #f1f5f9;
+  background: var(--color-code-bg);
   padding: 0.15em 0.35em;
   border-radius: 3px;
 }
 
 #content-body pre {
-  background: #f1f5f9;
+  background: var(--color-code-bg);
   padding: 1rem;
   border-radius: var(--radius);
   overflow-x: auto;
@@ -499,7 +580,7 @@ a:hover {
     display: flex;
   }
 
-  .lang-switcher {
+  .top-controls {
     margin-left: 0;
     order: 3;
   }

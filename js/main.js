@@ -167,8 +167,65 @@ function modeLabel(modeId) {
   return t().modes[modeId] || modeId;
 }
 
+// ---------- THEME (light / dark / system) ----------
+const THEME_KEY = "chronomicron-theme"; // "light" | "dark" | "system"
+
+function getStoredTheme() {
+  const v = localStorage.getItem(THEME_KEY);
+  return v === "light" || v === "dark" || v === "system" ? v : "system";
+}
+
+function systemPrefersDark() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+/** Apply theme: system follows OS; light/dark force a mode */
+function applyTheme(theme) {
+  const root = document.documentElement;
+  if (theme === "system") {
+    root.removeAttribute("data-theme");
+  } else {
+    root.setAttribute("data-theme", theme);
+  }
+  localStorage.setItem(THEME_KEY, theme);
+  updateThemeToggleLabel(theme);
+}
+
+function updateThemeToggleLabel(theme) {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+  const effective = theme === "system" ? (systemPrefersDark() ? "dark" : "light") : theme;
+  // Show the action: click to switch toward the other mode
+  btn.textContent = effective === "dark" ? "☀" : "◐";
+  btn.title =
+    theme === "system"
+      ? `Theme: system (${effective}) — click for light/dark`
+      : `Theme: ${theme} — click to cycle`;
+  btn.setAttribute("aria-label", `Color theme: ${theme}`);
+}
+
+function cycleTheme() {
+  const order = ["system", "light", "dark"];
+  const current = getStoredTheme();
+  const next = order[(order.indexOf(current) + 1) % order.length];
+  applyTheme(next);
+}
+
 // ---------- INITIALISATION ----------
 document.addEventListener("DOMContentLoaded", () => {
+  // Restore theme before paint-heavy UI work
+  applyTheme(getStoredTheme());
+  const themeBtn = document.getElementById("theme-toggle");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", cycleTheme);
+  }
+  // If user chose "system", update icon when OS theme changes
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if (getStoredTheme() === "system") updateThemeToggleLabel("system");
+    });
+  }
+
   // Custom cursor: switch image while mouse button is held down
   document.addEventListener("mousedown", () => {
     document.documentElement.classList.add("cursor-pressed");
@@ -374,4 +431,3 @@ async function loadMarkdown(path) {
     console.error(err);
   }
 }
-
