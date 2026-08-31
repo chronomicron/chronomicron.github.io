@@ -2,7 +2,7 @@
 
 Je serai heureux d’échanger au sujet d’occasions professionnelles, de collaborations ou d’intérêts communs.
 
-**Courriel :** [votre courriel préféré ici]  
+**Courriel :** <span data-email></span>
 **Site web :** [chronomicron.com](https://chronomicron.com/)
 
 ## Profils professionnels et vérification

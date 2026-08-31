@@ -2,7 +2,7 @@
 
 I’m happy to connect about opportunities, collaboration, or shared interests.
 
-**Email:** [your preferred email here]  
+**Email:** <span data-email></span>
 **Website:** [chronomicron.com](https://chronomicron.com/)
 
 ## Professional Profiles & Verification
