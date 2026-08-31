@@ -406,6 +406,9 @@ function loadPage(pageId) {
   const item = findNavItem(pageId);
   if (!item) return;
 
+  // Dynamic browser tab title, e.g. "About — Robert Grou-Szabo"
+  document.title = pageLabel(pageId) + " — Robert Grou-Szabo";
+
   const mdPath = `${currentLang}/${item.file}`;
   loadMarkdown(mdPath);
 }
@@ -422,6 +425,9 @@ async function loadMarkdown(path) {
     const markdownText = await response.text();
     const html = marked.parse(markdownText);
     contentBody.innerHTML = html;
+
+    // Contact page: fill email slots without storing a plain address in Markdown
+    injectEmailLinks(contentBody);
   } catch (err) {
     contentBody.innerHTML = `
       <h1>Content not found</h1>
@@ -430,4 +436,27 @@ async function loadMarkdown(path) {
     `;
     console.error(err);
   }
+}
+
+/**
+ * Build the contact email in JS so crawlers that only read static HTML/Markdown
+ * do not see a complete address. Human visitors still get a normal mailto link.
+ *
+ * In Markdown use:  <span data-email></span>
+ */
+function injectEmailLinks(root) {
+  const slots = root.querySelectorAll("[data-email]");
+  if (!slots.length) return;
+
+  // Split so the full address is never one contiguous string in the source
+  const user = ["c", "h", "r", "o", "n", "o", "m", "i", "c", "r", "o", "n"].join("");
+  const domain = ["g", "m", "a", "i", "l", ".", "c", "o", "m"].join("");
+  const addr = user + String.fromCharCode(64) + domain; // 64 = '@'
+
+  slots.forEach(el => {
+    const a = document.createElement("a");
+    a.href = "mailto:" + addr;
+    a.textContent = addr;
+    el.replaceWith(a);
+  });
 }
