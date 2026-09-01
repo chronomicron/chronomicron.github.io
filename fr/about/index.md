@@ -1,6 +1,7 @@
 # À propos
 
 Je suis **ingénieur électrique**, spécialisé en développement **matériel (hardware)** et **micrologiciel (firmware)**, avec une solide expérience en conception **ASIC** et **FPGA**. Mon domaine principal a été la conception **VLSI** d’algorithmes de **vision par ordinateur** et de **traitement vidéo**. J’ai également un fort parcours universitaire, avec plusieurs publications dans des revues et conférences **IEEE**, ainsi que d’autres lieux d’évaluation par les pairs.
+> **CV (PDF) :** [Télécharger](/assets/resume/Robert_Grou_Resume_fr.pdf)
 
 ## Influences précoces
 

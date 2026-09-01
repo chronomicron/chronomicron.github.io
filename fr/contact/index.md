@@ -4,6 +4,7 @@ Je serai heureux d’échanger au sujet d’occasions professionnelles, de colla
 
 **Courriel :** <span data-email></span>
 **Site web :** [chronomicron.com](https://chronomicron.com/)
+**CV (PDF) :** [Télécharger](/assets/resume/Robert_Grou_Resume_fr.pdf)
 
 ## Profils professionnels et vérification
 
