@@ -401,6 +401,12 @@ a:hover {
   z-index: 2;
   max-width: 820px;
   margin: 0 auto;
+  opacity: 1;
+  transition: opacity 0.28s ease;
+}
+
+#content-body.is-fading {
+  opacity: 0;
 }
 
 /* ---------- MARKDOWN CONTENT STYLING ---------- */

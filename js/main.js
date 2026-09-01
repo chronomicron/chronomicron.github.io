@@ -17,9 +17,38 @@
 */
 
 // ---------- CONFIGURATION ----------
+const LANG_KEY = "chronomicron-lang"; // "en" | "fr" | "ja"
 let currentLang = "en";
 let currentMode = "profile";
 let currentPage = null;
+
+/** Browser preference → en / fr / ja (first visit only if nothing stored) */
+function detectBrowserLang() {
+  const list = navigator.languages && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language || "en"];
+  for (const raw of list) {
+    const code = (raw || "").toLowerCase();
+    if (code.startsWith("fr")) return "fr";
+    if (code.startsWith("ja")) return "ja";
+    if (code.startsWith("en")) return "en";
+  }
+  return "en";
+}
+
+function initLanguage() {
+  const stored = localStorage.getItem(LANG_KEY);
+  if (stored && UI[stored]) {
+    currentLang = stored;
+  } else {
+    currentLang = detectBrowserLang();
+    localStorage.setItem(LANG_KEY, currentLang);
+  }
+  document.documentElement.lang = currentLang === "ja" ? "ja" : currentLang;
+  document.querySelectorAll(".lang-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.lang === currentLang);
+  });
+}
 
 // Set to true to show the millimeter graph-paper overlay
 const SHOW_GRAPH_PAPER = false;
@@ -226,6 +255,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Language: saved choice, or browser preference on first visit
+  initLanguage();
+
   // Custom cursor: switch image while mouse button is held down
   document.addEventListener("mousedown", () => {
     document.documentElement.classList.add("cursor-pressed");
@@ -267,13 +299,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Language switcher (EN, FR, JA – JA UI ready; content can follow)
+  // Language switcher (manual choice is remembered)
   document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const lang = btn.dataset.lang;
       if (!UI[lang]) return;
 
       currentLang = lang;
+      localStorage.setItem(LANG_KEY, lang);
       document.documentElement.lang = lang === "ja" ? "ja" : lang;
 
       document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
@@ -415,7 +448,10 @@ function loadPage(pageId) {
 
 async function loadMarkdown(path) {
   const contentBody = document.getElementById("content-body");
-  contentBody.innerHTML = "<p>Loading…</p>";
+
+  // Fade out current content
+  contentBody.classList.add("is-fading");
+  await new Promise(r => setTimeout(r, 160));
 
   try {
     const response = await fetch(path);
@@ -436,6 +472,11 @@ async function loadMarkdown(path) {
     `;
     console.error(err);
   }
+
+  // Fade in new content
+  requestAnimationFrame(() => {
+    contentBody.classList.remove("is-fading");
+  });
 }
 
 /**
