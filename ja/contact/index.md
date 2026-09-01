@@ -4,6 +4,7 @@
 
 **メール：** <span data-email></span> 
 **ウェブサイト：** [chronomicron.com](https://chronomicron.com/)
+**履歴書（PDF）：** [ダウンロード](/assets/resume/Robert_Grou_Resume.pdf)
 
 ## プロフェッショナル・プロフィールと確認用リンク
 
