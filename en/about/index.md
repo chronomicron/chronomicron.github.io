@@ -1,7 +1,7 @@
 # About
 
 I’m an **electrical engineer** specializing in **hardware** and **firmware** development, with deep experience in **ASIC** and **FPGA** design. My core focus has been **VLSI** design for **computer vision** and **video processing** algorithms. I also bring a strong academic background, with several publications in **IEEE** journals, conferences, and other peer-reviewed venues.
-> **Resume:** [Download PDF](/assets/resume/Robert_Grou_Resume.pdf)
+> **Resume:** [Download PDF](/assets/resume/Robert_Grou_Resume_en.pdf)
 
 ## Background
 

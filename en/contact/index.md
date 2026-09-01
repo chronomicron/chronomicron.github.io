@@ -4,7 +4,7 @@ I’m happy to connect about opportunities, collaboration, or shared interests.
 
 **Email:** <span data-email></span>
 **Website:** [chronomicron.com](https://chronomicron.com/)
-**Resume:** [Download PDF](/assets/resume/Robert_Grou_Resume.pdf)
+**Resume:** [Download PDF](/assets/resume/Robert_Grou_Resume_en.pdf)
 
 ## Professional Profiles & Verification
 
