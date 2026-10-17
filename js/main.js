@@ -912,6 +912,82 @@ function emphasizedSkillPrefix(text) {
   return Array.from(text).slice(0, Math.min(7, Array.from(text).length)).join("");
 }
 
+/** Present non-technical skills and interests as independent personal profile cards. */
+function buildOtherSkillsMosaic(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  if (!heading) return;
+
+  const mosaic = document.createElement("section");
+  mosaic.className = "other-interests-mosaic";
+  mosaic.setAttribute("aria-label", ({
+    en: "Other skills and interests",
+    fr: "Autres compétences et intérêts",
+    ja: "その他のスキルと関心"
+  })[currentLang] || "Other skills and interests");
+
+  const kicker = document.createElement("p");
+  kicker.className = "other-interests-kicker";
+  kicker.textContent = ({
+    en: "PERSONAL INTERESTS · PRACTICAL SKILLS · CURIOSITY",
+    fr: "INTÉRÊTS PERSONNELS · SAVOIR-FAIRE · CURIOSITÉ",
+    ja: "個人的な関心 · 実践的な技能 · 好奇心"
+  })[currentLang] || "PERSONAL INTERESTS · PRACTICAL SKILLS · CURIOSITY";
+  mosaic.appendChild(kicker);
+
+  const markers = ["A/あ", "ID", "FERM", "FIX", "OUT", "ART", "READ", "HOME", "C64", "20+", "AI"];
+  const categories = ["languages", "mobility", "food", "hands-on", "outdoors", "creative", "reading", "lifestyle", "gaming", "travel", "ai"];
+  const pictograms = {
+    languages: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.2 5.3 3.2 8.5s-.9 6.1-3.2 8.5m0-17c-2.3 2.4-3.2 5.3-3.2 8.5s.9 6.1 3.2 8.5M5.3 7.5h13.4m-13.4 9h13.4"/>',
+    mobility: '<path d="M4 14l1.5-5h13L20 14v5h-2v-2H6v2H4zM7 9l1.5-3h7L17 9"/><circle cx="7" cy="15" r="1"/><circle cx="17" cy="15" r="1"/>',
+    food: '<path d="M4 11h16l-1.7 7H5.7L4 11zM3 20h18M8 8c-1.2-1.3 1.2-2 0-3m4 3c-1.2-1.3 1.2-2 0-3m4 3c-1.2-1.3 1.2-2 0-3"/>',
+    "hands-on": '<path d="M14.5 6.5a4 4 0 0 0-5-5l2.2 2.2-2.8 2.8L6.7 4.1a4 4 0 0 0 5 5l7.5 7.5a2 2 0 0 1-2.8 2.8l-7.5-7.5a4 4 0 0 0-5-5l2.2 2.2-2.8 2.8"/>',
+    outdoors: '<path d="M3 19l6-10 4 6 3-4 5 8H3zM9 9l2-3 2 3m4-1V4m-2 2h4"/>',
+    creative: '<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/><path d="M6.5 10h.1"/>',
+    reading: '<path d="M12 7c-2.2-2-5-2.5-8-1.5v13c3-.9 5.8-.4 8 1.5 2.2-1.9 5-2.4 8-1.5v-13c-3-1-5.8-.5-8 1.5zM12 7v13"/>',
+    lifestyle: '<path d="M3 11l9-7 9 7M5.5 9.5V20h13V9.5M9 20v-6h6v6"/>',
+    gaming: '<path d="M7 8h10a4 4 0 0 1 3.8 5l-1 3a2 2 0 0 1-3.2 1l-2.2-1.7h-4.8L7.4 17a2 2 0 0 1-3.2-1l-1-3A4 4 0 0 1 7 8zM7 11v4m-2-2h4m7-1h.1m2 2h.1"/>',
+    travel: '<path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.2"/><path d="M3 20h4m10 0h4"/>',
+    ai: '<circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="6" r="1.6"/><circle cx="19" cy="6" r="1.6"/><circle cx="5" cy="18" r="1.6"/><circle cx="19" cy="18" r="1.6"/><path d="M7 7l3.2 3.3m6.8-3.3l-3.2 3.3M7 17l3.2-3.3m6.8 3.3l-3.2-3.3"/>'
+  };
+  let currentCard = null;
+  let node = heading.nextSibling;
+  let index = -1;
+
+  while (node) {
+    const next = node.nextSibling;
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2") {
+      index += 1;
+      currentCard = document.createElement("article");
+      currentCard.className = `other-interest-card other-interest-${categories[index] || "extra"}`;
+      currentCard.dataset.category = categories[index] || "extra";
+
+      const marker = document.createElement("span");
+      marker.className = "other-interest-marker";
+      marker.setAttribute("aria-hidden", "true");
+      marker.textContent = markers[index] || "•";
+      const title = document.createElement("span");
+      title.className = "other-interest-title";
+      title.textContent = node.textContent.trim();
+      const pictogram = document.createElement("span");
+      pictogram.className = "other-interest-pictogram";
+      pictogram.setAttribute("aria-hidden", "true");
+      pictogram.innerHTML = `<svg viewBox="0 0 24 24" focusable="false">${pictograms[categories[index]] || ""}</svg>`;
+      node.replaceChildren(marker, title, pictogram);
+
+      currentCard.appendChild(node);
+      mosaic.appendChild(currentCard);
+    } else if (currentCard) {
+      if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "UL") {
+        node.classList.add("other-interest-items");
+      }
+      currentCard.appendChild(node);
+    }
+    node = next;
+  }
+
+  heading.after(mosaic);
+}
+
 /** Turn the publication list into a cover gallery with a year ribbon. */
 function buildPublicationGallery(contentBody, markdownText) {
   const firstYearHeading = [...contentBody.querySelectorAll("h2")].find(heading => /^\d{4}$/.test(heading.textContent.trim()));
@@ -1242,6 +1318,8 @@ async function loadMarkdown(path, pageId) {
       buildSkillsLandingVisual(contentBody);
     } else if (pageId === "technical") {
       buildTechnicalSkillsMap(contentBody);
+    } else if (pageId === "other") {
+      buildOtherSkillsMosaic(contentBody);
     } else if (pageId === "publications") {
       buildPublicationGallery(contentBody, markdownText);
     }
