@@ -1,12 +1,40 @@
 # Hardware Applications
 
-## IMU Sensor Fusion (Orientation Tracking)
-**Status:** Experimental / Learning project
+## Tamaggo 360° Camera IMU
 
-I worked on combining data from an onboard gyroscope and a gravitational (accelerometer) sensor to produce a stable orientation vector. The goal was to know, in real time, which way a PCB was pointing — up, down, tilt angle, etc.
+At Tamaggo, I worked on the IMU for a 360° camera. I combined readings from the camera’s gravity-down sensor and accelerometer, then stored the camera’s orientation as quaternion vectors at image-capture time. This preserved the direction the camera was pointing for each picture. The wider camera project also involved its touchscreen, MP4 encoder, and image-file handling.
 
-This is a classic IMU (Inertial Measurement Unit) sensor-fusion problem: the gyroscope gives good short-term rotation information but drifts over time, while the accelerometer provides an absolute reference to gravity but is noisy when the board is moving. Merging the two signals yields a more reliable estimate of the board’s orientation.
+- 360° camera
+- Gravity-down sensor + accelerometer
+- Vector fusion
+- Quaternion capture metadata
 
-## Other Hardware Work
+## ASIC Design Support & Verification
 
-In addition to formal projects, I regularly repair and restore old electronics — game consoles, computers, televisions, radios, and similar devices. These small repair jobs keep older hardware working and help reduce e-waste.
+Collaborated with other designers on ASIC work, helping test and verify chips with professional EDA tools.
+
+- Cadence
+- Synopsys
+
+## 68332 Microcontroller Projects
+
+Work with Motorola 68332 microcontrollers across projects including digital-to-analog converters and signal analysis, combining low-level control with practical circuit design.
+
+## Single-Board Computer Projects
+
+Personal projects using small, flexible computers to connect software with real devices and circuits.
+
+- Raspberry Pi
+- Arduino
+- BeagleBone
+
+## 4 W AM/FM Transceiver
+
+A hands-on transceiver project bringing RF, analog circuitry, and embedded systems together. The signal-path graphic highlights the journey from audio to radio transmission and back again.
+
+## Prototyping & Bench Work
+
+Breadboard circuits, sensor experiments, and other small builds are part of the wider hands-on workbench. I also repair and restore older electronics, helping keep useful hardware in service.
+
+- Breadboard circuit experiments
+- Electronics repair and restoration

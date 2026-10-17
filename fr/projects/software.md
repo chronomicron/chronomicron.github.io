@@ -3,19 +3,22 @@
 ## IA personnelle et serveur local
 **Statut :** En cours
 
-Construction d’un ordinateur dédié à l’IA, équipé d’un GPU, pour exécuter des grands modèles de langage entièrement en local avec Ollama et des outils connexes. L’objectif est de disposer d’une IA capable sans dépendre de services infonuagiques externes.
+J’ai construit un serveur domestique équipé d’un GPU pour expérimenter avec des modèles de langage en local. Je le transforme en atelier d’IA privé où je relie des modèles locaux à des assistants de programmation et à des agents.
 
-- Inférence IA locale avec Ollama
-- Serveur personnel accessible depuis Internet
-- Serveur Git auto-hébergé pour les dépôts privés
-- Expérience en début de parcours : utiliser Amazon Alexa comme point d’entrée vocal vers l’instance Ollama locale, depuis n’importe où dans la maison
+- Ollama · modèles locaux
+- Hermes · expérimentation avec des agents
+- OpenClaw · expérimentation avec des agents
+- Cline · VS Code + Ollama
+- Unsloth · entraînement de modèles
+- Serveur maison · Git auto-hébergé
+- Alexa · expérimentation vocale
 
 ## ChronoVault
 **Statut :** En développement
 
-ChronoVault est un outil d’archivage de médias personnels pour les gens dont les photos et vidéos sont dispersées un peu partout — vieux disques durs, clés USB, DVD, NAS, Google Drive, Dropbox, etc.
+ChronoVault est ma réponse à un problème numérique bien connu : des années de photos et de vidéos dispersées entre vieux disques, clés USB, DVD, NAS et services infonuagiques. Le projet vise à rassembler ce désordre dans une archive locale, organisée par date et plus facile à explorer.
 
-Il parcourt ces emplacements, trouve les fichiers multimédias et les regroupe dans une archive locale unique, organisée et chronologique. Lorsque le logiciel n’est pas sûr d’une date ou d’un détail, il aide à revoir et corriger l’information à partir de ce qui est disponible : métadonnées de l’appareil photo, GPS, historique des logiciels d’édition, ou même une reconnaissance OCR d’un tampon de date imprimé sur l’image.
+Le projet est conçu pour rassembler les médias, les organiser par date et signaler les dates incertaines afin de les vérifier. Les métadonnées de l’appareil photo, le GPS, l’historique d’édition ou même l’OCR d’une date imprimée peuvent fournir des indices utiles.
 
 **Le problème qu’il résout**  
 Au fil des ans, photos et vidéos s’accumulent sur téléphones, appareils photo, sauvegardes infonuagiques et disques externes oubliés. Il est rare d’avoir un seul endroit propre où tout se trouve. Les doublons, les exports de téléphone en vrac et les structures de dossiers incohérentes empirent la situation. ChronoVault rassemble tout cela dans une archive datée et cohérente, sans avoir à tout trier à la main.
@@ -37,7 +40,7 @@ Aucun changement de chaîne requis — les mêmes émissions au même moment cha
 ![GitHub](/assets/icons/alpha/github-logo.png) [Dépôt GitHub](https://github.com/chronomicron/VLC_scheduler)
 
 ## Mods de jeux
-**Statut :** Terminé / occasionnel
+**Statut :** Terminé
 
 - Mod Valheim
 - Mod RimWorld

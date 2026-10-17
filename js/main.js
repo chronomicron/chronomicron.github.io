@@ -1159,6 +1159,350 @@ function buildPersonalInterestTree(contentBody) {
   });
 }
 
+/** Turn software project markdown into a featured portfolio board. */
+function buildSoftwareProjectBoard(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  const projectHeadings = [...contentBody.querySelectorAll("h2")];
+  if (!heading || !projectHeadings.length) return;
+
+  const copy = ({
+    en: {
+      kicker: "SOFTWARE · LOCAL AI · PERSONAL ARCHIVING",
+      lede: "A few projects I’m building to solve useful problems at home and beyond.",
+      featured: "FEATURED BUILD", aiLab: "LOCAL AI LAB", completed: "COMPLETED PROJECT",
+      details: "Project details", toolchain: "Tools in the workshop",
+      chronoFlow: ["Scattered media", "Review dates", "Chronological archive"],
+      aiFlow: ["Home GPU server", "Local models", "Tools & agents"]
+    },
+    fr: {
+      kicker: "LOGICIEL · IA LOCALE · ARCHIVAGE PERSONNEL",
+      lede: "Quelques projets que je développe pour résoudre des problèmes concrets, à la maison et ailleurs.",
+      featured: "PROJET À LA UNE", aiLab: "LABORATOIRE IA LOCALE", completed: "PROJET TERMINÉ",
+      details: "Détails du projet", toolchain: "Outils à l’essai",
+      chronoFlow: ["Médias dispersés", "Vérifier les dates", "Archive chronologique"],
+      aiFlow: ["Serveur GPU maison", "Modèles locaux", "Outils et agents"]
+    },
+    ja: {
+      kicker: "ソフトウェア · ローカルAI · 個人メディア整理",
+      lede: "身近な課題を解決するために開発しているプロジェクトを紹介します。",
+      featured: "注目プロジェクト", aiLab: "ローカルAI環境", completed: "完成したプロジェクト",
+      details: "プロジェクトの詳細", toolchain: "試しているツール",
+      chronoFlow: ["各所に散在するメディア", "日付を確認", "時系列アーカイブ"],
+      aiFlow: ["自宅のGPUサーバ", "ローカルモデル", "ツールとエージェント"]
+    }
+  })[currentLang];
+  if (!copy) return;
+
+  const board = document.createElement("section");
+  board.className = "software-project-board";
+  const kicker = document.createElement("p");
+  kicker.className = "software-project-kicker";
+  kicker.textContent = copy.kicker;
+  const lede = document.createElement("p");
+  lede.className = "software-project-lede";
+  lede.textContent = copy.lede;
+  const grid = document.createElement("div");
+  grid.className = "software-project-grid";
+
+  const projects = projectHeadings.map(projectHeading => {
+    const sourceNodes = [];
+    let node = projectHeading.nextElementSibling;
+    while (node && node.tagName !== "H2" && node.tagName !== "H1") {
+      sourceNodes.push(node.cloneNode(true));
+      node = node.nextElementSibling;
+    }
+    const title = projectHeading.textContent.trim();
+    const normalizedTitle = title.toLocaleLowerCase();
+    const type = /chronovault/.test(normalizedTitle)
+      ? "chronovault"
+      : /vlc/.test(normalizedTitle)
+        ? "vlc"
+        : /game|mod|ゲーム/i.test(title)
+          ? "mods"
+          : "ai-server";
+    const statusNode = sourceNodes.find(element => element.matches("p") && element.querySelector("strong"));
+    const status = statusNode ? statusNode.textContent.replace(/^[^:：]*[:：]\s*/, "").trim() : "";
+    const bodyNodes = sourceNodes.filter(element => element !== statusNode);
+    const repoLinks = bodyNodes.flatMap(element => [...element.querySelectorAll("a[href*='github.com']")]);
+    const leadNode = bodyNodes.find(element => element.matches("p") && !element.querySelector("a[href*='github.com']"));
+    const toolList = bodyNodes.find(element => element.tagName === "UL");
+
+    const article = document.createElement("article");
+    article.className = `software-project-card software-project-${type}`;
+    const header = document.createElement("div");
+    header.className = "software-project-card-header";
+    const eyebrow = document.createElement("span");
+    eyebrow.className = "software-project-eyebrow";
+    eyebrow.textContent = type === "chronovault" ? copy.featured : type === "ai-server" ? copy.aiLab : copy.completed;
+    const statusBadge = document.createElement("span");
+    statusBadge.className = `software-project-status${type === "vlc" || type === "mods" ? " is-complete" : ""}`;
+    statusBadge.textContent = status;
+    header.append(eyebrow, statusBadge);
+
+    const titleElement = document.createElement("h2");
+    titleElement.textContent = title;
+    const content = document.createElement("div");
+    content.className = "software-project-copy";
+    if (leadNode) content.appendChild(leadNode.cloneNode(true));
+
+    if ((type === "chronovault" || type === "vlc") && bodyNodes.some(element => element !== leadNode)) {
+      const details = document.createElement("details");
+      details.className = "software-project-details";
+      const summary = document.createElement("summary");
+      summary.textContent = copy.details;
+      details.appendChild(summary);
+      bodyNodes.filter(element => element !== leadNode && !element.querySelector("a[href*='github.com']"))
+        .forEach(element => details.appendChild(element.cloneNode(true)));
+      if (details.childElementCount > 1) content.appendChild(details);
+    }
+
+    if ((type === "ai-server" || type === "mods") && toolList) {
+      if (type === "ai-server") {
+        const toolsBlock = document.createElement("div");
+        toolsBlock.className = "software-project-tools";
+        const toolsTitle = document.createElement("span");
+        toolsTitle.className = "software-project-tools-title";
+        toolsTitle.textContent = copy.toolchain;
+        toolsBlock.appendChild(toolsTitle);
+        const chips = document.createElement("div");
+        chips.className = "software-tool-chips";
+        [...toolList.querySelectorAll(":scope > li")].forEach(item => {
+          const chip = document.createElement("span");
+          chip.textContent = item.textContent.trim();
+          chips.appendChild(chip);
+        });
+        toolsBlock.appendChild(chips);
+        content.appendChild(toolsBlock);
+      } else {
+        const chips = document.createElement("div");
+        chips.className = "software-tool-chips software-mod-chips";
+        [...toolList.querySelectorAll(":scope > li")].forEach(item => {
+          const chip = document.createElement("span");
+          chip.textContent = item.textContent.trim();
+          chips.appendChild(chip);
+        });
+        content.appendChild(chips);
+      }
+    }
+
+    repoLinks.forEach(link => {
+      const action = document.createElement("a");
+      action.className = "software-project-repo";
+      action.href = link.href;
+      action.target = "_blank";
+      action.rel = "noopener noreferrer";
+      action.textContent = `${link.textContent.trim()} ↗`;
+      content.appendChild(action);
+    });
+
+    article.append(header, titleElement, content);
+    if (type === "chronovault" || type === "ai-server") {
+      const visual = document.createElement("div");
+      visual.className = `software-project-visual software-project-visual-${type}`;
+      visual.setAttribute("aria-hidden", "true");
+      const labels = type === "chronovault" ? copy.chronoFlow : copy.aiFlow;
+      visual.innerHTML = `<div class="software-flow-track"><span class="software-flow-pulse"></span><span class="software-flow-pulse"></span></div>${labels.map((label, index) => `<div class="software-flow-step"><span class="software-flow-index">0${index + 1}</span><strong>${label}</strong></div>`).join("")}`;
+      article.appendChild(visual);
+    }
+    return { type, article };
+  });
+
+  const order = ["chronovault", "ai-server", "vlc", "mods"];
+  projects.sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
+  projects.forEach(project => grid.appendChild(project.article));
+  board.append(kicker, lede, grid);
+  contentBody.replaceChildren(heading, board);
+}
+
+/** Turn the hardware experience into a visual engineering workbench. */
+function buildHardwareProjectBoard(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  const projectHeadings = [...contentBody.querySelectorAll("h2")];
+  if (!heading || !projectHeadings.length) return;
+
+  const copy = ({
+    en: {
+      kicker: "CAMERA IMU · ASIC · EMBEDDED · SBC · RF · PROTOTYPING",
+      lede: "From camera-orientation metadata and silicon verification to embedded control, radio systems, and hands-on builds.",
+      labels: {
+        imu: "TAMAGGO · CAMERA SYSTEMS", transceiver: "RF SYSTEM",
+        mcu: "EMBEDDED SYSTEMS",
+        asic: "SILICON · COLLABORATIVE WORK", sbc: "SINGLE-BOARD COMPUTERS",
+        bench: "PROTOTYPING · BENCH WORK"
+      },
+      flows: {
+        imu: ["Gravity-down sensor", "Accelerometer", "Vector fusion", "Quaternion at capture"],
+        transceiver: ["Audio input", "AM / FM signal", "4 W RF stage", "Antenna"],
+        mcu: ["68332 controller", "Digital-to-analog", "Signal analysis"],
+        asic: ["Collaborative design", "Chip testing", "Verification"],
+        sbc: ["Compute", "Interfaces", "Prototype"]
+      }
+    },
+    fr: {
+      kicker: "IMU CAMÉRA · ASIC · EMBARQUÉ · MONOCARTES · RF · PROTOTYPAGE",
+      lede: "Des métadonnées d’orientation d’une caméra à la vérification silicium, au contrôle embarqué et aux montages pratiques.",
+      labels: {
+        imu: "TAMAGGO · SYSTÈME CAMÉRA", transceiver: "SYSTÈME RF",
+        mcu: "SYSTÈMES EMBARQUÉS",
+        asic: "SILICIUM · COLLABORATION", sbc: "ORDINATEURS MONOCARTES",
+        bench: "PROTOTYPAGE · ATELIER"
+      },
+      flows: {
+        imu: ["Capteur gravité-bas", "Accéléromètre", "Fusion de vecteurs", "Quaternion à la capture"],
+        transceiver: ["Entrée audio", "Signal AM / FM", "Étage RF 4 W", "Antenne"],
+        mcu: ["Contrôleur 68332", "Conversion numérique-analogique", "Analyse de signaux"],
+        asic: ["Conception en équipe", "Essais de puces", "Vérification"],
+        sbc: ["Calcul", "Interfaces", "Prototype"]
+      }
+    },
+    ja: {
+      kicker: "カメラIMU · ASIC · 組み込み · SBC · RF · 試作",
+      lede: "カメラの向きの記録やシリコン検証から、組み込み制御、無線回路、実機での試作まで。",
+      labels: {
+        imu: "TAMAGGO · カメラシステム", transceiver: "RFシステム",
+        mcu: "組み込みシステム",
+        asic: "シリコン · 共同作業", sbc: "シングルボードコンピュータ",
+        bench: "試作 · ベンチ作業"
+      },
+      flows: {
+        imu: ["重力下向きセンサー", "加速度センサー", "ベクトル融合", "撮影時のクォータニオン"],
+        transceiver: ["音声入力", "AM / FM 信号", "4 W RF 段", "アンテナ"],
+        mcu: ["68332 コントローラ", "D/A 変換", "信号解析"],
+        asic: ["共同設計", "チップテスト", "検証"],
+        sbc: ["処理", "インターフェース", "試作"]
+      }
+    }
+  })[currentLang];
+  if (!copy) return;
+
+  const board = document.createElement("section");
+  board.className = "hardware-project-board";
+  const kicker = document.createElement("p");
+  kicker.className = "hardware-project-kicker";
+  kicker.textContent = copy.kicker;
+  const lede = document.createElement("p");
+  lede.className = "hardware-project-lede";
+  lede.textContent = copy.lede;
+  const grid = document.createElement("div");
+  grid.className = "hardware-project-grid";
+
+  const cards = projectHeadings.map(projectHeading => {
+    const sourceNodes = [];
+    let node = projectHeading.nextElementSibling;
+    while (node && node.tagName !== "H2" && node.tagName !== "H1") {
+      sourceNodes.push(node.cloneNode(true));
+      node = node.nextElementSibling;
+    }
+    const title = projectHeading.textContent.trim();
+    const lowered = title.toLocaleLowerCase();
+    const kind = /imu|姿勢/.test(lowered)
+      ? "imu"
+      : /transceiver|émetteur-récepteur|トランシーバ/.test(lowered)
+        ? "transceiver"
+      : /68332/.test(lowered)
+        ? "mcu"
+        : /asic/.test(lowered)
+          ? "asic"
+          : /single-board|monocartes|シングルボード/.test(lowered)
+            ? "sbc"
+            : "bench";
+    const leadNode = sourceNodes.find(element => element.matches("p"));
+    const listNode = sourceNodes.find(element => element.tagName === "UL");
+
+    const card = document.createElement("article");
+    card.className = `hardware-project-card hardware-project-${kind}`;
+    card.appendChild(makeHardwareCardIcon(kind));
+    const label = document.createElement("p");
+    label.className = "hardware-project-label";
+    label.textContent = copy.labels[kind];
+    const titleElement = document.createElement("h2");
+    titleElement.textContent = title;
+    const description = document.createElement("p");
+    description.className = "hardware-project-description";
+    description.textContent = leadNode?.textContent.trim() || "";
+    card.append(label, titleElement, description);
+
+    if (listNode) {
+      const items = [...listNode.querySelectorAll(":scope > li")].map(item => item.textContent.trim());
+      const tags = document.createElement("div");
+      tags.className = `hardware-project-tags${kind === "sbc" ? " hardware-board-tags" : ""}`;
+      items.forEach(item => {
+        const tag = document.createElement("span");
+        tag.textContent = item;
+        tags.appendChild(tag);
+      });
+      card.appendChild(tags);
+    }
+
+    if (kind !== "bench") {
+      const visual = document.createElement("div");
+      visual.className = `hardware-project-visual hardware-visual-${kind}`;
+      visual.setAttribute("aria-hidden", "true");
+      const steps = copy.flows[kind];
+      steps.forEach((step, index) => {
+        const item = document.createElement("span");
+        item.className = "hardware-flow-node";
+        const number = document.createElement("small");
+        number.textContent = `0${index + 1}`;
+        const text = document.createElement("strong");
+        text.textContent = step;
+        item.append(number, text);
+        visual.appendChild(item);
+      });
+      card.appendChild(visual);
+    }
+    return { kind, card };
+  });
+
+  const order = ["imu", "asic", "mcu", "sbc", "transceiver", "bench"];
+  cards.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind));
+  cards.forEach(({ card }) => grid.appendChild(card));
+  board.append(kicker, lede, grid);
+  contentBody.replaceChildren(heading, board);
+}
+
+/** Draw a small category pictograph for each hardware card. */
+function makeHardwareCardIcon(kind) {
+  const ns = "http://www.w3.org/2000/svg";
+  const wrapper = document.createElement("span");
+  wrapper.className = `hardware-card-icon hardware-icon-${kind}`;
+  wrapper.setAttribute("aria-hidden", "true");
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 48 48");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("focusable", "false");
+  const add = (name, attrs) => {
+    const shape = document.createElementNS(ns, name);
+    Object.entries(attrs).forEach(([key, value]) => shape.setAttribute(key, value));
+    svg.appendChild(shape);
+  };
+  const stroke = { stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" };
+  if (kind === "imu") {
+    add("circle", { ...stroke, cx: "24", cy: "24", r: "15" });
+    add("path", { ...stroke, d: "M24 35V13m0 0-5 5m5-5 5 5M13 25h21m0 0-5-5m5 5-5 5" });
+    add("circle", { cx: "24", cy: "24", r: "3", fill: "currentColor" });
+  } else if (kind === "transceiver") {
+    add("path", { ...stroke, d: "M24 22v17m-8 0h16M20 30l4-8 4 8m-4-17v1" });
+    add("path", { ...stroke, d: "M16 17a11 11 0 0 1 0 10m16-10a11 11 0 0 0 0 10M11 12a18 18 0 0 1 0 20m26-20a18 18 0 0 0 0 20" });
+  } else if (kind === "asic" || kind === "mcu") {
+    add("rect", { ...stroke, x: "14", y: "14", width: "20", height: "20", rx: "3" });
+    [18, 24, 30].forEach(point => {
+      add("path", { ...stroke, d: `M${point} 8v6m0 20v6M8 ${point}h6m20 0h6` });
+    });
+    if (kind === "mcu") add("path", { ...stroke, d: "M18 25h4l3-6 4 10 2-4h3" });
+    else add("path", { ...stroke, d: "M19 19h10v10H19zM21 24h6" });
+  } else if (kind === "sbc") {
+    add("rect", { ...stroke, x: "9", y: "10", width: "30", height: "28", rx: "4" });
+    add("rect", { ...stroke, x: "18", y: "17", width: "12", height: "12", rx: "2" });
+    add("path", { ...stroke, d: "M12 15h3m-3 6h3m-3 6h3m18-12h3m-3 6h3m-3 6h3M18 33h12" });
+  } else {
+    add("rect", { ...stroke, x: "9", y: "10", width: "30", height: "28", rx: "4" });
+    [16, 24, 32].forEach(x => [17, 25, 33].forEach(y => add("circle", { ...stroke, cx: String(x), cy: String(y), r: "1.5" })));
+  }
+  wrapper.appendChild(svg);
+  return wrapper;
+}
+
 /** Present contact channels and profile links as a logo-led contact directory. */
 function buildContactDirectory(contentBody) {
   const heading = contentBody.querySelector("h1");
@@ -1637,6 +1981,10 @@ async function loadMarkdown(path, pageId) {
       buildOtherSkillsMosaic(contentBody);
     } else if (pageId === "interests") {
       buildPersonalInterestTree(contentBody);
+    } else if (pageId === "software") {
+      buildSoftwareProjectBoard(contentBody);
+    } else if (pageId === "hardware") {
+      buildHardwareProjectBoard(contentBody);
     } else if (pageId === "contact") {
       buildContactDirectory(contentBody);
     } else if (pageId === "publications") {

@@ -3,19 +3,22 @@
 ## Personal Home AI & Local Server
 **Status:** Ongoing
 
-Built a dedicated AI computer with GPU to run large language models entirely locally using Ollama and related tools. The goal is to have capable AI available without relying on external cloud services.
+I built a GPU-equipped home server as a private workshop for running and experimenting with language models locally. I’m connecting local models to coding assistants and agent tools to explore what a useful, self-hosted AI setup can do.
 
-- Local AI inference with Ollama
-- Personal home server accessible from the internet
-- Self-hosted Git server for private repositories
-- Early-stage experiment: using Amazon Alexa as a voice entry point to query the local Ollama instance from anywhere in the house
+- Ollama · local models
+- Hermes · agent experiments
+- OpenClaw · agent experiments
+- Cline · VS Code + Ollama
+- Unsloth · model training
+- Home server · self-hosted Git
+- Alexa · voice experiment
 
 ## ChronoVault
 **Status:** In development
 
-ChronoVault is a personal media archiving tool for people whose photos and videos are scattered across many places — old hard drives, USB keys, DVDs, NAS boxes, Google Drive, Dropbox, and more.
+ChronoVault is my answer to a familiar digital mess: years of photos and videos scattered across old drives, USB keys, DVDs, NAS devices, and cloud accounts. It aims to turn that sprawl into one local, chronological archive that is easier to explore and trust.
 
-It searches through all of these locations, finds media files, and consolidates them into a single, organized, chronological archive. When the software is unsure about a date or detail, it helps you review and correct the information using whatever evidence is available: camera metadata, GPS data, editing software history, or even an OCR scan of a printed date stamp on the image itself.
+The project is designed to bring media together, organize it by date, and surface uncertain dates for review. Camera metadata, GPS, editing history, and even OCR of a printed date stamp can provide useful clues when the right date is unclear.
 
 **The problem it solves**  
 Over the years photos and videos accumulate across phones, cameras, cloud backups, and forgotten external drives. There is rarely one clean place where everything lives. Duplicates, messy phone dumps, and inconsistent folder structures only make it worse. ChronoVault pulls all of that material together into one coherent, dated archive so you don’t have to sort everything by hand.
@@ -37,7 +40,7 @@ No channel changing required — the same shows appeared at the same times every
 ![GitHub](/assets/icons/alpha/github-logo.png) [GitHub Repository](https://github.com/chronomicron/VLC_scheduler)
 
 ## Game Mods
-**Status:** Completed / Occasional
+**Status:** Completed
 
 - Valheim mod
 - RimWorld mod

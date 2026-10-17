@@ -3179,3 +3179,587 @@ html[lang="ja"] .hero h1 {
   .about-flow animateMotion { display: none; }
   .hero { transition: none; }
 }
+
+/* Software projects: a featured archive build, an AI lab, and finished work. */
+#content-body[data-page="software"] {
+  width: 100%;
+  max-width: 1200px;
+}
+
+#content-body .software-project-board {
+  --software-accent: #43d9c4;
+  padding: 0.15rem 0 2rem;
+}
+
+#content-body .software-project-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--software-accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.15em;
+}
+
+#content-body .software-project-lede {
+  max-width: 52rem;
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+#content-body .software-project-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+
+#content-body .software-project-card {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 0.8rem;
+  overflow: hidden;
+  padding: 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 32%, var(--color-border));
+  border-radius: calc(var(--radius) * 1.6);
+  color: var(--color-text);
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--project-accent) 12%, transparent), transparent 56%),
+    color-mix(in srgb, var(--color-surface) 87%, transparent);
+  box-shadow: 0 12px 32px rgba(1, 8, 20, 0.13);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+#content-body .software-project-card:hover,
+#content-body .software-project-card:focus-within {
+  z-index: 1;
+  border-color: color-mix(in srgb, var(--project-accent) 66%, var(--color-border));
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--project-accent) 11%, transparent);
+  transform: translateY(-3px);
+}
+
+#content-body .software-project-chronovault {
+  --project-accent: #42dbc5;
+  grid-column: span 7;
+  grid-template-columns: minmax(0, 1.1fr) minmax(210px, 0.9fr);
+  grid-template-rows: auto auto 1fr;
+  min-height: 22rem;
+}
+
+#content-body .software-project-ai-server {
+  --project-accent: #ae93ff;
+  grid-column: span 5;
+  min-height: 22rem;
+}
+
+#content-body .software-project-vlc,
+#content-body .software-project-mods {
+  --project-accent: #72a7d6;
+  grid-column: span 6;
+  min-height: 11rem;
+}
+
+#content-body .software-project-card-header {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+#content-body .software-project-chronovault .software-project-card-header,
+#content-body .software-project-chronovault > h2 {
+  grid-column: 1 / -1;
+}
+
+#content-body .software-project-eyebrow,
+#content-body .software-project-status {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#content-body .software-project-eyebrow { color: var(--project-accent); }
+
+#content-body .software-project-status {
+  flex: 0 0 auto;
+  padding: 0.34rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 42%, transparent);
+  border-radius: 999px;
+  color: var(--project-accent);
+  background: color-mix(in srgb, var(--project-accent) 9%, transparent);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+#content-body .software-project-status.is-complete {
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 48%, transparent);
+}
+
+#content-body .software-project-card > h2 {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.55rem);
+  line-height: 1.25;
+}
+
+#content-body .software-project-copy {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 0.75rem;
+}
+
+#content-body .software-project-copy > p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+#content-body .software-project-visual {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 0.55rem;
+  min-width: 0;
+  min-height: 12rem;
+  overflow: hidden;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 24%, var(--color-border));
+  border-radius: 1rem;
+  background:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    color-mix(in srgb, var(--color-bg) 64%, transparent);
+  background-size: 22px 22px;
+}
+
+#content-body .software-project-visual-chronovault { grid-column: 2; grid-row: 3; }
+#content-body .software-project-visual-ai-server { min-height: 8rem; margin-top: auto; }
+
+#content-body .software-flow-track {
+  position: absolute;
+  top: 19%;
+  bottom: 19%;
+  left: 1.8rem;
+  width: 1px;
+  background: linear-gradient(transparent, var(--project-accent), transparent);
+  opacity: 0.55;
+}
+
+#content-body .software-flow-pulse {
+  position: absolute;
+  left: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--project-accent);
+  box-shadow: 0 0 12px var(--project-accent);
+  animation: software-flow-drift 3.2s ease-in-out infinite;
+}
+
+#content-body .software-flow-pulse:nth-child(2) { animation-delay: -1.6s; }
+
+@keyframes software-flow-drift {
+  0%, 100% { top: 0; opacity: 0.4; }
+  50% { top: calc(100% - 7px); opacity: 1; }
+}
+
+#content-body .software-flow-step {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+  min-height: 3.2rem;
+  align-content: center;
+  padding: 0.55rem 0.65rem 0.55rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 22%, var(--color-border));
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+}
+
+#content-body .software-flow-index {
+  color: var(--project-accent);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+#content-body .software-flow-step strong { font-size: 0.8rem; line-height: 1.3; }
+
+#content-body .software-project-tools { display: grid; gap: 0.45rem; }
+
+#content-body .software-project-tools-title {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content-body .software-tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+#content-body .software-tool-chips > span {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 0.34rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 28%, var(--color-border));
+  border-radius: 999px;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--project-accent) 7%, var(--color-bg));
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+#content-body .software-project-details {
+  margin: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--color-border);
+}
+
+#content-body .software-project-details summary {
+  color: var(--project-accent);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+#content-body .software-project-details p,
+#content-body .software-project-details ul {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+#content-body .software-project-repo {
+  justify-self: start;
+  padding: 0.52rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 38%, var(--color-border));
+  border-radius: 0.65rem;
+  color: var(--project-accent);
+  background: color-mix(in srgb, var(--project-accent) 8%, var(--color-bg));
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+#content-body .software-project-repo:hover { background: color-mix(in srgb, var(--project-accent) 15%, var(--color-bg)); }
+
+@media (max-width: 1050px) {
+  #content-body .software-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #content-body .software-project-chronovault,
+  #content-body .software-project-ai-server { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  #content-body .software-project-grid { grid-template-columns: 1fr; }
+  #content-body .software-project-chronovault,
+  #content-body .software-project-ai-server,
+  #content-body .software-project-vlc,
+  #content-body .software-project-mods { grid-column: 1; }
+  #content-body .software-project-card { min-height: 0; }
+  #content-body .software-project-chronovault { grid-template-columns: 1fr; }
+  #content-body .software-project-visual-chronovault { grid-column: 1; grid-row: auto; }
+}
+
+/* Hardware projects use a workbench layout with signal-path cards. */
+#content-body[data-page="hardware"] {
+  width: 100%;
+  max-width: 1200px;
+}
+
+#content-body .hardware-project-board {
+  --hardware-accent: #43d9c4;
+  padding: 0.15rem 0 2rem;
+}
+
+#content-body .hardware-project-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--hardware-accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+#content-body .hardware-project-lede {
+  max-width: 56rem;
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+#content-body .hardware-project-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+
+#content-body .hardware-project-card {
+  --project-accent: #43d9c4;
+  position: relative;
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 0.75rem;
+  overflow: hidden;
+  padding: 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 32%, var(--color-border));
+  border-radius: calc(var(--radius) * 1.6);
+  color: var(--color-text);
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--project-accent) 12%, transparent), transparent 55%),
+    color-mix(in srgb, var(--color-surface) 87%, transparent);
+  box-shadow: 0 12px 32px rgba(1, 8, 20, 0.13);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+#content-body .hardware-card-icon {
+  position: absolute;
+  z-index: 1;
+  top: 0.85rem;
+  right: 0.9rem;
+  display: grid;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 38%, var(--color-border));
+  border-radius: 0.8rem;
+  color: var(--project-accent);
+  background: color-mix(in srgb, var(--project-accent) 9%, var(--color-bg));
+  box-shadow: inset 0 0 18px color-mix(in srgb, var(--project-accent) 8%, transparent);
+}
+
+#content-body .hardware-card-icon svg {
+  display: block;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+#content-body .hardware-project-card:hover {
+  border-color: color-mix(in srgb, var(--project-accent) 64%, var(--color-border));
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--project-accent) 11%, transparent);
+  transform: translateY(-3px);
+}
+
+#content-body .hardware-project-imu {
+  --project-accent: #43d9c4;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.3fr) minmax(250px, 0.8fr);
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 19rem;
+}
+
+#content-body .hardware-project-mcu {
+  --project-accent: #b69afa;
+  grid-column: span 6;
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.72fr);
+  grid-template-rows: auto auto 1fr;
+  min-height: 17rem;
+}
+
+#content-body .hardware-project-asic,
+#content-body .hardware-project-sbc,
+#content-body .hardware-project-transceiver {
+  grid-column: span 6;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, 0.7fr);
+  grid-template-rows: auto auto 1fr;
+  min-height: 16rem;
+}
+
+#content-body .hardware-project-asic { --project-accent: #78b7ff; }
+#content-body .hardware-project-sbc { --project-accent: #b3d86b; }
+#content-body .hardware-project-transceiver { --project-accent: #43d9c4; }
+
+#content-body .hardware-project-bench {
+  --project-accent: #edbd75;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+  align-items: center;
+}
+
+#content-body .hardware-project-label {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--project-accent);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#content-body .hardware-project-card > h2 {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-right: 3.3rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+  line-height: 1.25;
+}
+
+#content-body .hardware-project-imu .hardware-project-description {
+  grid-column: 1;
+  grid-row: 3;
+  align-self: start;
+  font-size: 0.98rem;
+}
+
+#content-body .hardware-project-imu .hardware-project-visual {
+  grid-column: 2;
+  grid-row: 3 / span 2;
+  min-height: 12rem;
+}
+
+#content-body .hardware-project-imu .hardware-project-tags {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+#content-body .hardware-project-description {
+  min-width: 0;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+#content-body .hardware-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 0.42rem;
+}
+
+#content-body .hardware-project-tags > span {
+  padding: 0.38rem 0.58rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 30%, var(--color-border));
+  border-radius: 999px;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--project-accent) 8%, var(--color-bg));
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+#content-body .hardware-project-visual {
+  position: relative;
+  display: grid;
+  grid-column: 2;
+  grid-row: 3;
+  align-content: center;
+  gap: 0.55rem;
+  min-width: 0;
+  min-height: 9rem;
+  overflow: hidden;
+  padding: 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 25%, var(--color-border));
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    color-mix(in srgb, var(--color-bg) 64%, transparent);
+  background-size: 20px 20px;
+}
+
+#content-body .hardware-flow-node {
+  position: relative;
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: 0.48rem 0.58rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 24%, var(--color-border));
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+}
+
+#content-body .hardware-flow-node small {
+  color: var(--project-accent);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+}
+
+#content-body .hardware-flow-node strong {
+  overflow-wrap: anywhere;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+#content-body .hardware-project-visual::before {
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  left: 1.35rem;
+  width: 1px;
+  background: linear-gradient(transparent, var(--project-accent), transparent);
+  content: "";
+  opacity: 0.65;
+}
+
+#content-body .hardware-project-visual::after {
+  position: absolute;
+  top: 14%;
+  left: calc(1.35rem - 3px);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--project-accent);
+  box-shadow: 0 0 12px var(--project-accent);
+  content: "";
+  animation: hardware-signal-travel 3.6s ease-in-out infinite;
+}
+
+@keyframes hardware-signal-travel {
+  0%, 100% { top: 14%; opacity: 0.45; }
+  50% { top: 84%; opacity: 1; }
+}
+
+#content-body .hardware-project-sbc .hardware-project-tags {
+  grid-column: 1;
+}
+
+#content-body .hardware-project-sbc .hardware-project-visual {
+  grid-column: 2;
+}
+
+#content-body .hardware-project-bench .hardware-project-description { grid-column: 1; }
+#content-body .hardware-project-bench .hardware-project-tags { grid-column: 2; }
+
+@media (max-width: 1050px) {
+  #content-body .hardware-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #content-body .hardware-project-imu,
+  #content-body .hardware-project-transceiver,
+  #content-body .hardware-project-mcu,
+  #content-body .hardware-project-bench { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  #content-body .hardware-project-grid { grid-template-columns: 1fr; }
+  #content-body .hardware-project-card,
+  #content-body .hardware-project-imu,
+  #content-body .hardware-project-transceiver,
+  #content-body .hardware-project-mcu,
+  #content-body .hardware-project-asic,
+  #content-body .hardware-project-sbc,
+  #content-body .hardware-project-bench { grid-column: 1; min-height: 0; }
+  #content-body .hardware-project-card { grid-template-columns: 1fr; }
+  #content-body .hardware-project-visual { grid-column: 1; grid-row: auto; }
+  #content-body .hardware-project-imu .hardware-project-description,
+  #content-body .hardware-project-imu .hardware-project-visual,
+  #content-body .hardware-project-imu .hardware-project-tags { grid-column: 1; grid-row: auto; }
+  #content-body .hardware-project-bench .hardware-project-description,
+  #content-body .hardware-project-bench .hardware-project-tags { grid-column: 1; }
+}
