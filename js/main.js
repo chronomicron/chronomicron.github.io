@@ -89,7 +89,36 @@ const UI = {
     },
     menuOpen: "Open menu",
     menuClose: "Close menu",
-    jaComingSoon: "Japanese version coming soon."
+    jaComingSoon: "Japanese version coming soon.",
+    resumeLink: "↓ Resume PDF",
+    resumeFile: "Robert_Grou_Resume_en.pdf",
+    hero: {
+      eyebrow: "Electrical Engineer · Builder · Curious about what’s next",
+      titleMain: "Firmware / Hardware",
+      titleAccent: "+ AI",
+      lede: "I design systems from firmware and circuit boards down to ASICs—and I’m exploring how AI and agentic tools can help us build what comes next.",
+      tagsLabel: "Areas of experience and interest",
+      tagFirmware: "Firmware",
+      tagHardware: "Hardware design",
+      tagAI: "AI & agents",
+      explore: "Explore my background",
+      resume: "View résumé",
+      hardwareLabel: "HARDWARE",
+      intelligenceLabel: "INTELLIGENCE",
+      caption: "From silicon to intelligent systems"
+    },
+    profileVisual: {
+      kicker: "ENGINEERING LAYERS",
+      title: "From code to silicon",
+      firmware: "Firmware",
+      firmwareNote: "code meets the device",
+      silicon: "ASIC / FPGA",
+      siliconNote: "logic in silicon",
+      intelligence: "Vision + AI",
+      intelligenceNote: "systems that interpret",
+      summary: "Ideas move through firmware, hardware, and intelligent systems.",
+      signal: "Signal path active"
+    }
   },
   fr: {
     modes: {
@@ -113,7 +142,36 @@ const UI = {
     },
     menuOpen: "Ouvrir le menu",
     menuClose: "Fermer le menu",
-    jaComingSoon: "La version japonaise sera disponible bientôt."
+    jaComingSoon: "La version japonaise sera disponible bientôt.",
+    resumeLink: "↓ CV PDF",
+    resumeFile: "Robert_Grou_Resume_fr.pdf",
+    hero: {
+      eyebrow: "Ingénieur électrique · Créateur · Curieux de la suite",
+      titleMain: "Firmware / Matériel",
+      titleAccent: "+ IA",
+      lede: "Je conçois des systèmes, du firmware et des circuits imprimés jusqu’aux ASIC, et j’explore comment l’IA et les outils agentiques peuvent nous aider à construire la suite.",
+      tagsLabel: "Domaines d’expérience et d’intérêt",
+      tagFirmware: "Firmware",
+      tagHardware: "Conception matérielle",
+      tagAI: "IA et agents",
+      explore: "Découvrir mon parcours",
+      resume: "Voir mon CV",
+      hardwareLabel: "MATÉRIEL",
+      intelligenceLabel: "INTELLIGENCE",
+      caption: "Du silicium aux systèmes intelligents"
+    },
+    profileVisual: {
+      kicker: "COUCHES D’INGÉNIERIE",
+      title: "Du code au silicium",
+      firmware: "Firmware",
+      firmwareNote: "le code rejoint l’appareil",
+      silicon: "ASIC / FPGA",
+      siliconNote: "logique dans le silicium",
+      intelligence: "Vision + IA",
+      intelligenceNote: "des systèmes qui interprètent",
+      summary: "Les idées traversent le firmware, le matériel et les systèmes intelligents.",
+      signal: "Trajet du signal actif"
+    }
   },
   ja: {
     modes: {
@@ -137,7 +195,36 @@ const UI = {
     },
     menuOpen: "メニューを開く",
     menuClose: "メニューを閉じる",
-    jaComingSoon: "日本語版は近日公開予定です。"
+    jaComingSoon: "日本語版は近日公開予定です。",
+    resumeLink: "↓ 履歴書 PDF",
+    resumeFile: "Robert_Grou_Resume_jp.pdf",
+    hero: {
+      eyebrow: "電気エンジニア · ものづくり · 次の可能性に関心",
+      titleMain: "ファームウェア / ハードウェア",
+      titleAccent: "+ AI",
+      lede: "ファームウェアや回路基板からASICまで、幅広いシステムを設計しています。AIやエージェント型ツールが、これからのものづくりにどう役立つかも探っています。",
+      tagsLabel: "経験分野と関心分野",
+      tagFirmware: "ファームウェア",
+      tagHardware: "ハードウェア設計",
+      tagAI: "AI・エージェント",
+      explore: "経歴を見る",
+      resume: "履歴書を見る",
+      hardwareLabel: "ハードウェア",
+      intelligenceLabel: "インテリジェンス",
+      caption: "シリコンから知能システムへ"
+    },
+    profileVisual: {
+      kicker: "エンジニアリングの層",
+      title: "コードからシリコンへ",
+      firmware: "ファームウェア",
+      firmwareNote: "機器を動かすコード",
+      silicon: "ASIC / FPGA",
+      siliconNote: "シリコン上の論理回路",
+      intelligence: "Vision + AI",
+      intelligenceNote: "理解するシステム",
+      summary: "ファームウェア、ハードウェア、知能システムへとアイデアを形にします。",
+      signal: "信号経路が動作中"
+    }
   }
 };
 
@@ -257,6 +344,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Language: saved choice, or browser preference on first visit
   initLanguage();
+  updateTopNavOffset();
+  window.addEventListener("resize", updateTopNavOffset);
 
   // Custom cursor: switch image while mouse button is held down
   document.addEventListener("mousedown", () => {
@@ -278,14 +367,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const mode = btn.dataset.mode;
       switchMode(mode);
       closeMobileMenu();
+      enterSite();
     });
   });
 
-  // Brand link also goes to Profile
+  // Clicking the name returns to the opening hero.
   document.querySelector(".nav-brand a").addEventListener("click", (e) => {
     e.preventDefault();
     switchMode("profile");
     closeMobileMenu();
+    returnToHero();
+  });
+
+  // Both hero navigation cues enter the Profile / About view.
+  document.querySelectorAll('a[href="#main-layout"]').forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      switchMode("profile");
+      enterSite();
+    });
   });
 
   // Hamburger toggle (mobile)
@@ -296,6 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const open = topNav.classList.toggle("menu-open");
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
       menuToggle.setAttribute("aria-label", open ? t().menuClose : t().menuOpen);
+      requestAnimationFrame(updateTopNavOffset);
     });
   }
 
@@ -324,6 +425,40 @@ document.addEventListener("DOMContentLoaded", () => {
   switchMode("profile");
 });
 
+/** Keep the hero and profile content below the fixed header, including on mobile. */
+function updateTopNavOffset() {
+  const topNav = document.getElementById("top-nav");
+  if (!topNav) return;
+  document.documentElement.style.setProperty("--topnav-offset", `${topNav.getBoundingClientRect().height}px`);
+}
+
+/** Reveal the selected site section by sliding the opening hero away. */
+function enterSite() {
+  const hero = document.querySelector(".hero");
+  const mainLayout = document.getElementById("main-layout");
+  updateTopNavOffset();
+  document.body.classList.add("site-entered");
+  hero.inert = true;
+  hero.setAttribute("aria-hidden", "true");
+  mainLayout.inert = false;
+  mainLayout.removeAttribute("aria-hidden");
+  window.scrollTo({ top: 0, behavior: "auto" });
+  document.getElementById("sidebar-title").focus({ preventScroll: true });
+}
+
+/** Return to the hero and reset the profile view for the next entry. */
+function returnToHero() {
+  const hero = document.querySelector(".hero");
+  const mainLayout = document.getElementById("main-layout");
+  updateTopNavOffset();
+  hero.inert = false;
+  hero.removeAttribute("aria-hidden");
+  mainLayout.inert = true;
+  mainLayout.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("site-entered");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 /** Update top-bar mode button labels for the current language */
 function updateChromeLabels() {
   document.querySelectorAll(".nav-btn").forEach(btn => {
@@ -335,6 +470,29 @@ function updateChromeLabels() {
   if (menuToggle && !document.getElementById("top-nav").classList.contains("menu-open")) {
     menuToggle.setAttribute("aria-label", t().menuOpen);
   }
+
+  updateHeroTranslations();
+}
+
+/** Update static hero and profile-visual labels for the selected language. */
+function updateHeroTranslations() {
+  const strings = t();
+  const getString = key => key.split(".").reduce((value, part) => value && value[part], strings);
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const value = getString(element.dataset.i18n);
+    if (typeof value === "string") element.textContent = value;
+  });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach(element => {
+    const value = getString(element.dataset.i18nAriaLabel);
+    if (typeof value === "string") element.setAttribute("aria-label", value);
+  });
+
+  const resumePath = `/assets/resume/${strings.resumeFile}`;
+  [document.getElementById("nav-resume"), document.getElementById("hero-resume")]
+    .filter(Boolean)
+    .forEach(link => { link.href = resumePath; });
 }
 
 /** Close the mobile hamburger menu */
@@ -352,6 +510,7 @@ function closeMobileMenu() {
 function switchMode(modeId) {
   currentMode = modeId;
   currentPage = null;
+  document.getElementById("main-layout").dataset.mode = modeId;
 
   document.querySelectorAll(".nav-btn").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.mode === modeId);
@@ -443,11 +602,35 @@ function loadPage(pageId) {
   document.title = pageLabel(pageId) + " — Robert Grou-Szabo";
 
   const mdPath = `${currentLang}/${item.file}`;
-  loadMarkdown(mdPath);
+  loadMarkdown(mdPath, pageId);
 }
 
-async function loadMarkdown(path) {
+/** Group each work-history entry so CSS can present it as an animated timeline. */
+function buildExperienceTimeline(contentBody) {
+  const firstHeading = contentBody.querySelector("h2");
+  if (!firstHeading) return;
+
+  const timeline = document.createElement("div");
+  timeline.className = "experience-timeline";
+  firstHeading.before(timeline);
+
+  let node = firstHeading;
+  let entry = null;
+  while (node) {
+    const next = node.nextSibling;
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2") {
+      entry = document.createElement("article");
+      entry.className = "experience-entry";
+      timeline.appendChild(entry);
+    }
+    (entry || timeline).appendChild(node);
+    node = next;
+  }
+}
+
+async function loadMarkdown(path, pageId) {
   const contentBody = document.getElementById("content-body");
+  contentBody.dataset.page = pageId;
 
   // Fade out current content
   contentBody.classList.add("is-fading");
@@ -461,6 +644,10 @@ async function loadMarkdown(path) {
     const markdownText = await response.text();
     const html = marked.parse(markdownText);
     contentBody.innerHTML = html;
+
+    if (pageId === "experience") {
+      buildExperienceTimeline(contentBody);
+    }
 
     // Contact page: fill email slots without storing a plain address in Markdown
     injectEmailLinks(contentBody);

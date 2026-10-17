@@ -1,7 +1,32 @@
 # About
 
-I’m an **electrical engineer** specializing in **hardware** and **firmware** development, with deep experience in **ASIC** and **FPGA** design. My core focus has been **VLSI** design for **computer vision** and **video processing** algorithms. I also bring a strong academic background, with several publications in **IEEE** journals, conferences, and other peer-reviewed venues.
-> **Resume:** [Download PDF](/assets/resume/Robert_Grou_Resume_en.pdf)
+<section class="about-overview" aria-label="Professional overview">
+  <p class="about-lede">I’m an electrical engineer working across firmware, hardware, and silicon-level design.</p>
+  <p class="about-summary">My work has focused on VLSI for computer vision and video processing, supported by a strong academic foundation.</p>
+  <div class="about-cards">
+    <article class="about-card">
+      <span class="about-card-index">01 / DEVELOP</span>
+      <h3>Firmware &amp; hardware</h3>
+      <p>Specialized in firmware and hardware development.</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">02 / DESIGN</span>
+      <h3>ASIC &amp; FPGA</h3>
+      <p>Deep experience in ASIC and FPGA design.</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">03 / RESEARCH</span>
+      <h3>VLSI &amp; vision</h3>
+      <p>Core focus: VLSI algorithms for computer vision and video processing.</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">04 / PUBLISH</span>
+      <h3>IEEE publications</h3>
+      <p>Several publications in IEEE journals and conferences, plus other peer-reviewed venues.</p>
+    </article>
+  </div>
+  <p class="about-resume"><a href="/assets/resume/Robert_Grou_Resume_en.pdf">Download my résumé PDF <span aria-hidden="true">↗</span></a></p>
+</section>
 
 ## Background
 

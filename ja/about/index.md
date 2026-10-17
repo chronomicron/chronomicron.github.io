@@ -1,7 +1,32 @@
 # 自己紹介
 
-私は**電気工学エンジニア**で、**ハードウェア**および**ファームウェア**の開発を専門としています。**ASIC**や**FPGA**の設計にも長く携わり、主な研究・実務の対象は**コンピュータビジョン**と**映像処理**向けの**VLSI**アルゴリズム設計です。学術面でも実績があり、**IEEE**をはじめとする査読付きの論文誌・国際会議に複数の論文を発表してきました。
-> **履歴書（PDF）：** [ダウンロード](/assets/resume/Robert_Grou_Resume_jp.pdf)
+<section class="about-overview" aria-label="職務概要">
+  <p class="about-lede">ファームウェア、ハードウェアからシリコンレベルの設計まで携わる電気工学エンジニアです。</p>
+  <p class="about-summary">コンピュータビジョンと映像処理向けのVLSI設計を中心に取り組み、学術分野でも確かな実績を積んできました。</p>
+  <div class="about-cards">
+    <article class="about-card">
+      <span class="about-card-index">01 / 開発</span>
+      <h3>ファームウェアとハードウェア</h3>
+      <p>ファームウェアおよびハードウェア開発を専門としています。</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">02 / 設計</span>
+      <h3>ASICとFPGA</h3>
+      <p>ASICとFPGAの設計に豊富な経験があります。</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">03 / 研究</span>
+      <h3>VLSIとビジョン</h3>
+      <p>コンピュータビジョンと映像処理向けVLSIアルゴリズムを主な専門としています。</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">04 / 発表</span>
+      <h3>IEEE論文・発表</h3>
+      <p>IEEEの論文誌や国際会議をはじめ、査読付き媒体で複数の論文を発表しています。</p>
+    </article>
+  </div>
+  <p class="about-resume"><a href="/assets/resume/Robert_Grou_Resume_jp.pdf">履歴書PDFをダウンロード <span aria-hidden="true">↗</span></a></p>
+</section>
 
 ## 初期の影響
 

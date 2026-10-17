@@ -1,7 +1,32 @@
 # À propos
 
-Je suis **ingénieur électrique**, spécialisé en développement **matériel (hardware)** et **micrologiciel (firmware)**, avec une solide expérience en conception **ASIC** et **FPGA**. Mon domaine principal a été la conception **VLSI** d’algorithmes de **vision par ordinateur** et de **traitement vidéo**. J’ai également un fort parcours universitaire, avec plusieurs publications dans des revues et conférences **IEEE**, ainsi que d’autres lieux d’évaluation par les pairs.
-> **CV (PDF) :** [Télécharger](/assets/resume/Robert_Grou_Resume_fr.pdf)
+<section class="about-overview" aria-label="Aperçu professionnel">
+  <p class="about-lede">Je suis ingénieur électrique et je travaille à la croisée du firmware, du matériel et de la conception au niveau du silicium.</p>
+  <p class="about-summary">Mes travaux portent principalement sur le VLSI pour la vision par ordinateur et le traitement vidéo, avec de solides bases universitaires.</p>
+  <div class="about-cards">
+    <article class="about-card">
+      <span class="about-card-index">01 / DÉVELOPPER</span>
+      <h3>Firmware et matériel</h3>
+      <p>Spécialisé en développement de firmware et de matériel.</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">02 / CONCEVOIR</span>
+      <h3>ASIC et FPGA</h3>
+      <p>Solide expérience en conception ASIC et FPGA.</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">03 / RECHERCHE</span>
+      <h3>VLSI et vision</h3>
+      <p>Spécialité : algorithmes VLSI pour la vision par ordinateur et le traitement vidéo.</p>
+    </article>
+    <article class="about-card">
+      <span class="about-card-index">04 / PUBLICATIONS</span>
+      <h3>Publications IEEE</h3>
+      <p>Plusieurs publications dans des revues et conférences IEEE, ainsi que d’autres publications évaluées par les pairs.</p>
+    </article>
+  </div>
+  <p class="about-resume"><a href="/assets/resume/Robert_Grou_Resume_fr.pdf">Télécharger mon CV en PDF <span aria-hidden="true">↗</span></a></p>
+</section>
 
 ## Influences précoces
 

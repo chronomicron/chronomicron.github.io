@@ -53,6 +53,9 @@
   <header id="top-nav">
     <div class="nav-brand">
       <a href="#" data-mode="profile">Robert Grou-Szabo</a>
+      <a class="nav-resume" id="nav-resume" href="/assets/resume/Robert_Grou_Resume_en.pdf" download>
+        <span data-i18n="resumeLink">↓ Resume PDF</span>
+      </a>
     </div>
 
     <!-- Hamburger – visible only on small screens -->
@@ -86,21 +89,21 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-inner">
       <div class="hero-copy">
-        <p class="hero-eyebrow"><span></span> Electrical Engineer · Builder · Curious about what’s next</p>
-        <h1 id="hero-title">Firmware / Hardware <span>+ AI</span></h1>
-        <p class="hero-lede">I design systems from firmware and circuit boards down to ASICs—and I’m exploring how AI and agentic tools can help us build what comes next.</p>
-        <div class="hero-tags" aria-label="Areas of experience and interest">
-          <span>Firmware</span><span>Hardware design</span><span>ASIC / FPGA</span><span>AI &amp; agents</span>
+        <p class="hero-eyebrow"><span class="hero-eyebrow-dot" aria-hidden="true"></span><span data-i18n="hero.eyebrow">Electrical Engineer · Builder · Curious about what’s next</span></p>
+        <h1 id="hero-title"><span class="hero-title-main" data-i18n="hero.titleMain">Firmware / Hardware</span> <span class="hero-title-accent" data-i18n="hero.titleAccent">+ AI</span></h1>
+        <p class="hero-lede" data-i18n="hero.lede">I design systems from firmware and circuit boards down to ASICs—and I’m exploring how AI and agentic tools can help us build what comes next.</p>
+        <div class="hero-tags" aria-label="Areas of experience and interest" data-i18n-aria-label="hero.tagsLabel">
+          <span data-i18n="hero.tagFirmware">Firmware</span><span data-i18n="hero.tagHardware">Hardware design</span><span>ASIC / FPGA</span><span data-i18n="hero.tagAI">AI &amp; agents</span>
         </div>
         <div class="hero-actions">
-          <a class="hero-primary" href="#main-layout">Explore my background <span aria-hidden="true">↓</span></a>
-          <a class="hero-secondary" href="/assets/resume/Robert_Grou_Resume_en.pdf">View résumé <span aria-hidden="true">↗</span></a>
+          <a class="hero-primary" href="#main-layout"><span data-i18n="hero.explore">Explore my background</span> <span aria-hidden="true">↓</span></a>
+          <a class="hero-secondary" id="hero-resume" href="/assets/resume/Robert_Grou_Resume_en.pdf"><span data-i18n="hero.resume">View résumé</span> <span aria-hidden="true">↗</span></a>
         </div>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
-        <div class="hero-visual-label hero-visual-label-left">HARDWARE</div>
-        <div class="hero-visual-label hero-visual-label-right">INTELLIGENCE</div>
+        <div class="hero-visual-label hero-visual-label-left" data-i18n="hero.hardwareLabel">HARDWARE</div>
+        <div class="hero-visual-label hero-visual-label-right" data-i18n="hero.intelligenceLabel">INTELLIGENCE</div>
         <svg class="systems-graphic" viewBox="0 0 620 420" role="presentation">
           <defs>
             <linearGradient id="signal-gradient" x1="0" x2="1">
@@ -143,18 +146,17 @@
             <animateMotion dur="4.6s" begin="-2.3s" repeatCount="indefinite" path="M177 208 C252 103 335 320 425 204 S532 150 574 209" />
           </circle>
         </svg>
-        <div class="hero-visual-caption"><span class="caption-dot"></span> From silicon to intelligent systems</div>
+        <div class="hero-visual-caption"><span class="caption-dot"></span><span data-i18n="hero.caption">From silicon to intelligent systems</span></div>
       </div>
     </div>
-    <a class="hero-scroll-cue" href="#main-layout" aria-label="Scroll to profile"><span></span> Scroll to explore</a>
   </section>
 
   <!-- ========== MAIN LAYOUT: LEFT SIDEBAR + CONTENT ========== -->
-  <div id="main-layout">
+  <div id="main-layout" data-mode="profile" aria-hidden="true" inert>
 
     <!-- Left contextual sidebar – changes according to the selected top mode -->
-    <aside id="sidebar">
-      <h2 id="sidebar-title">Profile / Resume</h2>
+  <aside id="sidebar">
+      <h2 id="sidebar-title" tabindex="-1">Profile / Resume</h2>
       <ul id="sidebar-menu">
         <!-- Populated dynamically by JavaScript -->
       </ul>
@@ -167,6 +169,67 @@
         <p>Loading…</p>
       </div>
     </main>
+
+    <aside id="profile-visual" aria-labelledby="profile-visual-title">
+      <div class="profile-visual-heading">
+        <p class="visual-kicker" data-i18n="profileVisual.kicker">ENGINEERING LAYERS</p>
+        <h2 id="profile-visual-title" data-i18n="profileVisual.title">From code to silicon</h2>
+      </div>
+
+      <svg class="about-flow" viewBox="0 0 320 430" aria-hidden="true">
+        <defs>
+          <pattern id="panel-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-opacity=".08" stroke-width="1" />
+          </pattern>
+          <linearGradient id="flow-gradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#55dbc9" />
+            <stop offset="1" stop-color="#a78bfa" />
+          </linearGradient>
+        </defs>
+        <rect class="flow-grid" x="1" y="1" width="318" height="428" rx="16" />
+        <path class="flow-trace" d="M160 123V165 M160 253V295" />
+        <path class="flow-trace flow-trace-branch" d="M160 144H256V210 M160 274H64V338" />
+
+        <g class="flow-card" transform="translate(38 42)">
+          <rect class="flow-card-body" width="244" height="82" rx="12" />
+          <rect class="flow-icon-well" x="14" y="14" width="54" height="54" rx="10" />
+          <path class="code-icon" d="m37 31-8 10 8 10m9-20 8 10-8 10m4-23-8 27" />
+          <text class="flow-label" x="82" y="39" data-i18n="profileVisual.firmware">Firmware</text>
+          <text class="flow-subtitle" x="82" y="59" data-i18n="profileVisual.firmwareNote">code meets the device</text>
+          <circle class="flow-status" cx="221" cy="20" r="3" />
+        </g>
+
+        <g class="flow-card" transform="translate(38 170)">
+          <rect class="flow-card-body" width="244" height="82" rx="12" />
+          <rect class="flow-icon-well" x="14" y="14" width="54" height="54" rx="10" />
+          <rect class="chip-icon" x="29" y="29" width="24" height="24" rx="4" />
+          <path class="chip-icon-pins" d="M34 23v6m8-6v6m8-6v6m-16 24v6m8-6v6m8-6v6m-26-26h6m-6 8h6m-6 8h6m24-16h6m-6 8h6m-6 8h6" />
+          <text class="flow-label" x="82" y="39" data-i18n="profileVisual.silicon">ASIC / FPGA</text>
+          <text class="flow-subtitle" x="82" y="59" data-i18n="profileVisual.siliconNote">logic in silicon</text>
+          <circle class="flow-status" cx="221" cy="20" r="3" />
+        </g>
+
+        <g class="flow-card" transform="translate(38 298)">
+          <rect class="flow-card-body" width="244" height="82" rx="12" />
+          <rect class="flow-icon-well" x="14" y="14" width="54" height="54" rx="10" />
+          <path class="network-icon-lines" d="M31 33 43 27 54 36 48 51 33 50 27 40Z M31 33 48 51M43 27 33 50M54 36 27 40" />
+          <g class="network-icon-nodes"><circle cx="31" cy="33" r="2.5"/><circle cx="43" cy="27" r="2.5"/><circle cx="54" cy="36" r="2.5"/><circle cx="48" cy="51" r="2.5"/><circle cx="33" cy="50" r="2.5"/><circle cx="27" cy="40" r="2.5"/></g>
+          <text class="flow-label" x="82" y="39" data-i18n="profileVisual.intelligence">Vision + AI</text>
+          <text class="flow-subtitle" x="82" y="59" data-i18n="profileVisual.intelligenceNote">systems that interpret</text>
+          <circle class="flow-status" cx="221" cy="20" r="3" />
+        </g>
+
+        <circle class="flow-packet" r="4">
+          <animateMotion dur="4.2s" repeatCount="indefinite" path="M160 122V165 M160 253V295" />
+        </circle>
+        <circle class="flow-packet flow-packet-secondary" r="3">
+          <animateMotion dur="4.2s" begin="-2.1s" repeatCount="indefinite" path="M160 122V165 M160 253V295" />
+        </circle>
+      </svg>
+
+      <p class="profile-visual-summary" data-i18n="profileVisual.summary">Ideas move through firmware, hardware, and intelligent systems.</p>
+      <div class="visual-signal"><span></span><span data-i18n="profileVisual.signal">Signal path active</span></div>
+    </aside>
 
   </div>
 
