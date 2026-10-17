@@ -331,8 +331,49 @@ function cycleTheme() {
   applyTheme(next);
 }
 
+function initSciFiCursor() {
+  if (!window.matchMedia?.("(hover: hover) and (pointer: fine)").matches) return;
+
+  const cursor = document.createElement("div");
+  cursor.className = "scifi-cursor";
+  cursor.setAttribute("aria-hidden", "true");
+  cursor.innerHTML = `
+    <span class="scifi-orbit-speck"></span>
+    <img class="scifi-cursor-pointer scifi-cursor-pointer--idle" src="/assets/pointer/scifi-pointer.svg" alt="">
+    <img class="scifi-cursor-pointer scifi-cursor-pointer--click" src="/assets/pointer/scifi-pointer-click.svg" alt="">
+  `;
+  document.body.append(cursor);
+
+  let framePending = false;
+  let pointerX = 0;
+  let pointerY = 0;
+  const moveCursor = (event) => {
+    if (event.pointerType && event.pointerType !== "mouse") return;
+    pointerX = event.clientX - 2;
+    pointerY = event.clientY - 1;
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(() => {
+      cursor.style.left = `${pointerX}px`;
+      cursor.style.top = `${pointerY}px`;
+      cursor.classList.add("is-visible");
+      framePending = false;
+    });
+  };
+
+  document.addEventListener("pointermove", moveCursor, { passive: true });
+  document.addEventListener("pointerover", (event) => {
+    cursor.classList.toggle("is-over-text", Boolean(event.target.closest?.("input, textarea, [contenteditable='true']")));
+  });
+  document.addEventListener("pointerout", (event) => {
+    if (event.relatedTarget == null) cursor.classList.remove("is-visible");
+  });
+  document.documentElement.classList.add("has-sci-fi-cursor");
+}
+
 // ---------- INITIALISATION ----------
 document.addEventListener("DOMContentLoaded", () => {
+  initSciFiCursor();
   // Restore theme before paint-heavy UI work
   applyTheme(getStoredTheme());
   const themeBtn = document.getElementById("theme-toggle");
@@ -351,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTopNavOffset();
   window.addEventListener("resize", updateTopNavOffset);
 
-  // Custom cursor: switch image while mouse button is held down
+  // Sci-fi cursor: switch to its bright pulse state while the mouse is pressed.
   document.addEventListener("mousedown", () => {
     document.documentElement.classList.add("cursor-pressed");
   });

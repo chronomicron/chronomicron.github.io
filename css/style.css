@@ -103,19 +103,19 @@ html, body {
   line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
-  /* Custom rocket cursor – hotspot at top-left (0,0) */
-  cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, auto;
+  /* Custom sci-fi pointer; hotspot sits at its bright arrow tip. */
+  cursor: url("/assets/pointer/scifi-pointer.svg") 2 1, url("/assets/pointer/scifi-pointer.png") 2 1, auto;
 }
 
-/* Ensure top bar, sidebar and main layout also use the rocket */
+/* Keep the custom pointer consistent across the main page regions. */
 #top-nav,
 #sidebar,
 #main-layout,
 #content {
-  cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, auto;
+  cursor: url("/assets/pointer/scifi-pointer.svg") 2 1, url("/assets/pointer/scifi-pointer.png") 2 1, auto;
 }
 
-/* Clickable elements also use the rocket cursor */
+/* Clickable elements keep the same visual pointer and semantic fallback. */
 a,
 button,
 .nav-btn,
@@ -123,10 +123,10 @@ button,
 summary,
 .lang-btn,
 #menu-toggle {
-  cursor: url("/assets/pointer/retro_rocket_48px.png") 0 0, pointer;
+  cursor: url("/assets/pointer/scifi-pointer.svg") 2 1, url("/assets/pointer/scifi-pointer.png") 2 1, pointer !important;
 }
 
-/* Pressed / click-down cursor (toggled by JS class on <html>) */
+/* The pressed sprite adds a brief energy pulse at the pointer tip. */
 html.cursor-pressed,
 html.cursor-pressed body,
 html.cursor-pressed #top-nav,
@@ -140,7 +140,102 @@ html.cursor-pressed .sidebar-btn,
 html.cursor-pressed summary,
 html.cursor-pressed .lang-btn,
 html.cursor-pressed #menu-toggle {
-  cursor: url("/assets/pointer/retro_rocket2_48px.png") 0 0, pointer !important;
+  cursor: url("/assets/pointer/scifi-pointer-click.svg") 2 1, url("/assets/pointer/scifi-pointer-click.png") 2 1, pointer !important;
+}
+
+/* Keep the custom pointer visible on cards and other controls with local cursor rules. */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  html * {
+    cursor: url("/assets/pointer/scifi-pointer.svg") 2 1, url("/assets/pointer/scifi-pointer.png") 2 1, auto !important;
+  }
+
+  html.cursor-pressed,
+  html.cursor-pressed * {
+    cursor: url("/assets/pointer/scifi-pointer-click.svg") 2 1, url("/assets/pointer/scifi-pointer-click.png") 2 1, auto !important;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+/* DOM cursor layer lets the violet signal mote travel behind and across the pointer. */
+.scifi-cursor {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 32px;
+  height: 32px;
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 100ms ease-out;
+}
+
+.scifi-cursor.is-visible { opacity: 1; }
+.scifi-cursor.is-over-text { opacity: 0; }
+
+.scifi-cursor-pointer {
+  position: absolute;
+  inset: 0;
+  width: 32px;
+  height: 32px;
+  z-index: 2;
+}
+
+.scifi-cursor-pointer--click { display: none; }
+html.cursor-pressed .scifi-cursor-pointer--idle { display: none; }
+html.cursor-pressed .scifi-cursor-pointer--click { display: block; }
+
+.scifi-orbit-speck {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b49bff;
+  box-shadow: 0 0 5px 2px rgb(153 125 255 / 72%);
+  offset-path: path("M 10 0 C 18 1 20 9 16 15 C 11 23 2 19 0 11 C -2 4 2 -1 10 0");
+  offset-rotate: 0deg;
+  z-index: 3;
+  animation: scifi-pointer-orbit 2s linear infinite,
+             scifi-pointer-depth 2s steps(1, end) infinite;
+}
+
+@keyframes scifi-pointer-orbit {
+  /* A closed path keeps the mote moving smoothly through the loop restart. */
+  0% { offset-distance: 0%; }
+  22% { offset-distance: 22%; }
+  52% { offset-distance: 52%; }
+  55% { offset-distance: 55%; }
+  82% { offset-distance: 82%; }
+  100% { offset-distance: 100%; }
+}
+
+@keyframes scifi-pointer-depth {
+  /* Keep depth changes instantaneous so the mote never flickers through the pointer layer. */
+  0%, 22% { z-index: 3; }
+  22.01%, 55% { z-index: 1; }
+  55.01%, 100% { z-index: 3; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.has-sci-fi-cursor,
+  html.has-sci-fi-cursor * { cursor: none !important; }
+
+  html.has-sci-fi-cursor input,
+  html.has-sci-fi-cursor textarea,
+  html.has-sci-fi-cursor [contenteditable="true"] { cursor: text !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scifi-orbit-speck {
+    animation: none;
+    offset-distance: 0%;
+    opacity: 1;
+    z-index: 3;
+  }
 }
 
 a {
