@@ -27,12 +27,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Robert Grou-Szabo — Personal Profile</title>
-  <meta name="description" content="Electrical engineer focused on hardware, firmware, ASIC/FPGA and VLSI for computer vision and video processing. Profile, publications, projects, and contact for Robert Grou-Szabo." />
+  <meta name="description" content="Robert Grou-Szabo is an electrical engineer with experience in firmware, hardware, ASIC and FPGA design, and a growing interest in AI and agentic development." />
 
   <!-- Open Graph (LinkedIn, chat previews, etc.) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Robert Grou-Szabo — Personal Profile" />
-  <meta property="og:description" content="Electrical engineer focused on hardware, firmware, ASIC/FPGA and VLSI for computer vision and video processing." />
+  <meta property="og:description" content="Firmware / Hardware + AI. Meet Robert Grou-Szabo, an electrical engineer exploring intelligent systems and agentic development." />
   <meta property="og:url" content="https://chronomicron.github.io/" />
 
   <!-- Favicon (hourglass + scythe stamp) -->
@@ -81,6 +81,73 @@
       </div>
     </div>
   </header>
+
+  <!-- ========== FIRST-IMPRESSION HERO ========== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-eyebrow"><span></span> Electrical Engineer · Builder · Curious about what’s next</p>
+        <h1 id="hero-title">Firmware / Hardware <span>+ AI</span></h1>
+        <p class="hero-lede">I design systems from firmware and circuit boards down to ASICs—and I’m exploring how AI and agentic tools can help us build what comes next.</p>
+        <div class="hero-tags" aria-label="Areas of experience and interest">
+          <span>Firmware</span><span>Hardware design</span><span>ASIC / FPGA</span><span>AI &amp; agents</span>
+        </div>
+        <div class="hero-actions">
+          <a class="hero-primary" href="#main-layout">Explore my background <span aria-hidden="true">↓</span></a>
+          <a class="hero-secondary" href="/assets/resume/Robert_Grou_Resume_en.pdf">View résumé <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-label hero-visual-label-left">HARDWARE</div>
+        <div class="hero-visual-label hero-visual-label-right">INTELLIGENCE</div>
+        <svg class="systems-graphic" viewBox="0 0 620 420" role="presentation">
+          <defs>
+            <linearGradient id="signal-gradient" x1="0" x2="1">
+              <stop offset="0" stop-color="#49d6c8" />
+              <stop offset="1" stop-color="#a78bfa" />
+            </linearGradient>
+            <radialGradient id="core-glow">
+              <stop offset="0" stop-color="#49d6c8" stop-opacity=".3" />
+              <stop offset="1" stop-color="#49d6c8" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <circle class="core-glow" cx="310" cy="210" r="180" fill="url(#core-glow)" />
+          <g class="chip" transform="translate(55 132)">
+            <rect class="chip-body" width="142" height="142" rx="18" />
+            <rect class="chip-core" x="31" y="31" width="80" height="80" rx="9" />
+            <path class="chip-mark" d="M53 76h36M71 58v36" />
+            <path class="chip-pins" d="M20 24v-15M48 24v-15M76 24v-15M104 24v-15M20 133v15M48 133v15M76 133v15M104 133v15M9 40h-15M9 68h-15M9 96h-15M133 40h15M133 68h15M133 96h15" />
+          </g>
+          <g class="trace-lines" fill="none">
+            <path d="M197 203h85c22 0 28-44 51-44h50" />
+            <path d="M197 224h63c27 0 35 43 64 43h59" />
+            <path d="M197 245h35c20 0 29 69 51 69h36" />
+            <path d="M197 181h42c21 0 27-67 52-67h49" />
+          </g>
+          <g class="network" stroke="url(#signal-gradient)" fill="none">
+            <path d="M384 158 449 112 505 146 550 95M384 158 447 205 513 177 550 95M384 267 449 205 501 250 550 294M384 267 437 319 501 250M449 112 447 205 437 319M505 146 513 177 501 250M550 95 513 177 550 294" />
+          </g>
+          <g class="nodes">
+            <circle cx="384" cy="158" r="7"/><circle cx="384" cy="267" r="7"/>
+            <circle cx="449" cy="112" r="6"/><circle cx="447" cy="205" r="8"/>
+            <circle cx="437" cy="319" r="6"/><circle cx="505" cy="146" r="6"/>
+            <circle cx="513" cy="177" r="7"/><circle cx="501" cy="250" r="7"/>
+            <circle cx="550" cy="95" r="6"/><circle cx="550" cy="294" r="6"/>
+          </g>
+          <path class="flight-path" d="M177 208 C252 103 335 320 425 204 S532 150 574 209" />
+          <circle class="signal-packet" r="5" fill="#f8fbff">
+            <animateMotion dur="4.6s" repeatCount="indefinite" path="M177 208 C252 103 335 320 425 204 S532 150 574 209" />
+          </circle>
+          <circle class="signal-packet signal-packet-late" r="3" fill="#49d6c8">
+            <animateMotion dur="4.6s" begin="-2.3s" repeatCount="indefinite" path="M177 208 C252 103 335 320 425 204 S532 150 574 209" />
+          </circle>
+        </svg>
+        <div class="hero-visual-caption"><span class="caption-dot"></span> From silicon to intelligent systems</div>
+      </div>
+    </div>
+    <a class="hero-scroll-cue" href="#main-layout" aria-label="Scroll to profile"><span></span> Scroll to explore</a>
+  </section>
 
   <!-- ========== MAIN LAYOUT: LEFT SIDEBAR + CONTENT ========== -->
   <div id="main-layout">
