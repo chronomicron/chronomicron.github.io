@@ -1828,6 +1828,293 @@ html[lang="ja"] .hero h1 {
   }
 }
 
+/* Personal Interests: connected bubbles rooted in curiosity. */
+#content-body[data-page="interests"] {
+  width: 100%;
+  max-width: 1120px;
+}
+
+#content-body .personal-interest-tree {
+  --interest-accent: var(--color-primary);
+  padding: 0.25rem 0 1.5rem;
+}
+
+#content-body .interest-tree-kicker {
+  margin: 0 0 0.3rem;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+#content-body .interest-tree-canvas {
+  position: relative;
+  width: min(100%, 1000px);
+  aspect-ratio: 10 / 7;
+  margin: 0 auto;
+  isolation: isolate;
+}
+
+#content-body .interest-tree-wires {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--color-primary);
+  pointer-events: none;
+}
+
+#content-body .interest-tree-wires path {
+  fill: none;
+  stroke: color-mix(in srgb, currentColor 55%, #8097b8);
+  stroke-width: 2;
+  stroke-dasharray: 4 7;
+  opacity: 0.68;
+  vector-effect: non-scaling-stroke;
+}
+
+#content-body .interest-tree-root {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: clamp(130px, 19%, 190px);
+  aspect-ratio: 1;
+  align-content: center;
+  justify-items: center;
+  gap: 0.45rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 58%, var(--color-border));
+  border-radius: 50%;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--color-primary) 18%, var(--color-surface)), color-mix(in srgb, var(--color-bg) 95%, transparent) 72%);
+  box-shadow: 0 0 34px color-mix(in srgb, var(--color-primary) 19%, transparent), inset 0 0 20px color-mix(in srgb, var(--color-primary) 9%, transparent);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+#content-body .interest-root-orbit {
+  position: absolute;
+  inset: -0.45rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 23%, transparent);
+  border-radius: 50%;
+  animation: interest-orbit 18s linear infinite;
+}
+
+#content-body .interest-root-orbit::before,
+#content-body .interest-root-orbit::after {
+  position: absolute;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-primary) 70%, transparent);
+  content: "";
+}
+
+#content-body .interest-root-orbit::before { top: 12%; left: 18%; }
+#content-body .interest-root-orbit::after { right: 7%; bottom: 33%; width: 0.28rem; height: 0.28rem; }
+
+@keyframes interest-orbit { to { transform: rotate(360deg); } }
+
+#content-body .interest-root-label {
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+#content-body .interest-tree-root strong {
+  max-width: 8.5rem;
+  font-size: clamp(0.9rem, 1.7vw, 1.12rem);
+  line-height: 1.2;
+}
+
+#content-body .interest-tree-node {
+  position: absolute;
+  z-index: 2;
+  top: var(--node-y);
+  left: var(--node-x);
+  width: clamp(155px, 23%, 235px);
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--interest-node-accent) 42%, var(--color-border));
+  border-radius: 4.5rem;
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--interest-node-accent) 12%, transparent), transparent 72%),
+    color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: 0 8px 20px color-mix(in srgb, #020817 20%, transparent);
+  transform: translate(-50%, -50%);
+  transition: width 220ms ease, border-radius 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+#content-body .interest-node-toggle {
+  display: grid;
+  width: 100%;
+  min-height: 7.8rem;
+  align-content: center;
+  justify-items: stretch;
+  gap: 0.55rem;
+  padding: 1.05rem 1.2rem;
+  border: 0;
+  border-radius: inherit;
+  color: var(--color-text);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+#content-body .interest-node-heading {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
+#content-body .interest-node-toggle:focus-visible {
+  outline: 2px solid var(--interest-node-accent);
+  outline-offset: 3px;
+}
+
+#content-body .interest-node-title {
+  min-width: 0;
+  flex: 1 1 auto;
+  color: var(--interest-node-accent);
+  font-size: 0.98rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+#content-body .interest-node-icon {
+  display: grid;
+  width: 2.15rem;
+  height: 2.15rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--interest-node-accent) 45%, var(--color-border));
+  border-radius: 0.62rem;
+  color: var(--interest-node-accent);
+  background: color-mix(in srgb, var(--interest-node-accent) 9%, transparent);
+}
+
+#content-body .interest-node-icon svg {
+  display: block;
+  width: 1.28rem;
+  height: 1.28rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#content-body .interest-node-preview {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+#content-body .interest-node-details {
+  max-height: min(48vh, 27rem);
+  overflow: auto;
+  padding: 0 1.15rem 1.05rem;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  scrollbar-color: color-mix(in srgb, var(--interest-node-accent) 45%, var(--color-border)) transparent;
+}
+
+#content-body .interest-node-details p { margin: 0 0 0.5rem; }
+#content-body .interest-node-details ul { display: grid; gap: 0.4rem; margin: 0; padding-left: 1.1rem; }
+#content-body .interest-node-details li { padding-left: 0.12rem; }
+#content-body .interest-tree-node.is-active {
+  z-index: 8;
+  width: min(36%, 355px);
+  border-radius: 1.15rem;
+  border-color: color-mix(in srgb, var(--interest-node-accent) 78%, white);
+  box-shadow: 0 18px 46px color-mix(in srgb, #020817 45%, transparent), 0 0 24px color-mix(in srgb, var(--interest-node-accent) 18%, transparent);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+#content-body .interest-tree-node.is-active .interest-node-toggle {
+  min-height: 0;
+  align-content: start;
+  padding-bottom: 0.55rem;
+}
+
+#content-body .interest-tree-node.is-active .interest-node-heading {
+  align-items: flex-start;
+}
+
+#content-body .interest-tree-node-1 { --interest-node-accent: #41d6c4; }
+#content-body .interest-tree-node-2 { --interest-node-accent: #f0ad67; }
+#content-body .interest-tree-node-3 { --interest-node-accent: #8ccc72; }
+#content-body .interest-tree-node-4 { --interest-node-accent: #b391fa; }
+#content-body .interest-tree-node-5 { --interest-node-accent: #b69afa; }
+#content-body .interest-tree-node-6 { --interest-node-accent: #6abde0; }
+#content-body .interest-tree-node-7 { --interest-node-accent: #61c99b; }
+
+@media (max-width: 850px) {
+  #content-body .interest-tree-canvas {
+    display: grid;
+    aspect-ratio: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0.7rem;
+    padding: 0.65rem 0 1.2rem;
+  }
+
+  #content-body .interest-tree-wires { display: none; }
+
+  #content-body .interest-tree-root {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(12rem, 70%);
+    grid-column: 1 / -1;
+    justify-self: center;
+    transform: none;
+  }
+
+  #content-body .interest-tree-node {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    min-height: 100%;
+    border-radius: 1.2rem;
+    transform: none;
+  }
+
+  #content-body .interest-node-toggle { min-height: 8.5rem; }
+
+  #content-body .interest-tree-node.is-active {
+    width: auto;
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 560px) {
+  #content-body .interest-tree-canvas { grid-template-columns: 1fr; }
+  #content-body .interest-tree-root { grid-column: auto; width: 9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #content-body .interest-root-orbit { animation: none; }
+  #content-body .interest-tree-node,
+  #content-body .interest-root-orbit { transition: none; }
+}
+
 /* Publications use a media-library view: paper pages above a year ribbon. */
 #content-body[data-page="publications"] {
   width: 100%;

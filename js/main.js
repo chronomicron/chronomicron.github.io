@@ -988,6 +988,177 @@ function buildOtherSkillsMosaic(contentBody) {
   heading.after(mosaic);
 }
 
+/** Turn the Personal Interests page into an interactive connected bubble tree. */
+function buildPersonalInterestTree(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  if (!heading) return;
+
+  const tree = document.createElement("section");
+  tree.className = "personal-interest-tree";
+  tree.setAttribute("aria-label", ({
+    en: "Explore personal interests by category",
+    fr: "Découvrir les intérêts personnels par catégorie",
+    ja: "カテゴリ別に個人的な関心を紹介"
+  })[currentLang] || "Explore personal interests by category");
+
+  const kicker = document.createElement("p");
+  kicker.className = "interest-tree-kicker";
+  kicker.textContent = ({
+    en: "A FEW THINGS I LIKE TO LEARN, MAKE, AND EXPLORE",
+    fr: "QUELQUES SUJETS QUE J’AIME APPRENDRE, CRÉER ET EXPLORER",
+    ja: "学び、つくり、探求すること"
+  })[currentLang] || "A FEW THINGS I LIKE TO LEARN, MAKE, AND EXPLORE";
+
+  const canvas = document.createElement("div");
+  canvas.className = "interest-tree-canvas";
+  canvas.innerHTML = `
+    <svg class="interest-tree-wires" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M500 350 C500 270 500 185 500 96" />
+      <path d="M500 350 C590 280 690 220 780 175" />
+      <path d="M500 350 C610 390 700 470 800 505" />
+      <path d="M500 350 C540 450 560 540 580 615" />
+      <path d="M500 350 C420 450 355 540 320 615" />
+      <path d="M500 350 C390 355 280 390 200 425" />
+      <path d="M500 350 C410 285 315 220 235 175" />
+    </svg>
+    <div class="interest-tree-root">
+      <span class="interest-root-orbit" aria-hidden="true"></span>
+      <span class="interest-root-label">${({ en: "CURIOSITY", fr: "CURIOSITÉ", ja: "好奇心" })[currentLang] || "CURIOSITY"}</span>
+      <strong>${({ en: "Always learning", fr: "Toujours apprendre", ja: "学び続ける" })[currentLang] || "Always learning"}</strong>
+    </div>
+  `;
+
+  const interestIcons = [
+    '<path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22zM4 5.5v13A3.5 3.5 0 0 1 7.5 15H20M9 6h7m-7 4h5"/>',
+    '<path d="M4 11h16l-1.7 7H5.7L4 11zM3 20h18M8 8c-1.2-1.3 1.2-2 0-3m4 3c-1.2-1.3 1.2-2 0-3m4 3c-1.2-1.3 1.2-2 0-3"/>',
+    '<path d="M3 19l6-10 4 6 3-4 5 8H3zM9 9l2-3 2 3m4-1V4m-2 2h4"/>',
+    '<path d="M7 8h10a4 4 0 0 1 3.8 5l-1 3a2 2 0 0 1-3.2 1l-2.2-1.7h-4.8L7.4 17a2 2 0 0 1-3.2-1l-1-3A4 4 0 0 1 7 8zM7 11v4m-2-2h4m7-1h.1m2 2h.1"/>',
+    '<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/><path d="M6.5 10h.1"/>',
+    '<path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.2"/><path d="M3 20h4m10 0h4"/>',
+    '<path d="M14.5 6.5a4 4 0 0 0-5-5l2.2 2.2-2.8 2.8L6.7 4.1a4 4 0 0 0 5 5l7.5 7.5a2 2 0 0 1-2.8 2.8l-7.5-7.5a4 4 0 0 0-5-5l2.2 2.2-2.8 2.8"/>'
+  ];
+
+  const nodes = [];
+  let nodeIndex = -1;
+  let sourceNode = heading.nextSibling;
+  while (sourceNode) {
+    const next = sourceNode.nextSibling;
+    if (sourceNode.nodeType === Node.ELEMENT_NODE && sourceNode.tagName === "H2") {
+      nodeIndex += 1;
+      const node = document.createElement("article");
+      node.className = `interest-tree-node interest-tree-node-${nodeIndex + 1}`;
+      node.dataset.nodeIndex = String(nodeIndex);
+      node.setAttribute("style", `--node-x:${[50, 78, 80, 58, 32, 20, 24][nodeIndex] || 50}%;--node-y:${[14, 25, 70, 88, 88, 61, 25][nodeIndex] || 50}%`);
+
+      const toggle = document.createElement("button");
+      toggle.className = "interest-node-toggle";
+      toggle.type = "button";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-controls", `interest-details-${nodeIndex}`);
+
+      const title = document.createElement("span");
+      title.className = "interest-node-title";
+      title.textContent = sourceNode.textContent.trim();
+      const pictogram = document.createElement("span");
+      pictogram.className = "interest-node-icon";
+      pictogram.setAttribute("aria-hidden", "true");
+      pictogram.innerHTML = `<svg viewBox="0 0 24 24" focusable="false">${interestIcons[nodeIndex] || ""}</svg>`;
+      const titleRow = document.createElement("span");
+      titleRow.className = "interest-node-heading";
+      titleRow.append(title, pictogram);
+      toggle.appendChild(titleRow);
+
+      const details = document.createElement("div");
+      details.className = "interest-node-details";
+      details.id = `interest-details-${nodeIndex}`;
+      details.hidden = true;
+
+      const sourceContent = [];
+      let contentNode = sourceNode.nextSibling;
+      while (contentNode && !(contentNode.nodeType === Node.ELEMENT_NODE && contentNode.tagName === "H2")) {
+        const following = contentNode.nextSibling;
+        if (contentNode.nodeType === Node.ELEMENT_NODE) {
+          sourceContent.push(contentNode);
+        }
+        contentNode = following;
+      }
+
+      const firstListItem = sourceContent.find(element => element.tagName === "UL")?.querySelector("li");
+      const previewText = sourceContent.find(element => element.tagName === "P")?.textContent.trim()
+        || firstListItem?.textContent.trim()
+        || "";
+      const preview = document.createElement("span");
+      preview.className = "interest-node-preview";
+      preview.textContent = previewText;
+      toggle.appendChild(preview);
+
+      sourceContent.forEach(element => details.appendChild(element));
+      node.append(toggle, details);
+      nodes.push(node);
+      sourceNode.remove();
+      canvas.appendChild(node);
+      sourceNode = contentNode;
+      continue;
+    }
+    sourceNode = next;
+  }
+
+  if (!nodes.length) return;
+  tree.append(kicker, canvas);
+  heading.after(tree);
+
+  let activeNode = null;
+  let lastPointerType = null;
+  const setActiveNode = node => {
+    if (activeNode === node) return;
+    activeNode?.classList.remove("is-active");
+    const previousToggle = activeNode?.querySelector(".interest-node-toggle");
+    const previousDetails = activeNode?.querySelector(".interest-node-details");
+    previousToggle?.setAttribute("aria-expanded", "false");
+    if (previousDetails) previousDetails.hidden = true;
+    activeNode = node;
+    activeNode?.classList.add("is-active");
+    const toggle = activeNode?.querySelector(".interest-node-toggle");
+    const details = activeNode?.querySelector(".interest-node-details");
+    toggle?.setAttribute("aria-expanded", "true");
+    if (details) details.hidden = false;
+  };
+
+  canvas.addEventListener("pointerover", event => {
+    if (event.pointerType !== "mouse") return;
+    const node = event.target.closest(".interest-tree-node");
+    if (node) setActiveNode(node);
+  });
+  canvas.addEventListener("pointerout", event => {
+    if (event.pointerType !== "mouse") return;
+    const leaving = event.target.closest(".interest-tree-node");
+    if (!leaving || !leaving.contains(event.relatedTarget)) setActiveNode(null);
+  });
+  canvas.addEventListener("pointerdown", event => {
+    lastPointerType = event.pointerType;
+  });
+  canvas.addEventListener("focusin", event => {
+    if (lastPointerType === "touch") return;
+    const node = event.target.closest(".interest-tree-node");
+    if (node) setActiveNode(node);
+  });
+  canvas.addEventListener("focusout", event => {
+    const leaving = event.target.closest(".interest-tree-node");
+    if (leaving && !leaving.contains(event.relatedTarget)) setActiveNode(null);
+  });
+  canvas.addEventListener("click", event => {
+    const toggle = event.target.closest(".interest-node-toggle");
+    if (!toggle) return;
+    const node = toggle.closest(".interest-tree-node");
+    if (event.detail === 0) {
+      setActiveNode(node);
+      return;
+    }
+    if (window.matchMedia("(hover: hover)").matches) return;
+    setActiveNode(activeNode === node ? null : node);
+  });
+}
+
 /** Turn the publication list into a cover gallery with a year ribbon. */
 function buildPublicationGallery(contentBody, markdownText) {
   const firstYearHeading = [...contentBody.querySelectorAll("h2")].find(heading => /^\d{4}$/.test(heading.textContent.trim()));
@@ -1320,6 +1491,8 @@ async function loadMarkdown(path, pageId) {
       buildTechnicalSkillsMap(contentBody);
     } else if (pageId === "other") {
       buildOtherSkillsMosaic(contentBody);
+    } else if (pageId === "interests") {
+      buildPersonalInterestTree(contentBody);
     } else if (pageId === "publications") {
       buildPublicationGallery(contentBody, markdownText);
     }
