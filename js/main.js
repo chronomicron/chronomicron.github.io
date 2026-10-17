@@ -1159,6 +1159,150 @@ function buildPersonalInterestTree(contentBody) {
   });
 }
 
+/** Present contact channels and profile links as a logo-led contact directory. */
+function buildContactDirectory(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  if (!heading) return;
+
+  const paragraphs = [...contentBody.querySelectorAll("p")];
+  const intro = paragraphs.find(paragraph => paragraph.previousElementSibling === heading);
+  const directParagraph = paragraphs.find(paragraph => paragraph.querySelector("[data-email]"));
+  const sectionHeadings = [...contentBody.querySelectorAll("h2")];
+  const contactPage = document.createElement("div");
+  contactPage.className = "contact-directory";
+
+  const kicker = document.createElement("p");
+  kicker.className = "contact-kicker";
+  kicker.textContent = ({
+    en: "DIRECT CONTACT · PROFESSIONAL PROFILES · ONLINE PRESENCE",
+    fr: "CONTACT DIRECT · PROFILS PROFESSIONNELS · PRÉSENCE EN LIGNE",
+    ja: "直接連絡 · プロフィール · オンライン上の活動"
+  })[currentLang] || "DIRECT CONTACT · PROFESSIONAL PROFILES · ONLINE PRESENCE";
+  contactPage.appendChild(kicker);
+
+  if (intro) {
+    const lede = document.createElement("p");
+    lede.className = "contact-directory-lede";
+    lede.textContent = intro.textContent.trim();
+    contactPage.appendChild(lede);
+  }
+
+  const directSection = document.createElement("section");
+  directSection.className = "contact-direct-section";
+  const directHeading = document.createElement("h2");
+  directHeading.textContent = ({ en: "Direct contact", fr: "Me joindre directement", ja: "直接連絡" })[currentLang] || "Direct contact";
+  const directGrid = document.createElement("div");
+  directGrid.className = "contact-direct-grid";
+  const directIcons = [
+    '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18m0-18a15 15 0 0 0 0 18"/>',
+    '<path d="M6 3h8l5 5v13H6zM14 3v6h5M9 13h7m-7 4h7"/>'
+  ];
+
+  if (directParagraph) {
+    const groups = [[]];
+    [...directParagraph.childNodes].forEach(child => {
+      if (child.nodeName === "BR" || child.nodeName === "STRONG") {
+        if (groups[groups.length - 1].length) groups.push([]);
+      }
+      groups[groups.length - 1].push(child.cloneNode(true));
+    });
+
+    groups.filter(group => group.some(node => node.textContent.trim())).forEach((group, index) => {
+      const item = document.createElement("article");
+      item.className = `contact-direct-card contact-direct-card-${index + 1}`;
+      const icon = document.createElement("span");
+      icon.className = "contact-direct-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = `<svg viewBox="0 0 24 24" focusable="false">${directIcons[index] || directIcons[0]}</svg>`;
+      const text = document.createElement("span");
+      text.className = "contact-direct-text";
+      const label = group.find(node => node.nodeName === "STRONG");
+      if (label) {
+        const labelText = document.createElement("span");
+        labelText.className = "contact-direct-label";
+        labelText.appendChild(label);
+        text.appendChild(labelText);
+      }
+      const value = document.createElement("span");
+      value.className = "contact-direct-value";
+      group.filter(node => node !== label).forEach(node => value.appendChild(node));
+      text.appendChild(value);
+      item.append(icon, text);
+      directGrid.appendChild(item);
+    });
+  }
+
+  if (directGrid.childElementCount) {
+    directSection.append(directHeading, directGrid);
+    contactPage.appendChild(directSection);
+  }
+
+  sectionHeadings.forEach((sectionHeading, sectionIndex) => {
+    const list = sectionHeading.nextElementSibling;
+    if (!list || list.tagName !== "UL") return;
+    const section = document.createElement("section");
+    section.className = `contact-profile-section contact-profile-section-${sectionIndex + 1}`;
+    const title = document.createElement("h2");
+    title.className = "contact-section-title";
+    title.textContent = sectionHeading.textContent.trim();
+    const grid = document.createElement("div");
+    grid.className = "contact-profile-grid";
+
+    [...list.querySelectorAll(":scope > li")].forEach(listItem => {
+      const logo = listItem.querySelector("img");
+      const name = listItem.querySelector("strong")?.textContent.trim() || "Profile";
+      const sourceLink = listItem.querySelector("a");
+      if (!sourceLink) return;
+
+      const profile = document.createElement("a");
+      profile.className = "contact-profile-card";
+      profile.href = sourceLink.href;
+      profile.target = "_blank";
+      profile.rel = "noopener noreferrer";
+
+      const topLine = document.createElement("span");
+      topLine.className = "contact-profile-topline";
+      const logoPlate = document.createElement("span");
+      logoPlate.className = "contact-profile-logo";
+      if (logo) {
+        const image = logo.cloneNode(true);
+        image.loading = "lazy";
+        logoPlate.appendChild(image);
+      }
+      const nameBlock = document.createElement("span");
+      nameBlock.className = "contact-profile-name-block";
+      const label = document.createElement("strong");
+      label.textContent = name;
+      const urlText = document.createElement("span");
+      urlText.className = "contact-profile-url";
+      urlText.textContent = sourceLink.textContent.trim();
+      nameBlock.append(label, urlText);
+      const arrow = document.createElement("span");
+      arrow.className = "contact-profile-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "↗";
+      topLine.append(logoPlate, nameBlock, arrow);
+
+      const description = document.createElement("span");
+      description.className = "contact-profile-description";
+      const descriptionSource = listItem.cloneNode(true);
+      descriptionSource.querySelectorAll("img, strong, a").forEach(element => element.remove());
+      description.textContent = descriptionSource.textContent.replace(/[\s—–-]+/gu, " ").trim();
+      profile.appendChild(topLine);
+      if (description.textContent) profile.appendChild(description);
+      grid.appendChild(profile);
+    });
+
+    if (grid.childElementCount) {
+      section.append(title, grid);
+      contactPage.appendChild(section);
+    }
+  });
+
+  contentBody.replaceChildren(heading, contactPage);
+}
+
 /** Turn the publication list into a cover gallery with a year ribbon. */
 function buildPublicationGallery(contentBody, markdownText) {
   const firstYearHeading = [...contentBody.querySelectorAll("h2")].find(heading => /^\d{4}$/.test(heading.textContent.trim()));
@@ -1493,6 +1637,8 @@ async function loadMarkdown(path, pageId) {
       buildOtherSkillsMosaic(contentBody);
     } else if (pageId === "interests") {
       buildPersonalInterestTree(contentBody);
+    } else if (pageId === "contact") {
+      buildContactDirectory(contentBody);
     } else if (pageId === "publications") {
       buildPublicationGallery(contentBody, markdownText);
     }
