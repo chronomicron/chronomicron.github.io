@@ -21,6 +21,8 @@ const LANG_KEY = "chronomicron-lang"; // "en" | "fr" | "ja"
 let currentLang = "en";
 let currentMode = "profile";
 let currentPage = null;
+let activeExperienceCard = null;
+let experiencePointerTrackingInstalled = false;
 
 /** Browser preference → en / fr / ja (first visit only if nothing stored) */
 function detectBrowserLang() {
@@ -626,9 +628,73 @@ function buildExperienceTimeline(contentBody) {
     (entry || timeline).appendChild(node);
     node = next;
   }
+
+  const leftColumn = document.createElement("div");
+  const rightColumn = document.createElement("div");
+  leftColumn.className = "experience-column experience-column-left";
+  rightColumn.className = "experience-column experience-column-right";
+
+  [...timeline.querySelectorAll(".experience-entry")].forEach((card, index) => {
+    const isLeftCard = index % 2 === 0;
+    card.classList.add(isLeftCard ? "experience-entry-left" : "experience-entry-right");
+    card.style.order = String(index);
+    (isLeftCard ? leftColumn : rightColumn).appendChild(card);
+  });
+
+  timeline.append(leftColumn, rightColumn);
+
+  installExperiencePointerTracking();
+}
+
+function closeExperienceCard(card) {
+  if (!card) return;
+  card.classList.remove("is-pointer-active");
+  card.querySelectorAll("details[open]").forEach(details => {
+    details.open = false;
+  });
+  if (activeExperienceCard === card) {
+    activeExperienceCard = null;
+  }
+}
+
+function experienceCardFromTarget(target) {
+  return target instanceof Element
+    ? target.closest('#content-body[data-page="experience"] .experience-entry')
+    : null;
+}
+
+function activateExperienceCard(card) {
+  if (card === activeExperienceCard) return;
+  closeExperienceCard(activeExperienceCard);
+  activeExperienceCard = card;
+  if (activeExperienceCard) activeExperienceCard.classList.add("is-pointer-active");
+}
+
+function installExperiencePointerTracking() {
+  if (experiencePointerTrackingInstalled) return;
+  experiencePointerTrackingInstalled = true;
+
+  document.addEventListener("pointerover", event => {
+    if (event.pointerType !== "mouse" || !window.matchMedia("(min-width: 1200px)").matches) return;
+    const card = experienceCardFromTarget(event.target);
+    if (card) activateExperienceCard(card);
+  });
+
+  document.addEventListener("pointerout", event => {
+    if (event.pointerType !== "mouse" || !window.matchMedia("(min-width: 1200px)").matches) return;
+    const leavingCard = experienceCardFromTarget(event.target);
+    if (!leavingCard || leavingCard !== activeExperienceCard) return;
+
+    const nextCard = experienceCardFromTarget(event.relatedTarget);
+    if (nextCard === leavingCard) return;
+    activateExperienceCard(nextCard);
+  });
+
+  window.addEventListener("blur", () => closeExperienceCard(activeExperienceCard));
 }
 
 async function loadMarkdown(path, pageId) {
+  closeExperienceCard(activeExperienceCard);
   const contentBody = document.getElementById("content-body");
   contentBody.dataset.page = pageId;
 
