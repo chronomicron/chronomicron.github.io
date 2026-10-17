@@ -1,9 +1,9 @@
-# Publications
+# 論文・発表
 
-The list below contains peer-reviewed journal and conference papers.  
-During graduate studies at Polytechnique Montréal and the University of Tokyo I also presented additional posters at local and regional conferences in Japan; those poster files are not included here.
+査読付きの学術誌論文および国際会議論文を掲載しています。
+Polytechnique Montréal と東京大学の大学院在学中には、日本国内の地域会議でもポスター発表を行いましたが、ポスター資料はここには掲載していません。
 
-You can also view my IEEE author profile here:  
+IEEE の著者プロフィールはこちらからご覧いただけます。
 ![IEEE](/assets/icons/alpha/ieee-logo.png) [https://ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)
 
 ## 2011

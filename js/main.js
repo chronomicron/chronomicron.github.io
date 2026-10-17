@@ -702,6 +702,226 @@ function buildAcademicLayout(contentBody) {
   installAcademicPointerTracking();
 }
 
+/** Turn the publication list into a cover gallery with a year ribbon. */
+function buildPublicationGallery(contentBody, markdownText) {
+  const firstYearHeading = [...contentBody.querySelectorAll("h2")].find(heading => /^\d{4}$/.test(heading.textContent.trim()));
+  if (!firstYearHeading) return;
+
+  const entries = [];
+  let year = "";
+  let currentEntry = null;
+  const finishEntry = () => {
+    if (!currentEntry) return;
+    const links = [];
+    const bodyLines = [];
+    currentEntry.lines.forEach(line => {
+      const lineWithoutImages = line.replace(/!\[[^\]]*\]\([^)]+\)/g, "");
+      for (const match of lineWithoutImages.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
+        links.push({ label: match[1].trim(), href: match[2].trim() });
+      }
+      const plainLine = line
+        .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+        .replace(/\[[^\]]+\]\([^)]+\)/g, "")
+        .replace(/[·•|]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (plainLine) bodyLines.push(plainLine);
+    });
+    const pdfLink = links.find(link => /\.pdf(?:$|[?#])/i.test(link.href) || /\bpdf\b/i.test(link.label));
+    let preview = "";
+    if (pdfLink?.href) {
+      try {
+        const fileName = decodeURIComponent(new URL(pdfLink.href, window.location.href).pathname.split("/").pop());
+        preview = `/assets/publications/previews/${fileName.replace(/\.pdf$/i, "").replace(/ /g, "-")}.png`;
+      } catch (error) {
+        preview = "";
+      }
+    }
+    entries.push({
+      year: currentEntry.year,
+      title: currentEntry.title,
+      authors: bodyLines[0] || "",
+      venue: bodyLines.slice(1).join(" · "),
+      links,
+      preview
+    });
+    currentEntry = null;
+  };
+
+  (markdownText || "").split(/\r?\n/).forEach(line => {
+    const yearHeading = line.match(/^##\s+(\d{4})\s*$/);
+    if (yearHeading) {
+      finishEntry();
+      year = yearHeading[1];
+      return;
+    }
+    const publication = line.match(/^\s*-\s+\*\*(.+?)\*\*\s*$/);
+    if (publication) {
+      finishEntry();
+      currentEntry = { year, title: publication[1].trim(), lines: [] };
+    } else if (currentEntry) {
+      currentEntry.lines.push(line.trim());
+    }
+  });
+  finishEntry();
+  if (!entries.length) return;
+
+  const title = contentBody.querySelector("h1");
+  const intro = document.createElement("div");
+  intro.className = "publication-intro";
+  if (title) {
+    title.after(intro);
+    let introNode = intro.nextSibling;
+    while (introNode && introNode !== firstYearHeading) {
+      const nextIntroNode = introNode.nextSibling;
+      intro.appendChild(introNode);
+      introNode = nextIntroNode;
+    }
+  }
+  let contentNode = firstYearHeading;
+  while (contentNode) {
+    const nextContentNode = contentNode.nextSibling;
+    contentNode.remove();
+    contentNode = nextContentNode;
+  }
+
+  const gallery = document.createElement("section");
+  gallery.className = "publication-gallery";
+  gallery.setAttribute("aria-label", ({ en: "Publication collection", fr: "Collection de publications", ja: "論文コレクション" })[currentLang] || "Publication collection");
+  const stage = document.createElement("div");
+  stage.className = "publication-stage";
+  const ribbon = document.createElement("div");
+  ribbon.className = "publication-ribbon";
+  ribbon.setAttribute("role", "group");
+  ribbon.setAttribute("aria-label", ({ en: "Choose a publication", fr: "Choisir une publication", ja: "論文を選択" })[currentLang] || "Choose a publication");
+  const timeline = document.createElement("div");
+  timeline.className = "publication-timeline";
+  ribbon.appendChild(timeline);
+
+  const selectors = entries.map((entry, index) => {
+    const button = document.createElement("button");
+    button.className = "publication-selector";
+    button.type = "button";
+    button.setAttribute("aria-label", `${entry.year}: ${entry.title}`);
+    button.setAttribute("aria-pressed", "false");
+    const cover = document.createElement("span");
+    cover.className = "publication-mini-cover";
+    if (entry.preview) {
+      const image = document.createElement("img");
+      image.src = entry.preview;
+      image.alt = "";
+      image.loading = "lazy";
+      cover.appendChild(image);
+    } else {
+      cover.classList.add("publication-mini-placeholder");
+      cover.textContent = entry.year;
+    }
+    const yearLabel = document.createElement("span");
+    yearLabel.className = "publication-selector-year";
+    yearLabel.textContent = entry.year;
+    const titleLabel = document.createElement("span");
+    titleLabel.className = "publication-selector-title";
+    titleLabel.textContent = entry.title;
+    button.append(cover, yearLabel, titleLabel);
+    button.addEventListener("click", () => selectPublication(index));
+    timeline.appendChild(button);
+    return button;
+  });
+  const publicationLabel = ({ en: "PAPER", fr: "ARTICLE", ja: "論文" })[currentLang] || "PAPER";
+  const coverLabel = ({ en: "PUBLICATION", fr: "PUBLICATION", ja: "論文" })[currentLang] || "PUBLICATION";
+
+  function selectPublication(index) {
+    const entry = entries[index];
+    selectors.forEach((button, buttonIndex) => {
+      const selected = buttonIndex === index;
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+
+    gallery.classList.add("is-changing");
+    const visual = document.createElement("figure");
+    visual.className = "publication-cover";
+    if (entry.preview) {
+      const image = document.createElement("img");
+      image.src = entry.preview;
+      image.alt = `First page of ${entry.title}`;
+      image.loading = "eager";
+      visual.appendChild(image);
+    } else {
+      visual.classList.add("publication-cover-placeholder");
+      const mark = document.createElement("span");
+      mark.className = "publication-cover-kicker";
+      mark.textContent = `${coverLabel} / ${entry.year}`;
+      const titleMark = document.createElement("strong");
+      titleMark.textContent = "IP Based Design";
+      const locationMark = document.createElement("span");
+      locationMark.textContent = "Grenoble · France";
+      visual.append(mark, titleMark, locationMark);
+    }
+
+    const details = document.createElement("article");
+    details.className = "publication-details";
+    const yearLabel = document.createElement("p");
+    yearLabel.className = "publication-year-label";
+    yearLabel.textContent = `${publicationLabel} / ${entry.year}`;
+    const heading = document.createElement("h2");
+    heading.textContent = entry.title;
+    details.append(yearLabel, heading);
+    if (entry.authors) {
+      const authors = document.createElement("p");
+      authors.className = "publication-authors";
+      authors.textContent = entry.authors;
+      details.appendChild(authors);
+    }
+    if (entry.venue) {
+      const venue = document.createElement("p");
+      venue.className = "publication-venue";
+      venue.textContent = entry.venue;
+      details.appendChild(venue);
+    }
+    const links = document.createElement("div");
+    links.className = "publication-links";
+    entry.links.forEach(link => {
+      const anchor = document.createElement("a");
+      anchor.href = link.href;
+      anchor.textContent = link.label;
+      if (/^https?:/i.test(link.href || "")) {
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+      }
+      links.appendChild(anchor);
+    });
+    if (links.childElementCount) details.appendChild(links);
+    stage.replaceChildren(visual, details);
+    requestAnimationFrame(() => gallery.classList.remove("is-changing"));
+  }
+
+  const onTimelineKeydown = event => {
+    const current = selectors.indexOf(document.activeElement);
+    if (current < 0) return;
+    const next = event.key === "ArrowRight" ? Math.min(current + 1, selectors.length - 1)
+      : event.key === "ArrowLeft" ? Math.max(current - 1, 0)
+        : event.key === "Home" ? 0
+          : event.key === "End" ? selectors.length - 1
+            : current;
+    if (next === current) return;
+    event.preventDefault();
+    selectors[next].focus();
+    selectPublication(next);
+  };
+  timeline.addEventListener("keydown", onTimelineKeydown);
+
+  if (intro.isConnected) {
+    intro.after(gallery);
+  } else if (title) {
+    title.after(gallery);
+  } else {
+    contentBody.append(gallery);
+  }
+  gallery.append(stage, ribbon);
+  selectPublication(0);
+}
+
 function academicCardFromTarget(target) {
   return target instanceof Element
     ? target.closest('#content-body[data-page="academic"] .academic-degree, #content-body[data-page="academic"] .academic-awards')
@@ -796,7 +1016,7 @@ async function loadMarkdown(path, pageId) {
   await new Promise(r => setTimeout(r, 160));
 
   try {
-    const response = await fetch(path);
+    const response = await fetch(path, { cache: "no-cache" });
     if (!response.ok) {
       throw new Error(`Could not load ${path} (${response.status})`);
     }
@@ -808,6 +1028,8 @@ async function loadMarkdown(path, pageId) {
       buildExperienceTimeline(contentBody);
     } else if (pageId === "academic") {
       buildAcademicLayout(contentBody);
+    } else if (pageId === "publications") {
+      buildPublicationGallery(contentBody, markdownText);
     }
 
     // Contact page: fill email slots without storing a plain address in Markdown
