@@ -23,6 +23,8 @@ let currentMode = "profile";
 let currentPage = null;
 let activeExperienceCard = null;
 let experiencePointerTrackingInstalled = false;
+let activeAcademicCard = null;
+let academicPointerTrackingInstalled = false;
 
 /** Browser preference → en / fr / ja (first visit only if nothing stored) */
 function detectBrowserLang() {
@@ -646,6 +648,96 @@ function buildExperienceTimeline(contentBody) {
   installExperiencePointerTracking();
 }
 
+/** Present education as credential cards and a separate awards panel. */
+function buildAcademicLayout(contentBody) {
+  const firstHeading = contentBody.querySelector("h2");
+  if (!firstHeading) return;
+
+  const layout = document.createElement("div");
+  layout.className = "academic-layout";
+  const degrees = document.createElement("div");
+  degrees.className = "academic-degrees";
+  const awards = document.createElement("section");
+  awards.className = "academic-awards";
+  firstHeading.before(layout);
+
+  let node = firstHeading;
+  let section = null;
+  let degreeCount = 0;
+  while (node) {
+    const next = node.nextSibling;
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2") {
+      const isAwardsSection = node.nextElementSibling?.tagName === "UL";
+      if (isAwardsSection) {
+        section = awards;
+      } else {
+        section = document.createElement("article");
+        section.className = "academic-degree";
+        section.classList.add(degreeCount < 2 ? "academic-degree-advanced" : "academic-degree-compact");
+        section.style.setProperty("--academic-delay", `${Math.min(degreeCount * 90, 360)}ms`);
+        degreeCount += 1;
+        degrees.appendChild(section);
+      }
+      section.appendChild(node);
+    } else if (section) {
+      section.appendChild(node);
+    }
+    node = next;
+  }
+
+  degrees.querySelectorAll(":scope > .academic-degree").forEach(degree => {
+    const institution = degree.querySelector(":scope > p");
+    institution?.classList.add("academic-institution");
+
+    degree.querySelectorAll(":scope > p").forEach(paragraph => {
+      const label = paragraph.querySelector("strong")?.textContent?.trim() || "";
+      if (/^(thesis|thèse|論文題目)/i.test(label)) {
+        paragraph.classList.add("academic-thesis");
+      }
+    });
+  });
+
+  layout.append(degrees);
+  if (awards.childElementCount) layout.append(awards);
+  installAcademicPointerTracking();
+}
+
+function academicCardFromTarget(target) {
+  return target instanceof Element
+    ? target.closest('#content-body[data-page="academic"] .academic-degree, #content-body[data-page="academic"] .academic-awards')
+    : null;
+}
+
+function activateAcademicCard(card) {
+  if (card === activeAcademicCard) return;
+  activeAcademicCard?.classList.remove("is-pointer-active");
+  activeAcademicCard = card;
+  activeAcademicCard?.classList.add("is-pointer-active");
+}
+
+function installAcademicPointerTracking() {
+  if (academicPointerTrackingInstalled) return;
+  academicPointerTrackingInstalled = true;
+
+  document.addEventListener("pointerover", event => {
+    if (event.pointerType !== "mouse" || !window.matchMedia("(min-width: 1200px)").matches) return;
+    const card = academicCardFromTarget(event.target);
+    if (card) activateAcademicCard(card);
+  });
+
+  document.addEventListener("pointerout", event => {
+    if (event.pointerType !== "mouse" || !window.matchMedia("(min-width: 1200px)").matches) return;
+    const leavingCard = academicCardFromTarget(event.target);
+    if (!leavingCard || leavingCard !== activeAcademicCard) return;
+
+    const nextCard = academicCardFromTarget(event.relatedTarget);
+    if (nextCard === leavingCard) return;
+    activateAcademicCard(nextCard);
+  });
+
+  window.addEventListener("blur", () => activateAcademicCard(null));
+}
+
 function closeExperienceCard(card) {
   if (!card) return;
   card.classList.remove("is-pointer-active");
@@ -695,6 +787,7 @@ function installExperiencePointerTracking() {
 
 async function loadMarkdown(path, pageId) {
   closeExperienceCard(activeExperienceCard);
+  activateAcademicCard(null);
   const contentBody = document.getElementById("content-body");
   contentBody.dataset.page = pageId;
 
@@ -713,6 +806,8 @@ async function loadMarkdown(path, pageId) {
 
     if (pageId === "experience") {
       buildExperienceTimeline(contentBody);
+    } else if (pageId === "academic") {
+      buildAcademicLayout(contentBody);
     }
 
     // Contact page: fill email slots without storing a plain address in Markdown

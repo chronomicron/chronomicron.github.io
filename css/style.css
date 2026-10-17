@@ -1062,6 +1062,228 @@ html[lang="ja"] .hero h1 {
   margin-bottom: 1rem;
 }
 
+/* Academic credentials read as a compact portfolio rather than a career timeline. */
+#content-body .academic-layout {
+  display: grid;
+  margin: 0.25rem 0 1.5rem;
+}
+
+#content-body[data-page="academic"] {
+  width: 100%;
+  max-width: 1160px;
+  container-type: inline-size;
+}
+
+#content-body .academic-degrees {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 740px;
+  gap: 0.9rem;
+}
+
+#content-body .academic-degree {
+  position: relative;
+  min-width: 0;
+  padding: 1.1rem 1.15rem 1rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) + 2px);
+  background: linear-gradient(145deg, var(--color-surface), var(--color-bg));
+  box-shadow: var(--shadow);
+  animation: academic-card-in 500ms ease-out both;
+  animation-delay: var(--academic-delay, 0ms);
+  transform-origin: left center;
+  transition: transform 180ms ease, scale 190ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 180ms ease, box-shadow 180ms ease;
+}
+
+#content-body .academic-degree:nth-child(even) {
+  transform-origin: right center;
+}
+
+#content-body .academic-degree::before {
+  position: absolute;
+  top: 0;
+  left: 1.15rem;
+  width: 2.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 15%, transparent));
+  content: "";
+}
+
+#content-body .academic-degree-advanced {
+  min-height: 14rem;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--color-primary) 9%, var(--color-surface)), var(--color-bg));
+}
+
+#content-body .academic-degree h2 {
+  margin: 0.25rem 0 0.7rem;
+  font-size: 1.12rem;
+  line-height: 1.4;
+}
+
+#content-body .academic-institution {
+  min-height: 2.3rem;
+  margin: 0 0 0.7rem;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+#content-body .academic-institution img {
+  height: 2.2rem;
+  max-width: 3.1rem;
+  padding: 0.2rem;
+  border-radius: 0.4rem;
+  background: #fff;
+  object-fit: contain;
+}
+
+#content-body .academic-institution strong {
+  color: var(--color-text);
+  font-size: 0.78rem;
+}
+
+#content-body .academic-thesis {
+  margin: 0.7rem 0 0;
+  padding: 0.6rem 0.75rem;
+  border-left: 2px solid var(--color-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: color-mix(in srgb, var(--color-primary) 7%, transparent);
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+#content-body .academic-thesis strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content-body .academic-awards {
+  position: relative;
+  z-index: 1;
+  width: 64%;
+  margin-top: -7rem;
+  margin-left: 36%;
+  padding: 1.2rem 1.3rem 1.3rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 48%, var(--color-border));
+  border-radius: calc(var(--radius) + 2px);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--color-primary) 14%, var(--color-surface)),
+    color-mix(in srgb, var(--color-surface) 94%, var(--color-bg)));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+#content-body .academic-awards h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.08rem;
+}
+
+#content-body .academic-awards ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#content-body .academic-awards li {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 22%, var(--color-border));
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-bg));
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+#content-body .academic-awards li::before {
+  margin-right: 0.45rem;
+  color: var(--color-primary);
+  content: "✦";
+}
+
+#content-body .academic-degree:hover,
+#content-body .academic-degree:focus-within {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+#content-body .academic-awards {
+  transform-origin: right center;
+  transition: scale 190ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 180ms ease, box-shadow 180ms ease;
+}
+
+@media (min-width: 1200px) {
+  #content-body .academic-degree.is-pointer-active,
+  #content-body .academic-awards.is-pointer-active {
+    z-index: 20;
+    border-color: color-mix(in srgb, var(--color-primary) 60%, var(--color-border));
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.26);
+  }
+
+  #content-body .academic-degree.is-pointer-active {
+    scale: 1.5;
+  }
+
+  #content-body .academic-awards.is-pointer-active {
+    scale: 1.3;
+  }
+}
+
+@container (max-width: 999px) {
+  #content-body .academic-awards {
+    transform-origin: center center;
+  }
+
+  #content-body .academic-awards.is-pointer-active {
+    scale: 1.08;
+  }
+}
+
+@keyframes academic-card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  #content-body .academic-awards {
+    width: 100%;
+    margin: 1rem 0 0;
+  }
+
+  #content-body .academic-degrees,
+  #content-body .academic-awards ul {
+    grid-template-columns: 1fr;
+  }
+
+  #content-body .academic-degree-advanced {
+    min-height: 0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 980px) {
+  #content-body .academic-awards {
+    width: 74%;
+    margin-left: 26%;
+  }
+}
+
+@container (max-width: 999px) {
+  #content-body .academic-awards {
+    width: 100%;
+    margin: 1rem 0 0;
+  }
+}
+
 /* Turn the Markdown work history into a scannable career timeline. */
 #content-body[data-page="experience"] .experience-timeline {
   position: relative;
