@@ -710,12 +710,23 @@ html[lang="ja"] .hero h1 {
 
 /* Left sidebar */
 #sidebar {
+  display: flex;
+  flex-direction: column;
   width: var(--sidebar-width);
   flex-shrink: 0;
   background-color: var(--color-sidebar-bg);
   border-right: 1px solid var(--color-border);
   padding: 1.5rem 1rem;
   overflow-y: auto;
+}
+
+.sidebar-copyright {
+  margin-top: auto;
+  padding: 1.25rem 0.5rem 0.25rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  line-height: 1.5;
 }
 
 #sidebar-title {
@@ -3207,6 +3218,11 @@ html[lang="ja"] .hero h1 {
     border-bottom: 1px solid var(--color-border);
     padding: 0.75rem 1rem;
     max-height: none;
+  }
+
+  .sidebar-copyright {
+    margin-top: 0.75rem;
+    padding: 0.65rem 0 0.1rem;
   }
 
   /* Sidebar items as horizontal scroll chips on mobile */
