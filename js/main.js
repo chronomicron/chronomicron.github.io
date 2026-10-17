@@ -702,6 +702,216 @@ function buildAcademicLayout(contentBody) {
   installAcademicPointerTracking();
 }
 
+/** Make the Skills landing page category cards navigable and add an animated circuit map. */
+function buildSkillsLandingVisual(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  if (!heading) return;
+
+  const overview = document.createElement("section");
+  overview.className = "skills-overview";
+  overview.setAttribute("aria-label", ({
+    en: "Skills overview",
+    fr: "Aperçu des compétences",
+    ja: "スキルの概要"
+  })[currentLang] || "Skills overview");
+  heading.after(overview);
+  while (overview.nextSibling) overview.appendChild(overview.nextSibling);
+
+  const categories = overview.querySelector("ul");
+  if (categories) {
+    categories.classList.add("skills-category-grid");
+    [...categories.children].filter(category => category.tagName === "LI").forEach((category, index) => {
+      const card = document.createElement("button");
+      const pageId = index === 0 ? "technical" : "other";
+      card.type = "button";
+      card.className = "skills-category-card";
+      card.dataset.page = pageId;
+      card.append(...category.childNodes);
+      card.addEventListener("click", () => loadPage(pageId));
+      category.replaceChildren(card);
+    });
+  }
+
+  const visual = document.createElement("div");
+  visual.className = "skills-signal-art";
+  visual.setAttribute("aria-hidden", "true");
+  visual.innerHTML = `
+    <svg viewBox="0 0 820 250" role="presentation" focusable="false">
+      <defs>
+        <linearGradient id="skills-signal-gradient" x1="0" x2="1">
+          <stop offset="0" stop-color="var(--color-primary)" stop-opacity=".18" />
+          <stop offset=".5" stop-color="var(--color-primary)" />
+          <stop offset="1" stop-color="#a78bfa" />
+        </linearGradient>
+        <radialGradient id="skills-chip-glow">
+          <stop offset="0" stop-color="var(--color-primary)" stop-opacity=".22" />
+          <stop offset="1" stop-color="var(--color-primary)" stop-opacity="0" />
+        </radialGradient>
+        <symbol id="skills-microchip" viewBox="-32 -31 64 62">
+          <path d="M-12-28v9m12-9v9m12-9v9m-12 38v9m12-9v9m12-9v9m-42-39h9m-9 12h9m-9 12h9m33-24h9m-9 12h9m-9 12h9" fill="none" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" />
+          <rect x="-19" y="-19" width="38" height="38" rx="5" fill="var(--color-surface)" stroke="var(--color-primary)" stroke-width="1.5" />
+          <rect x="-12" y="-12" width="24" height="24" rx="3" fill="var(--color-bg)" stroke="var(--color-primary)" stroke-opacity=".7" />
+          <path d="M-7-5h5v-3h7v7H0v6h7" fill="none" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="-5" cy="5" r="1.7" fill="var(--color-primary)" />
+        </symbol>
+      </defs>
+      <g class="skills-io-input">
+        <rect class="skills-io-box" x="12" y="78" width="112" height="60" rx="8" />
+        <text class="skills-io-label" x="68" y="103" text-anchor="middle"><tspan></tspan><tspan x="68" dy="15"></tspan></text>
+      </g>
+      <g class="skills-io-output">
+        <rect class="skills-io-box" x="696" y="78" width="112" height="60" rx="8" />
+        <text class="skills-io-label" x="752" y="103" text-anchor="middle"><tspan></tspan><tspan x="752" dy="15"></tspan></text>
+      </g>
+      <path id="skills-wire-input-a" class="skills-wire-base" d="M124 96h15" />
+      <path id="skills-wire-input-b" class="skills-wire-base" d="M124 108h15" />
+      <path id="skills-wire-input-c" class="skills-wire-base" d="M124 120h15" />
+      <path id="skills-wire-ab" class="skills-wire-base" d="M193 108h25V69h30" />
+      <path id="skills-wire-ac" class="skills-wire-base" d="M193 108h25v50h30" />
+      <path id="skills-wire-bd" class="skills-wire-base" d="M302 69h55" />
+      <path id="skills-wire-cd" class="skills-wire-base" d="M302 158h25V81h30" />
+      <path id="skills-wire-ce" class="skills-wire-base" d="M302 158h55" />
+      <path id="skills-wire-df" class="skills-wire-base" d="M411 69h24v27h31" />
+      <path id="skills-wire-ef" class="skills-wire-base" d="M411 158h24v-38h31" />
+      <path id="skills-wire-fg" class="skills-wire-base" d="M520 108h55" />
+      <path id="skills-wire-dg" class="skills-wire-base" d="M411 69h130v27h34" />
+      <path id="skills-wire-output" class="skills-wire-base" d="M629 108h50v-20h17m-17 20h17m-17 0v20h17" />
+      <path class="skills-wire-flow" d="M124 96h15M124 108h15M124 120h15M193 108h25V69h30M193 108h25v50h30M302 69h55M302 158h25V81h30M302 158h55M411 69h24v27h31M411 158h24v-38h31M520 108h55M411 69h130v27h34M629 108h50v-20h17m-17 20h17m-17 0v20h17" />
+      <g class="skills-circuit-junctions">
+        <circle cx="98" cy="78" r="3" /><circle cx="98" cy="138" r="3" /><circle cx="218" cy="108" r="3" />
+        <circle cx="327" cy="158" r="3" /><circle cx="435" cy="69" r="3" /><circle cx="435" cy="158" r="3" />
+        <circle cx="541" cy="69" r="3" /><circle cx="679" cy="88" r="3" /><circle cx="679" cy="128" r="3" />
+      </g>
+      <g class="skills-signal-travel" aria-hidden="true">
+        <circle r="3"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#skills-wire-input-a" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="2.7s" begin="-.8s" repeatCount="indefinite"><mpath href="#skills-wire-ab" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="2.9s" begin="-.4s" repeatCount="indefinite"><mpath href="#skills-wire-ac" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="2.6s" begin="-1.1s" repeatCount="indefinite"><mpath href="#skills-wire-bd" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="3s" begin="-.7s" repeatCount="indefinite"><mpath href="#skills-wire-cd" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="2.8s" begin="-1.3s" repeatCount="indefinite"><mpath href="#skills-wire-ef" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="2.5s" begin="-.5s" repeatCount="indefinite"><mpath href="#skills-wire-fg" /></animateMotion></circle>
+        <circle r="3"><animateMotion dur="2.7s" begin="-1.5s" repeatCount="indefinite"><mpath href="#skills-wire-output" /></animateMotion></circle>
+      </g>
+      <circle class="skills-chip-aura" cx="384" cy="113" r="128" />
+      <g class="skills-chip-network">
+        <use href="#skills-microchip" x="134" y="77" width="64" height="62" />
+        <use href="#skills-microchip" x="243" y="38" width="64" height="62" />
+        <use href="#skills-microchip" x="243" y="127" width="64" height="62" />
+        <use href="#skills-microchip" x="352" y="38" width="64" height="62" />
+        <use href="#skills-microchip" x="352" y="127" width="64" height="62" />
+        <use href="#skills-microchip" x="461" y="77" width="64" height="62" />
+        <use href="#skills-microchip" x="570" y="77" width="64" height="62" />
+      </g>
+    </svg>`;
+
+  const flowLabels = ({
+    en: [["YOUR", "SPECIFICATIONS"], ["YOUR", "APPLICATION"]],
+    fr: [["VOS", "SPÉCIFICATIONS"], ["VOTRE", "APPLICATION"]],
+    ja: [["仕様", "入力"], ["アプリケーション", "出力"]]
+  })[currentLang] || [["YOUR", "SPECIFICATIONS"], ["YOUR", "APPLICATION"]];
+  visual.querySelectorAll(".skills-io-input tspan").forEach((line, index) => {
+    line.textContent = flowLabels[0][index];
+  });
+  visual.querySelectorAll(".skills-io-output tspan").forEach((line, index) => {
+    line.textContent = flowLabels[1][index];
+  });
+  overview.appendChild(visual);
+}
+
+/** Reframe technical skill lists as a layered engineering stack. */
+function buildTechnicalSkillsMap(contentBody) {
+  const heading = contentBody.querySelector("h1");
+  if (!heading) return;
+
+  const map = document.createElement("div");
+  map.className = "technical-stack-map";
+  const kicker = document.createElement("p");
+  kicker.className = "technical-stack-kicker";
+  kicker.textContent = ({
+    en: "ENGINEERING SYSTEM STACK",
+    fr: "COUCHES DE L’INGÉNIERIE",
+    ja: "エンジニアリング・スタック"
+  })[currentLang] || "ENGINEERING SYSTEM STACK";
+  const core = document.createElement("div");
+  core.className = "technical-stack-core";
+  const support = document.createElement("div");
+  support.className = "technical-stack-support";
+  const layers = [];
+  let currentLayer = null;
+  let node = heading.nextSibling;
+
+  while (node) {
+    const next = node.nextSibling;
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2") {
+      currentLayer = document.createElement("section");
+      currentLayer.className = "technical-stack-layer";
+      currentLayer.appendChild(node);
+      layers.push(currentLayer);
+    } else if (currentLayer) {
+      currentLayer.appendChild(node);
+    }
+    node = next;
+  }
+
+  layers.forEach((layer, index) => {
+    const layerHeading = layer.querySelector("h2");
+    const list = layer.querySelector("ul");
+    if (list) {
+      list.classList.add("technical-skill-chips");
+      list.querySelectorAll(":scope > li").forEach(item => {
+        const text = item.textContent.trim();
+        const prefix = emphasizedSkillPrefix(text);
+        if (!prefix) return;
+
+        const emphasis = document.createElement("strong");
+        emphasis.className = "technical-skill-emphasis";
+        emphasis.textContent = prefix;
+        item.replaceChildren(emphasis, document.createTextNode(text.slice(prefix.length)));
+      });
+    }
+
+    if (index < 3) {
+      layer.classList.add("technical-stack-layer-core");
+      layer.dataset.layer = String(index + 1).padStart(2, "0");
+      if (layerHeading) {
+        const indexLabel = document.createElement("span");
+        indexLabel.className = "technical-layer-index";
+        indexLabel.setAttribute("aria-hidden", "true");
+        indexLabel.textContent = layer.dataset.layer;
+        layerHeading.prepend(indexLabel);
+      }
+      core.appendChild(layer);
+    } else if (index < 5) {
+      layer.classList.add("technical-stack-layer-support");
+      support.appendChild(layer);
+    } else {
+      layer.classList.add("technical-stack-layer-learning");
+      support.appendChild(layer);
+    }
+  });
+
+  map.append(kicker, core, support);
+  heading.after(map);
+}
+
+function emphasizedSkillPrefix(text) {
+  if (/^C\s*\/\s*C\+\+/i.test(text)) return text.match(/^C\s*\/\s*C\+\+/i)[0];
+
+  const label = text.match(/^(.{1,36}?[:：])/u);
+  if (label) return label[1];
+
+  const parenthetical = text.search(/[（(]/u);
+  if (parenthetical > 0 && parenthetical <= 42) return text.slice(0, parenthetical).trim();
+
+  const separator = text.search(/[,，/／]/u);
+  if (separator >= 3 && separator <= 42) return text.slice(0, separator).trim();
+
+  const words = text.match(/^\S+(?:\s+\S+)?/u);
+  if (words) return words[0];
+
+  return Array.from(text).slice(0, Math.min(7, Array.from(text).length)).join("");
+}
+
 /** Turn the publication list into a cover gallery with a year ribbon. */
 function buildPublicationGallery(contentBody, markdownText) {
   const firstYearHeading = [...contentBody.querySelectorAll("h2")].find(heading => /^\d{4}$/.test(heading.textContent.trim()));
@@ -1028,6 +1238,10 @@ async function loadMarkdown(path, pageId) {
       buildExperienceTimeline(contentBody);
     } else if (pageId === "academic") {
       buildAcademicLayout(contentBody);
+    } else if (pageId === "skills") {
+      buildSkillsLandingVisual(contentBody);
+    } else if (pageId === "technical") {
+      buildTechnicalSkillsMap(contentBody);
     } else if (pageId === "publications") {
       buildPublicationGallery(contentBody, markdownText);
     }
