@@ -17,7 +17,7 @@ Je serai heureux d’échanger au sujet d’occasions professionnelles, de colla
 - ![IEEE](/assets/icons/alpha/ieee-logo.png) **Profil d’auteur IEEE Xplore** — [ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)  
   Publications IEEE évaluées par les pairs.
 
-- ![Google Scholar](/assets/icons/alpha/google-scholar-logo.png) **Google Scholar** — [Profil Scholar](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=grou-szabo%2C+robert&btnG=)  
+- ![Google Scholar](/assets/icons/alpha/google-scholar-logo.png) **Google Scholar** — [Profil Scholar](https://scholar.google.com/citations?user=GBzyxXUAAAAJ)<br>
   Citations et publications universitaires.
 
 - ![Semantic Scholar](/assets/icons/alpha/semantic-scholar-logo.png) **Semantic Scholar** — [semanticscholar.org/author/Robert-Grou-Szabo](https://www.semanticscholar.org/author/Robert-Grou-Szabo/1407852480)  

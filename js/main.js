@@ -93,6 +93,12 @@ const UI = {
     },
     menuOpen: "Open menu",
     menuClose: "Close menu",
+    themeControl: {
+      ariaLabel: "Change color theme",
+      names: { system: "system", light: "light", dark: "dark" },
+      systemTooltip: "Theme: system ({effective}) — click for light/dark",
+      modeTooltip: "Theme: {theme} — click to cycle"
+    },
     jaComingSoon: "Japanese version coming soon.",
     resumeLink: "↓ Resume PDF",
     resumeFile: "Robert_Grou_Resume_en.pdf",
@@ -122,6 +128,9 @@ const UI = {
       intelligenceNote: "systems that interpret",
       summary: "Ideas move through firmware, hardware, and intelligent systems.",
       signal: "Signal path active"
+    },
+    publication: {
+      previewAlt: "Cropped preview of the first page of the paper: {title}"
     }
   },
   fr: {
@@ -146,6 +155,12 @@ const UI = {
     },
     menuOpen: "Ouvrir le menu",
     menuClose: "Fermer le menu",
+    themeControl: {
+      ariaLabel: "Changer le thème de couleur",
+      names: { system: "automatique", light: "clair", dark: "sombre" },
+      systemTooltip: "Thème : automatique ({effective}) — cliquer pour alterner entre le clair et le sombre",
+      modeTooltip: "Thème : {theme} — cliquer pour changer"
+    },
     jaComingSoon: "La version japonaise sera disponible bientôt.",
     resumeLink: "↓ CV PDF",
     resumeFile: "Robert_Grou_Resume_fr.pdf",
@@ -175,6 +190,9 @@ const UI = {
       intelligenceNote: "des systèmes qui interprètent",
       summary: "Les idées traversent le firmware, le matériel et les systèmes intelligents.",
       signal: "Trajet du signal actif"
+    },
+    publication: {
+      previewAlt: "Aperçu recadré de la première page de l’article : {title}"
     }
   },
   ja: {
@@ -199,6 +217,12 @@ const UI = {
     },
     menuOpen: "メニューを開く",
     menuClose: "メニューを閉じる",
+    themeControl: {
+      ariaLabel: "配色テーマを変更",
+      names: { system: "自動", light: "ライト", dark: "ダーク" },
+      systemTooltip: "テーマ：自動（{effective}）—クリックしてライト／ダークを切り替え",
+      modeTooltip: "テーマ：{theme} — クリックして切り替え"
+    },
     jaComingSoon: "日本語版は近日公開予定です。",
     resumeLink: "↓ 履歴書 PDF",
     resumeFile: "Robert_Grou_Resume_jp.pdf",
@@ -228,6 +252,9 @@ const UI = {
       intelligenceNote: "理解するシステム",
       summary: "ファームウェア、ハードウェア、知能システムへとアイデアを形にします。",
       signal: "信号経路が動作中"
+    },
+    publication: {
+      previewAlt: "論文「{title}」の1ページ目を切り取ったプレビュー"
     }
   }
 };
@@ -315,13 +342,13 @@ function updateThemeToggleLabel(theme) {
   const btn = document.getElementById("theme-toggle");
   if (!btn) return;
   const effective = theme === "system" ? (systemPrefersDark() ? "dark" : "light") : theme;
+  const copy = t().themeControl;
   // Show the action: click to switch toward the other mode
   btn.textContent = effective === "dark" ? "☀" : "◐";
-  btn.title =
-    theme === "system"
-      ? `Theme: system (${effective}) — click for light/dark`
-      : `Theme: ${theme} — click to cycle`;
-  btn.setAttribute("aria-label", `Color theme: ${theme}`);
+  btn.title = theme === "system"
+    ? copy.systemTooltip.replace("{effective}", copy.names[effective])
+    : copy.modeTooltip.replace("{theme}", copy.names[theme]);
+  btn.setAttribute("aria-label", copy.ariaLabel);
 }
 
 function cycleTheme() {
@@ -516,6 +543,7 @@ function updateChromeLabels() {
     menuToggle.setAttribute("aria-label", t().menuOpen);
   }
 
+  updateThemeToggleLabel(getStoredTheme());
   updateHeroTranslations();
 }
 
@@ -672,19 +700,10 @@ function buildExperienceTimeline(contentBody) {
     node = next;
   }
 
-  const leftColumn = document.createElement("div");
-  const rightColumn = document.createElement("div");
-  leftColumn.className = "experience-column experience-column-left";
-  rightColumn.className = "experience-column experience-column-right";
-
   [...timeline.querySelectorAll(".experience-entry")].forEach((card, index) => {
     const isLeftCard = index % 2 === 0;
     card.classList.add(isLeftCard ? "experience-entry-left" : "experience-entry-right");
-    card.style.order = String(index);
-    (isLeftCard ? leftColumn : rightColumn).appendChild(card);
   });
-
-  timeline.append(leftColumn, rightColumn);
 
   installExperiencePointerTracking();
 }
@@ -1830,7 +1849,7 @@ function buildPublicationGallery(contentBody, markdownText) {
     if (entry.preview) {
       const image = document.createElement("img");
       image.src = entry.preview;
-      image.alt = `First page of ${entry.title}`;
+      image.alt = t().publication.previewAlt.replace("{title}", entry.title);
       image.loading = "eager";
       visual.appendChild(image);
     } else {

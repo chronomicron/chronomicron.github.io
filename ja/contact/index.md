@@ -17,7 +17,7 @@
 - ![IEEE](/assets/icons/alpha/ieee-logo.png) **IEEE Xplore 著者プロフィール** — [ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)  
   査読付き IEEE 論文一覧。
 
-- ![Google Scholar](/assets/icons/alpha/google-scholar-logo.png) **Google Scholar** — [Scholar プロフィール](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=grou-szabo%2C+robert&btnG=)  
+- ![Google Scholar](/assets/icons/alpha/google-scholar-logo.png) **Google Scholar** — [Scholar プロフィール](https://scholar.google.com/citations?user=GBzyxXUAAAAJ)<br>
   引用数と学術論文。
 
 - ![Semantic Scholar](/assets/icons/alpha/semantic-scholar-logo.png) **Semantic Scholar** — [semanticscholar.org/author/Robert-Grou-Szabo](https://www.semanticscholar.org/author/Robert-Grou-Szabo/1407852480)  

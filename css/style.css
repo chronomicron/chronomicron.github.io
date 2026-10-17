@@ -2865,8 +2865,8 @@ html[lang="ja"] .hero h1 {
 @media (min-width: 1200px) {
   #content-body[data-page="experience"] .experience-timeline {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: 2rem;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
     align-items: start;
     padding: 0 0 1rem;
   }
@@ -2879,26 +2879,17 @@ html[lang="ja"] .hero h1 {
     transform: translateX(-50%);
   }
 
-  #content-body .experience-column {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
-  #content-body .experience-column-right {
-    padding-top: 3.75rem;
-  }
-
   #content-body .experience-entry {
-    width: 100%;
+    width: calc(50% - 1rem);
   }
 
   #content-body .experience-entry-left {
+    justify-self: start;
     transform-origin: left center;
   }
 
   #content-body .experience-entry-right {
+    justify-self: end;
     transform-origin: right center;
   }
 
@@ -3122,20 +3113,33 @@ html[lang="ja"] .hero h1 {
   .hero-visual-caption { margin-top: -1.25rem; }
 
   #top-nav {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand menu"
+      "controls controls";
+    align-items: center;
+    justify-items: stretch;
     height: auto;
     min-height: var(--topnav-height);
     padding: 0.5rem 1rem;
-    gap: 0.5rem;
+    gap: 0.5rem 0.75rem;
   }
 
   .nav-brand {
-    flex: 1;
+    grid-area: brand;
     min-width: 0;
+    overflow: hidden;
   }
 
   .nav-brand a {
     font-size: 1rem;
+  }
+
+  .nav-brand > a:first-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .nav-brand { gap: 0.5rem; }
@@ -3146,22 +3150,28 @@ html[lang="ja"] .hero h1 {
     white-space: nowrap;
   }
 
-  /* Show hamburger, hide inline lang on the first row if needed */
+  /* Keep the menu button beside the name; controls sit on their own row. */
   #menu-toggle {
     display: flex;
+    grid-area: menu;
+    margin-left: 0;
+    justify-self: end;
   }
 
   .top-controls {
+    grid-area: controls;
     margin-left: 0;
-    order: 3;
+    justify-content: flex-end;
+    justify-self: end;
+    width: 100%;
   }
 
   /* Mode links become a full-width dropdown under the top bar */
   .nav-links {
     display: none;
+    grid-area: nav;
     flex-direction: column;
     width: 100%;
-    order: 4;
     gap: 0.25rem;
     padding: 0.5rem 0 0.25rem 0;
     border-top: 1px solid rgba(255,255,255,0.15);
@@ -3169,6 +3179,13 @@ html[lang="ja"] .hero h1 {
 
   #top-nav.menu-open .nav-links {
     display: flex;
+  }
+
+  #top-nav.menu-open {
+    grid-template-areas:
+      "brand menu"
+      "controls controls"
+      "nav nav";
   }
 
   .nav-btn {

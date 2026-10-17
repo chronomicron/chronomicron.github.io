@@ -17,7 +17,7 @@ I’m happy to connect about opportunities, collaboration, or shared interests.
 - ![IEEE](/assets/icons/alpha/ieee-logo.png) **IEEE Xplore Author Profile** — [ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)  
   Peer-reviewed IEEE publications.
 
-- ![Google Scholar](/assets/icons/alpha/google-scholar-logo.png) **Google Scholar** — [Scholar profile](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=grou-szabo%2C+robert&btnG=)  
+- ![Google Scholar](/assets/icons/alpha/google-scholar-logo.png) **Google Scholar** — [Scholar profile](https://scholar.google.com/citations?user=GBzyxXUAAAAJ)<br>
   Citations and academic publications.
 
 - ![Semantic Scholar](/assets/icons/alpha/semantic-scholar-logo.png) **Semantic Scholar** — [semanticscholar.org/author/Robert-Grou-Szabo](https://www.semanticscholar.org/author/Robert-Grou-Szabo/1407852480)  
