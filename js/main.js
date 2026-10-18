@@ -41,8 +41,13 @@ function detectBrowserLang() {
 }
 
 function initLanguage() {
+  const params = new URLSearchParams(window.location.search);
+  const requested = (params.get("lang") || "").trim().toLowerCase().split(/[-_]/)[0];
   const stored = localStorage.getItem(LANG_KEY);
-  if (stored && UI[stored]) {
+  if (requested && UI[requested]) {
+    currentLang = requested;
+    localStorage.setItem(LANG_KEY, currentLang);
+  } else if (stored && UI[stored]) {
     currentLang = stored;
   } else {
     currentLang = detectBrowserLang();
@@ -319,7 +324,7 @@ const THEME_KEY = "chronomicron-theme"; // "light" | "dark" | "system"
 
 function getStoredTheme() {
   const v = localStorage.getItem(THEME_KEY);
-  return v === "light" || v === "dark" || v === "system" ? v : "system";
+  return v === "light" || v === "dark" || v === "system" ? v : "dark";
 }
 
 function systemPrefersDark() {
@@ -481,6 +486,9 @@ document.addEventListener("DOMContentLoaded", () => {
       currentLang = lang;
       localStorage.setItem(LANG_KEY, lang);
       document.documentElement.lang = lang === "ja" ? "ja" : lang;
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", lang);
+      window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
 
       document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
