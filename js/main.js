@@ -21,6 +21,7 @@ const LANG_KEY = "chronomicron-lang"; // "en" | "fr" | "ja"
 let currentLang = "en";
 let currentMode = "profile";
 let currentPage = null;
+let markdownLoadSequence = 0;
 let activeExperienceCard = null;
 let experiencePointerTrackingInstalled = false;
 let activeAcademicCard = null;
@@ -2019,6 +2020,7 @@ function installExperiencePointerTracking() {
 }
 
 async function loadMarkdown(path, pageId) {
+  const loadSequence = ++markdownLoadSequence;
   closeExperienceCard(activeExperienceCard);
   activateAcademicCard(null);
   const contentBody = document.getElementById("content-body");
@@ -2026,7 +2028,9 @@ async function loadMarkdown(path, pageId) {
 
   // Fade out current content
   contentBody.classList.add("is-fading");
-  await new Promise(r => setTimeout(r, 160));
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  await new Promise(r => setTimeout(r, reducedMotion ? 0 : 420));
+  if (loadSequence !== markdownLoadSequence) return;
 
   try {
     const response = await fetch(path, { cache: "no-cache" });
@@ -2034,6 +2038,7 @@ async function loadMarkdown(path, pageId) {
       throw new Error(`Could not load ${path} (${response.status})`);
     }
     const markdownText = await response.text();
+    if (loadSequence !== markdownLoadSequence) return;
     const html = marked.parse(markdownText);
     contentBody.innerHTML = html;
 
@@ -2062,6 +2067,7 @@ async function loadMarkdown(path, pageId) {
     // Contact page: fill email slots without storing a plain address in Markdown
     injectEmailLinks(contentBody);
   } catch (err) {
+    if (loadSequence !== markdownLoadSequence) return;
     contentBody.innerHTML = `
       <h1>Content not found</h1>
       <p>Sorry, the requested page could not be loaded.</p>
@@ -2072,7 +2078,9 @@ async function loadMarkdown(path, pageId) {
 
   // Fade in new content
   requestAnimationFrame(() => {
-    contentBody.classList.remove("is-fading");
+    if (loadSequence === markdownLoadSequence) {
+      contentBody.classList.remove("is-fading");
+    }
   });
 }
 
