@@ -3,6 +3,8 @@
 La liste ci-dessous regroupe des articles de revues et de conférences évalués par les pairs.  
 Pendant mes études de cycles supérieurs à Polytechnique Montréal et à l’University of Tokyo, j’ai aussi présenté des affiches dans des conférences locales et régionales au Japon ; ces fichiers d’affiches ne sont pas inclus ici.
 
+Mes travaux de recherche ont porté sur la conception et l’implémentation d’<strong class="publication-focus">algorithmes de vision par ordinateur et de traitement d’images</strong> : détection et classification du bruit, analyse fondée sur les contours, estimation du flou de mouvement et restauration d’images, avec une attention particulière à leur implémentation efficace en VLSI.
+
 Vous pouvez également consulter mon profil d’auteur IEEE ici :  
 ![IEEE](/assets/icons/alpha/ieee-logo.png) [https://ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)
 
@@ -52,4 +54,3 @@ Vous pouvez également consulter mon profil d’auteur IEEE ici :
   P. Nsame, Robert Grou-Szabo, Yvon Savaria  
   IP Based Design 2000, Grenoble, France  
   [Fiche PolyPublie](https://publications.polymtl.ca/27957/)
-  

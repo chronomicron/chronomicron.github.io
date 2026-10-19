@@ -7,6 +7,8 @@
 
 **Thesis:** Automatic Image Noise Type Determination Based on Directional Edge Information
 
+**Research focus:** Developing image-analysis algorithms to identify noise types using directional edge information.
+
 ## M.Sc.A. in Electrical Engineering
 ![Polytechnique Montréal](../../assets/icons/alpha/polytechnique-montreal-logo.png) École Polytechnique, Université de Montréal, Canada  
 **Specialization:** Microelectronics  

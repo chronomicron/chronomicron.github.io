@@ -16,8 +16,8 @@
     </article>
     <article class="about-card">
       <span class="about-card-index">03 / 研究</span>
-      <h3>VLSIとビジョン</h3>
-      <p>コンピュータビジョンと映像処理向けVLSIアルゴリズムを主な専門としています。</p>
+      <h3>コンピュータビジョンとアルゴリズム</h3>
+      <p>ノイズ分類、輪郭情報を用いた解析、動きぼけ推定、画像復元などの画像処理アルゴリズムを開発し、VLSIへの効率的な実装にも取り組んできました。</p>
     </article>
     <article class="about-card">
       <span class="about-card-index">04 / 発表</span>

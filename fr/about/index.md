@@ -16,8 +16,8 @@
     </article>
     <article class="about-card">
       <span class="about-card-index">03 / RECHERCHE</span>
-      <h3>VLSI et vision</h3>
-      <p>Spécialité : algorithmes VLSI pour la vision par ordinateur et le traitement vidéo.</p>
+      <h3>Vision par ordinateur et algorithmes</h3>
+      <p>Développement d’algorithmes de traitement d’images : classification du bruit, analyse des contours, estimation du flou de mouvement et restauration d’images, avec un intérêt particulier pour leur implémentation efficace en VLSI.</p>
     </article>
     <article class="about-card">
       <span class="about-card-index">04 / PUBLICATIONS</span>

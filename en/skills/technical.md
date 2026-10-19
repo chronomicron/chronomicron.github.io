@@ -20,6 +20,14 @@
 - FreeRTOS / Zephyr RTOS
 - ARM Cortex-M / Cortex-A toolchains
 
+## Computer Vision & Algorithm Development
+- Image-noise analysis: detection and classification
+- Edge-based image analysis
+- Motion-blur estimation
+- Image-restoration filters
+- Image-compression history detection
+- VLSI implementation of image and video-processing algorithms
+
 ## Computer Vision & Video
 - OpenCV
 - FFmpeg

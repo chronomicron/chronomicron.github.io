@@ -8,6 +8,8 @@
 **Thèse :** Automatic Image Noise Type Determination Based on Directional Edge Information  
 *(Détermination automatique du type de bruit d’image basée sur l’information des contours directionnels)*
 
+**Sujet de recherche :** Développement d’une méthode d’analyse d’images qui identifie les types de bruit à partir d’informations sur les contours directionnels.
+
 ## Maîtrise ès sciences appliquées (M.Sc.A.) en génie électrique
 ![Polytechnique Montréal](/assets/icons/alpha/polytechnique-montreal-logo.png) École Polytechnique, Université de Montréal, Canada  
 **Spécialisation :** Microélectronique  

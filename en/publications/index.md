@@ -3,6 +3,8 @@
 The list below contains peer-reviewed journal and conference papers.  
 During graduate studies at Polytechnique Montréal and the University of Tokyo I also presented additional posters at local and regional conferences in Japan; those poster files are not included here.
 
+My research work focused on the design and implementation of <strong class="publication-focus">computer-vision and image-processing algorithms</strong>, including image-noise detection and classification, edge-based analysis, motion-blur estimation, and image restoration, with an emphasis on efficient VLSI implementation.
+
 You can also view my IEEE author profile here:  
 ![IEEE](/assets/icons/alpha/ieee-logo.png) [https://ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)
 

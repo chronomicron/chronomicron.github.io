@@ -8,6 +8,8 @@
 **論文題目：** Automatic Image Noise Type Determination Based on Directional Edge Information  
 （方向性エッジ情報に基づく画像ノイズ種別の自動判定）
 
+**研究内容：** 方向性エッジ情報を用いて画像ノイズの種類を判定する画像解析アルゴリズムの開発。
+
 ## 修士（応用科学・電気工学）
 ![Polytechnique Montréal](/assets/icons/alpha/polytechnique-montreal-logo.png) モントリオール工科大学（École Polytechnique, Université de Montréal, カナダ）  
 **専門：** マイクロエレクトロニクス  

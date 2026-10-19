@@ -16,8 +16,8 @@
     </article>
     <article class="about-card">
       <span class="about-card-index">03 / RESEARCH</span>
-      <h3>VLSI &amp; vision</h3>
-      <p>Core focus: VLSI algorithms for computer vision and video processing.</p>
+      <h3>Computer vision &amp; algorithms</h3>
+      <p>Developed image-processing algorithms for noise classification, edge-based analysis, motion-blur estimation, and image restoration, with a focus on efficient VLSI implementation.</p>
     </article>
     <article class="about-card">
       <span class="about-card-index">04 / PUBLISH</span>

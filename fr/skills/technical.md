@@ -20,6 +20,14 @@
 - FreeRTOS / Zephyr RTOS
 - Chaînes d’outils ARM Cortex-M / Cortex-A
 
+## Vision par ordinateur et développement d’algorithmes
+- Analyse du bruit dans les images : détection et classification
+- Analyse d’images fondée sur les contours
+- Estimation du flou de mouvement
+- Filtres de restauration d’images
+- Détection de l’historique de compression d’images
+- Implémentation VLSI d’algorithmes de traitement d’images et de vidéo
+
 ## Vision par ordinateur et vidéo
 - OpenCV
 - FFmpeg

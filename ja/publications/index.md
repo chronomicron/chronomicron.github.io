@@ -3,6 +3,8 @@
 査読付きの学術誌論文および国際会議論文を掲載しています。
 Polytechnique Montréal と東京大学の大学院在学中には、日本国内の地域会議でもポスター発表を行いましたが、ポスター資料はここには掲載していません。
 
+研究では、<strong class="publication-focus">コンピュータビジョンおよび画像処理アルゴリズム</strong>の設計・実装に取り組みました。対象は画像ノイズの検出・分類、輪郭情報に基づく解析、動きぼけ推定、画像復元などで、VLSIによる効率的な実装も重視しました。
+
 IEEE の著者プロフィールはこちらからご覧いただけます。
 ![IEEE](/assets/icons/alpha/ieee-logo.png) [https://ieeexplore.ieee.org/author/38272216600](https://ieeexplore.ieee.org/author/38272216600)
 

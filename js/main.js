@@ -116,6 +116,7 @@ const UI = {
       tagsLabel: "Areas of experience and interest",
       tagFirmware: "Firmware",
       tagHardware: "Hardware design",
+      tagVision: "Computer Vision & Algorithms",
       tagAI: "AI & agents",
       explore: "Explore my background",
       resume: "View résumé",
@@ -178,6 +179,7 @@ const UI = {
       tagsLabel: "Domaines d’expérience et d’intérêt",
       tagFirmware: "Firmware",
       tagHardware: "Conception matérielle",
+      tagVision: "Vision par ordinateur · algorithmes",
       tagAI: "IA et agents",
       explore: "Découvrir mon parcours",
       resume: "Voir mon CV",
@@ -240,6 +242,7 @@ const UI = {
       tagsLabel: "経験分野と関心分野",
       tagFirmware: "ファームウェア",
       tagHardware: "ハードウェア設計",
+      tagVision: "コンピュータビジョン・アルゴリズム",
       tagAI: "AI・エージェント",
       explore: "経歴を見る",
       resume: "履歴書を見る",
@@ -2024,12 +2027,13 @@ async function loadMarkdown(path, pageId) {
   closeExperienceCard(activeExperienceCard);
   activateAcademicCard(null);
   const contentBody = document.getElementById("content-body");
+  contentBody.classList.remove("is-wiping-in", "is-wiping-out");
   contentBody.dataset.page = pageId;
 
-  // Fade out current content
-  contentBody.classList.add("is-fading");
+  // Wipe the current page away from right to left before replacing it.
   const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  await new Promise(r => setTimeout(r, reducedMotion ? 0 : 420));
+  if (!reducedMotion) contentBody.classList.add("is-wiping-out");
+  await new Promise(r => setTimeout(r, reducedMotion ? 0 : 650));
   if (loadSequence !== markdownLoadSequence) return;
 
   try {
@@ -2076,11 +2080,18 @@ async function loadMarkdown(path, pageId) {
     console.error(err);
   }
 
-  // Fade in new content
+  // Reveal the new page from left to right.
   requestAnimationFrame(() => {
-    if (loadSequence === markdownLoadSequence) {
-      contentBody.classList.remove("is-fading");
-    }
+    if (loadSequence !== markdownLoadSequence) return;
+    contentBody.classList.remove("is-wiping-out");
+    if (reducedMotion) return;
+
+    contentBody.classList.add("is-wiping-in");
+    window.setTimeout(() => {
+      if (loadSequence === markdownLoadSequence) {
+        contentBody.classList.remove("is-wiping-in");
+      }
+    }, 720);
   });
 }
 
