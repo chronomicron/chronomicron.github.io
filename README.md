@@ -1,9 +1,9 @@
 # chronomicron.github.io
 
-**Live site:** [https://chronomicron.github.io](https://chronomicron.github.io)  
-**Domain:** [https://chronomicron.com](https://chronomicron.com) *(when DNS is pointed at GitHub Pages)*
+**Résumé site:** [https://chronomicron.com/resume/](https://chronomicron.com/resume/)  
+**Domain root:** [https://chronomicron.com](https://chronomicron.com) *(project landing page to be added)*
 
-Personal digital profile and résumé site for **Robert Grou-Szabo** — electrical engineer focused on hardware, firmware, ASIC/FPGA, and VLSI for computer vision and video processing.
+Personal project hub and résumé site for **Robert Grou-Szabo** — electrical engineer focused on hardware, firmware, ASIC/FPGA, and VLSI for computer vision and video processing.
 
 This repository is the source for a static site hosted with **GitHub Pages**. Content is kept separate from presentation so pages can be updated without redesigning the whole site.
 
@@ -36,7 +36,7 @@ Visitors can switch **language** (English, French, Japanese), **theme** (light /
 | **Organization logos** | Small icons next to schools, employers, and verification links |
 | **Background images** | Optional semi-transparent technical/photo backgrounds per visit |
 | **Custom cursor** | Optional rocket pointer (with press state) |
-| **Downloadable résumés** | PDF résumés under `assets/resume/` (EN / FR / JA) |
+| **Downloadable résumés** | PDF résumés under `resume/assets/resume/` (EN / FR / JA) |
 | **Email without plain-text harvesting** | Contact address assembled in JavaScript |
 | **Analytics** | Statcounter (invisible) on the main page |
 
@@ -46,28 +46,19 @@ Visitors can switch **language** (English, French, Japanese), **theme** (light /
 
 ```text
 chronomicron.github.io/
-├── index.html              # Shell: top bar, sidebar, content pane
-├── css/style.css           # Layout, themes, responsive rules
-├── js/main.js              # Navigation, Markdown loading, i18n, theme
-├── en/  fr/  ja/           # Content by language (same folder structure)
-│   ├── about/
-│   ├── academic/
-│   ├── contact/
-│   ├── experience/
-│   ├── personal_interests/
-│   ├── projects/
-│   ├── publications/
-│   └── skills/
-├── assets/
-│   ├── background/         # Optional page backgrounds
-│   ├── icons/              # Organization logos (e.g. alpha/)
-│   ├── publications/       # Paper PDFs
-│   └── resume/             # Downloadable résumé PDFs
-├── favicon*.png / .ico
-└── README.md
+├── index.html              # Temporary redirect to /resume/; later project landing page
+├── CNAME                   # Custom-domain configuration for GitHub Pages
+├── README.md               # Repository notes
+└── resume/                 # Résumé website, served at chronomicron.com/resume/
+    ├── index.html          # Shell: top bar, sidebar, content pane
+    ├── css/style.css       # Layout, themes, responsive rules
+    ├── js/main.js          # Navigation, Markdown loading, i18n, theme
+    ├── en/  fr/  ja/       # Content by language
+    ├── assets/             # Backgrounds, icons, papers, and résumé PDFs
+    └── favicon*            # Résumé-site favicon variants
 ```
 
-Content is edited as Markdown; the site loads and renders it in the browser (Marked.js). Shared media stays under `assets/`.
+Content is edited as Markdown; the site loads and renders it in the browser (Marked.js). Résumé-site content and media stay under `resume/`.
 
 ---
 
@@ -79,7 +70,7 @@ From the repository root:
 python3 -m http.server 8000
 ```
 
-Then open [http://localhost:8000](http://localhost:8000).
+Then open [http://localhost:8000/resume/](http://localhost:8000/resume/).
 
 Use a hard refresh or a private window if CSS/JS changes do not appear (caching).
 
@@ -98,7 +89,7 @@ Use a hard refresh or a private window if CSS/JS changes do not appear (caching)
 Visual and text résumés are maintained separately (often as LaTeX sources outside the public phone-number workflow). Published PDFs for the website are stored in:
 
 ```text
-assets/resume/
+resume/assets/resume/
 ```
 
 Examples: `Robert_Grou_Resume_en.pdf`, `_fr.pdf`, `_ja.pdf` — linked from About / Contact in each language.
