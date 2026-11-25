@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10151f" />
+    <title>Gravity Gridlock</title>
+    <script type="module" crossorigin src="/gravity-gridlock/assets/index-Bb8DIuRi.js"></script>
+    <link rel="stylesheet" crossorigin href="/gravity-gridlock/assets/index-DT43Q5gp.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="masthead">
+        <div class="brand-mark">GG</div>
+        <div>
+          <p class="eyebrow">LOCAL HEAD-TO-HEAD PROTOTYPE</p>
+          <h1>Gravity <span>Gridlock</span></h1>
+        </div>
+        <div class="gravity-readout"><span class="gravity-dot"></span><span id="gravity-label">Turn flow: down ↓</span></div>
+      </header>
+
+      <main class="game-layout">
+        <section class="arena-card" aria-label="Game board">
+          <details class="setup-panel" id="setup-panel">
+            <summary>Board setup</summary>
+            <div class="setup-body">
+              <div class="setup-control board-scale-control">
+                <div><strong>Board display size</strong><small>Visual size only · does not change grid rules</small></div>
+                <label for="board-scale"><span id="board-scale-value">100%</span><input id="board-scale" type="range" min="70" max="180" step="5" value="100" aria-label="Board display size"></label>
+              </div>
+              <div class="setup-control">
+                <div><strong>Player mode</strong><small>One local player or two local players</small></div>
+                <label class="setup-select-label" for="player-mode"><select id="player-mode" aria-label="Player mode"><option value="local">2 local players</option><option value="bot">1 player vs bot</option></select></label>
+              </div>
+              <div class="setup-control" id="bot-policy-control" hidden>
+                <div><strong>Bot difficulty</strong><small>Level 1 keeps its current policies; Level 2 can rotate</small></div>
+                <label class="setup-select-label" for="bot-policy"><select id="bot-policy" aria-label="Bot difficulty and policy"><optgroup label="Level 1"><option value="random-legal">Random legal move</option><option value="goal-seeking">Goal-seeking</option></optgroup><optgroup label="Level 2"><option value="rotation-aware">Rotation-aware goal-seeking</option></optgroup></select></label>
+              </div>
+              <div class="setup-control">
+                <div><strong>Square grid</strong><small>Rows = columns · bounds 8–24</small></div>
+                <div class="stepper"><button id="size-decrease" type="button" aria-label="Decrease grid size">−</button><output id="size-value">9 × 9</output><button id="size-increase" type="button" aria-label="Increase grid size">+</button></div>
+              </div>
+              <div class="setup-control">
+                <div><strong>Tile colors</strong><small>Bounds 3–12 varieties</small></div>
+                <div class="stepper"><button id="colors-decrease" type="button" aria-label="Decrease color varieties">−</button><output id="colors-value">6</output><button id="colors-increase" type="button" aria-label="Increase color varieties">+</button></div>
+              </div>
+              <div class="setup-control tile-art-control">
+                <div><strong>Tile art set</strong><small>Visual only · game values stay the same</small></div>
+                <label for="tile-art-set" class="tile-art-label">Set
+                  <select id="tile-art-set" aria-label="Tile art set">
+                    <option value="1">1 · Emoji</option>
+                    <option value="2">2 · Pop</option>
+                    <option value="3">3 · Etched</option>
+                    <option value="4">4 · Candy</option>
+                    <option value="5">5 · Pixel</option>
+                    <option value="6">6 · Neon</option>
+                  </select>
+                </label>
+              </div>
+              <div class="origin-settings">
+                <p class="origin-heading">Bubble origins <small>Two-cell edge margin · each target is the opposing player's origin</small></p>
+                <div class="origin-control"><strong>Mercury starts</strong><label>Row <input id="mercury-origin-row" type="number" min="2" max="10" value="3"></label><label>Column <input id="mercury-origin-col" type="number" min="2" max="10" value="3"></label><small>Target: <output id="mercury-target">K11</output> · Air's origin</small></div>
+                <div class="origin-control"><strong>Air starts</strong><label>Row <input id="air-origin-row" type="number" min="2" max="10" value="10"></label><label>Column <input id="air-origin-col" type="number" min="2" max="10" value="10"></label><small>Target: <output id="air-target">D4</output> · Mercury's origin</small></div>
+                <output id="origin-validation" aria-live="polite"></output>
+              </div>
+              <div class="seed-input-control">
+                <label for="seed-input"><strong>Replay seed</strong><small>Reuse a seed with the selected size, colors, and origins</small></label>
+                <input id="seed-input" type="text" spellcheck="false" autocomplete="off" aria-label="Board seed">
+                <button id="use-seed-button" type="button">Use seed</button>
+              </div>
+              <div class="setup-actions"><button id="regenerate-button" type="button">New random board</button><output id="settings-summary" aria-live="polite">Current board: 9 × 9 · 6 varieties</output></div>
+            </div>
+          </details>
+          <div class="arena-topline">
+            <div class="turn-copy">
+              <span class="eyebrow" id="board-dimensions">SHARED ARENA · 9 × 9</span>
+              <strong id="turn-label">Mercury's turn</strong>
+              <small class="phase-label" id="phase-label" aria-live="polite">Swap neighboring tiles or your bubble with a tile</small>
+            </div>
+            <div class="turn-pill" id="turn-pill">PLAYER 1</div>
+          </div>
+          <div id="game-root"></div>
+          <details class="event-log" id="event-log">
+            <summary>Show event log (last 20)</summary>
+            <div class="event-log-body">
+              <div class="event-log-heading"><span>TURN AND CASCADE TRACE · v<span id="game-version"></span></span><div><button id="event-log-copy" type="button">Copy trace</button><button id="event-log-clear" type="button">Clear log</button></div></div>
+              <ol id="event-log-list" aria-live="polite"></ol>
+            </div>
+          </details>
+          <div class="arena-footer">
+            <span class="seed-readout">Board seed <code id="board-seed">00000000</code><button id="copy-board-seed" type="button">Copy</button></span>
+            <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" aria-label="Turn sound on">🔇 Sound off</button>
+            <div class="arena-actions"><button id="hint-button" type="button" disabled>Hint · −1 pt</button><button id="reset-button" type="button">↻ <span>New round</span></button></div>
+          </div>
+        </section>
+
+        <aside class="side-panel">
+          <section class="instructions-card">
+            <div class="section-heading"><span class="heading-icon">?</span><div><p class="eyebrow">QUICK BRIEFING</p><h2>How to play</h2></div></div>
+            <ol class="steps">
+              <li><span class="step-number">01</span><div><strong>Set up & turn the arena</strong><p>Choose distinct bubble origins in Board setup; each target is the other player's origin. Bottom-left rotates clockwise and bottom-right counter-clockwise, up to twice before your swap. Rotation moves bubbles and targets together; gravity stays vertical on screen.</p></div></li>
+              <li><span class="step-number">02</span><div><strong>Swap for points or move a bubble toward a goal</strong><p>Either bubble may swap with a neighboring tile on the active player's turn, but the swap must make a match. The two bubbles cannot swap with each other. The active bubble may also swap directly into its adjacent, tile-occupied goal without a match; that awards the board-side bonus and ends the round. Each unique tile cleared scores 1 point for the active player.</p></div></li>
+              <li><span class="step-number">03</span><div><strong>Set the turn flow</strong><p>Mercury turns flow down and Air turns flow up, regardless of board rotation. Both bubbles move with the ordered lane contents and cannot pass each other. Walls stay fixed; tiles flow past their rows, but walls stop bubbles.</p></div></li>
+              <li><span class="step-number">04</span><div><strong>Settle & cascade</strong><p>Cleared gaps compact across walls toward the active turn's flow. Remaining empty cells refill from the upstream board edge. Every cascade scores for the same active player.</p></div></li>
+              <li><span class="step-number">05</span><div><strong>Hint & recover</strong><p>Hint shows a legal matching swap and its match cells for 1 point (your score cannot drop below 0). If the settled board has no legal move, tile colors shuffle while bubbles, walls, and goals stay put.</p></div></li>
+            </ol>
+            <div class="win-note"><span>✦</span><p>Either bubble reaching its own goal ends the round and awards a bonus equal to the board side length. Highest score wins; the arriving player wins a tie.</p></div>
+          </section>
+
+          <section class="players-card">
+            <p class="eyebrow">RACE STATUS</p>
+            <div class="player-row active" id="mercury-row"><span class="player-token mercury-token">●</span><div class="player-name"><strong>Player 1 · Mercury</strong><small>Turn flow down ↓</small></div><span class="player-score" id="mercury-score">0 pts</span><span class="player-position" id="mercury-position">A1</span></div>
+            <div class="player-row" id="air-row"><span class="player-token air-token">○</span><div class="player-name"><strong id="air-player-name">Player 2 · Air</strong><small>Turn flow up ↑</small></div><span class="player-score" id="air-score">0 pts</span><span class="player-position" id="air-position">G7</span></div>
+            <div class="round-result" id="round-result" aria-live="polite" hidden></div>
+            <div class="collision-note"><span class="status-dot"></span>Bubbles and walls cannot be cleared</div>
+            <div class="online-panel">
+              <strong>Online playtest · local network</strong>
+              <small id="online-status" aria-live="polite">Not connected</small>
+              <button id="create-room" type="button">Create room · Mercury</button>
+              <div id="invite-panel" hidden><input id="invite-link" readonly aria-label="Room invite link"><button id="copy-invite" type="button">Copy invite link</button><small id="invite-copy-status" aria-live="polite"></small></div>
+              <div class="join-row"><input id="room-code" placeholder="Paste invite link or room code" aria-label="Invite link or room code"><button id="join-room" type="button">Join as Air</button></div>
+              <div id="rematch-panel" hidden>
+                <strong>Play another game?</strong>
+                <small id="rematch-status" aria-live="polite"></small>
+                <button id="rematch-propose" type="button">Propose rematch</button>
+                <button id="rematch-accept" type="button" hidden>Accept · start next game</button>
+                <button id="rematch-decline" type="button" hidden>Decline</button>
+                <button id="rematch-cancel" type="button" hidden>Cancel proposal</button>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </main>
+      <footer class="page-footer">A small shared-board experiment <span>•</span> Rules are still in motion</footer>
+    </div>
+  </body>
+</html>
