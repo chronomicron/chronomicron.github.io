@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chronomicron — Projects & Engineering</title>
-  <meta name="description" content="Explore the engineering projects of Robert Grou-Szabo: Gazoken, JobQuestR, ChronoVault, and résumé.">
+  <meta name="description" content="Explore the engineering projects of Robert Grou-Szabo: Gazoken, JobQuestR, ChronoVault, Gravity Gridlock, and résumé.">
   <link rel="canonical" href="https://chronomicron.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chronomicron — Projects & Engineering">
@@ -151,6 +151,7 @@
     .project-card.gazoken { --accent: #9edc64; }
     .project-card.jobquestr { --accent: #71c7f1; }
     .project-card.chronovault { --accent: #b69afa; }
+    .project-card.gravity-gridlock { --accent: #ff9d70; }
     .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
     .project-icon { display: grid; width: 48px; height: 48px; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); }
     .project-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; }
@@ -202,7 +203,7 @@
       <section aria-labelledby="projects-title">
         <div class="section-heading">
           <h2 id="projects-title">Projects</h2>
-          <p>Three paths to explore</p>
+          <p>Four projects to explore</p>
         </div>
         <div class="projects">
           <a class="project-card gazoken" href="/gazoken/" aria-label="Open Gazoken image forensics workbench">
@@ -242,6 +243,19 @@
             <h3>ChronoVault</h3>
             <p>An in-progress project to bring years of photos and videos into one coherent chronological archive.</p>
             <span class="card-action"><span>View the GitHub project</span><span aria-hidden="true">↗</span></span>
+          </a>
+
+          <a class="project-card gravity-gridlock" href="/gravity-gridlock/" aria-label="Open the planned Gravity Gridlock browser playtest route; deployment is in progress">
+            <div class="card-top">
+              <span class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/><circle cx="12" cy="12" r="2.4"/><path d="M7.7 7.7 10.3 10.3M16.3 7.7 13.7 10.3M7.7 16.3 10.3 13.7M16.3 16.3 13.7 13.7M12 3.8v5.8M12 14.4v5.8"/></svg>
+              </span>
+              <span class="status">Playtest · route pending</span>
+            </div>
+            <p class="card-kicker">Browser game · match-three strategy</p>
+            <h3>Gravity Gridlock</h3>
+            <p>An original strategy puzzle game where gravity-shifting bubbles reshape the board. Currently in playtest.</p>
+            <span class="card-action"><span>Open the planned game route</span><span aria-hidden="true">↗</span></span>
           </a>
         </div>
       </section>
