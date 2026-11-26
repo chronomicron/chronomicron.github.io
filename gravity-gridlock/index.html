@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#10151f" />
     <title>Gravity Gridlock</title>
-    <script type="module" crossorigin src="/gravity-gridlock/assets/index-DBszdxGu.js"></script>
+    <script type="module" crossorigin src="/gravity-gridlock/assets/index-DDx0cT5u.js"></script>
     <link rel="stylesheet" crossorigin href="/gravity-gridlock/assets/index-D1QYXF6Q.css">
   </head>
   <body>
@@ -83,6 +83,10 @@
                 <label for="board-scale"><span id="board-scale-value">100%</span><input id="board-scale" type="range" min="70" max="180" step="5" value="100" aria-label="Board display size"></label>
               </div>
               <div class="setup-control">
+                <div><strong>Turn timer</strong><small>Host sets this · expiry plays a random legal move</small></div>
+                <label class="setup-select-label" for="turn-timer"><select id="turn-timer" aria-label="Turn timer"><option value="0">Off</option><option value="30">30 seconds</option><option value="60">1 minute</option></select></label>
+              </div>
+              <div class="setup-control">
                 <div><strong>Player mode</strong><small>One local player or two local players</small></div>
                 <label class="setup-select-label" for="player-mode"><select id="player-mode" aria-label="Player mode"><option value="local">2 local players</option><option value="bot">1 player vs bot</option></select></label>
               </div>
@@ -108,6 +112,7 @@
                     <option value="4">4 · Candy</option>
                     <option value="5">5 · Pixel</option>
                     <option value="6">6 · Neon</option>
+                    <option value="7">7 · Japan</option>
                   </select>
                 </label>
               </div>
@@ -139,6 +144,7 @@
             <li><span class="step-number">03</span><div><strong>Set the turn flow</strong><p>Mercury turns flow down and Air turns flow up, regardless of board rotation. Both bubbles move with the ordered lane contents and cannot pass each other. Walls stay fixed; tiles flow past their rows, but walls stop bubbles.</p></div></li>
             <li><span class="step-number">04</span><div><strong>Settle & cascade</strong><p>Cleared gaps compact across walls toward the active turn's flow. Remaining empty cells refill from the upstream board edge. Every cascade scores for the same active player.</p></div></li>
             <li><span class="step-number">05</span><div><strong>Hint & recover</strong><p>Hint shows a legal matching swap and its match cells for 1 point (your score cannot drop below 0). If the settled board has no legal move, tile colors shuffle while bubbles, walls, and goals stay put.</p></div></li>
+            <li><span class="step-number">06</span><div><strong>Optional turn timer</strong><p>The host can choose 30 seconds or 1 minute in Board setup. If time runs out, a random legal move is made, including a possible rotation.</p></div></li>
           </ol>
           <div class="win-note"><span>✦</span><p>Either bubble reaching its own goal ends the round and awards a bonus equal to the board side length. Highest score wins; the arriving player wins a tie.</p></div>
         </div>
