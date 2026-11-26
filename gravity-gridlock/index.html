@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#10151f" />
     <title>Gravity Gridlock</title>
-    <script type="module" crossorigin src="/gravity-gridlock/assets/index-CsbM2Dve.js"></script>
-    <link rel="stylesheet" crossorigin href="/gravity-gridlock/assets/index-CzuscvIV.css">
+    <script type="module" crossorigin src="/gravity-gridlock/assets/index-DBszdxGu.js"></script>
+    <link rel="stylesheet" crossorigin href="/gravity-gridlock/assets/index-D1QYXF6Q.css">
   </head>
   <body>
     <div class="page-shell">
@@ -25,15 +25,6 @@
           <div class="arena-topline">
             <div class="turn-copy">
               <span class="eyebrow" id="board-dimensions">SHARED ARENA · 9 × 9</span>
-              <strong id="turn-label">Mercury's turn</strong>
-              <small class="phase-label" id="phase-label" aria-live="polite">Swap neighboring tiles or your bubble with a tile</small>
-            </div>
-            <div class="turn-meta">
-              <div class="seat-statuses" id="seat-statuses" aria-label="Player connections" hidden>
-                <span class="seat-status" id="player1-connection" data-state="absent" aria-label="Player 1 absent"><span class="seat-dot"></span><span>P1</span></span>
-                <span class="seat-status" id="player2-connection" data-state="absent" aria-label="Player 2 absent"><span class="seat-dot"></span><span>P2</span></span>
-              </div>
-              <div class="turn-pill" id="turn-pill">PLAYER 1</div>
             </div>
           </div>
           <div id="game-root"></div>
@@ -52,20 +43,16 @@
         </section>
 
         <aside class="side-panel">
-          <section class="instructions-card">
-            <div class="section-heading"><span class="heading-icon">?</span><div><p class="eyebrow">QUICK BRIEFING</p><h2>How to play</h2></div></div>
-            <ol class="steps">
-              <li><span class="step-number">01</span><div><strong>Set up & turn the arena</strong><p>Choose distinct bubble origins in Board setup; each target is the other player's origin. Bottom-left rotates clockwise and bottom-right counter-clockwise, up to twice before your swap. Rotation moves bubbles and targets together; gravity stays vertical on screen.</p></div></li>
-              <li><span class="step-number">02</span><div><strong>Swap for points or move a bubble toward a goal</strong><p>Either bubble may swap with a neighboring tile on the active player's turn, but the swap must make a match. The two bubbles cannot swap with each other. The active bubble may also swap directly into its adjacent, tile-occupied goal without a match; that awards the board-side bonus and ends the round. Each unique tile cleared scores 1 point for the active player.</p></div></li>
-              <li><span class="step-number">03</span><div><strong>Set the turn flow</strong><p>Mercury turns flow down and Air turns flow up, regardless of board rotation. Both bubbles move with the ordered lane contents and cannot pass each other. Walls stay fixed; tiles flow past their rows, but walls stop bubbles.</p></div></li>
-              <li><span class="step-number">04</span><div><strong>Settle & cascade</strong><p>Cleared gaps compact across walls toward the active turn's flow. Remaining empty cells refill from the upstream board edge. Every cascade scores for the same active player.</p></div></li>
-              <li><span class="step-number">05</span><div><strong>Hint & recover</strong><p>Hint shows a legal matching swap and its match cells for 1 point (your score cannot drop below 0). If the settled board has no legal move, tile colors shuffle while bubbles, walls, and goals stay put.</p></div></li>
-            </ol>
-            <div class="win-note"><span>✦</span><p>Either bubble reaching its own goal ends the round and awards a bonus equal to the board side length. Highest score wins; the arriving player wins a tie.</p></div>
-          </section>
-
           <section class="players-card">
             <p class="eyebrow">RACE STATUS</p>
+            <div class="turn-status" aria-live="polite">
+              <div class="turn-status-heading"><strong id="turn-label">Mercury's turn</strong><span class="turn-pill" id="turn-pill">PLAYER 1</span></div>
+              <small class="phase-label" id="phase-label">Swap neighboring tiles or your bubble with a tile</small>
+            </div>
+            <div class="seat-statuses" id="seat-statuses" aria-label="Player connections" hidden>
+              <span class="seat-status" id="player1-connection" data-state="absent" aria-label="Player 1 absent"><span class="seat-dot"></span><span>P1</span></span>
+              <span class="seat-status" id="player2-connection" data-state="absent" aria-label="Player 2 absent"><span class="seat-dot"></span><span>P2</span></span>
+            </div>
             <div class="player-row active" id="mercury-row"><span class="player-token mercury-token">●</span><div class="player-name"><strong>Player 1 · Mercury</strong><small>Turn flow down ↓</small></div><span class="player-score" id="mercury-score">0 pts</span><span class="player-position" id="mercury-position">A1</span></div>
             <div class="player-row" id="air-row"><span class="player-token air-token">○</span><div class="player-name"><strong id="air-player-name">Player 2 · Air</strong><small>Turn flow up ↑</small></div><span class="player-score" id="air-score">0 pts</span><span class="player-position" id="air-position">G7</span></div>
             <div class="round-result" id="round-result" aria-live="polite" hidden></div>
@@ -85,6 +72,7 @@
                 <button id="rematch-cancel" type="button" hidden>Cancel proposal</button>
               </div>
             </div>
+            <button id="how-to-play-button" class="how-to-play-button" type="button" aria-haspopup="dialog" aria-controls="how-to-play-dialog">HOW TO PLAY</button>
           </section>
         </aside>
           <details class="setup-panel" id="setup-panel">
@@ -142,6 +130,19 @@
             </div>
           </details>
       </main>
+      <dialog class="how-to-play-dialog" id="how-to-play-dialog" aria-labelledby="how-to-play-title">
+        <div class="instructions-card">
+          <div class="dialog-heading"><div class="section-heading"><span class="heading-icon">?</span><div><p class="eyebrow">QUICK BRIEFING</p><h2 id="how-to-play-title">How to play</h2></div></div><button class="dialog-close" type="button" aria-label="Close instructions">×</button></div>
+          <ol class="steps">
+            <li><span class="step-number">01</span><div><strong>Set up & turn the arena</strong><p>Choose distinct bubble origins in Board setup; each target is the other player's origin. Bottom-left rotates clockwise and bottom-right counter-clockwise, up to twice before your swap. Rotation moves bubbles and targets together; gravity stays vertical on screen.</p></div></li>
+            <li><span class="step-number">02</span><div><strong>Swap for points or move a bubble toward a goal</strong><p>Either bubble may swap with a neighboring tile on the active player's turn, but the swap must make a match. The two bubbles cannot swap with each other. The active bubble may also swap directly into its adjacent, tile-occupied goal without a match; that awards the board-side bonus and ends the round. Each unique tile cleared scores 1 point for the active player.</p></div></li>
+            <li><span class="step-number">03</span><div><strong>Set the turn flow</strong><p>Mercury turns flow down and Air turns flow up, regardless of board rotation. Both bubbles move with the ordered lane contents and cannot pass each other. Walls stay fixed; tiles flow past their rows, but walls stop bubbles.</p></div></li>
+            <li><span class="step-number">04</span><div><strong>Settle & cascade</strong><p>Cleared gaps compact across walls toward the active turn's flow. Remaining empty cells refill from the upstream board edge. Every cascade scores for the same active player.</p></div></li>
+            <li><span class="step-number">05</span><div><strong>Hint & recover</strong><p>Hint shows a legal matching swap and its match cells for 1 point (your score cannot drop below 0). If the settled board has no legal move, tile colors shuffle while bubbles, walls, and goals stay put.</p></div></li>
+          </ol>
+          <div class="win-note"><span>✦</span><p>Either bubble reaching its own goal ends the round and awards a bonus equal to the board side length. Highest score wins; the arriving player wins a tie.</p></div>
+        </div>
+      </dialog>
       <footer class="page-footer">A small shared-board experiment <span>•</span> Rules are still in motion</footer>
     </div>
   </body>
