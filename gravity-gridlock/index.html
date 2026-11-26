@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#10151f" />
     <title>Gravity Gridlock</title>
-    <script type="module" crossorigin src="/gravity-gridlock/assets/index-t_GzRZyu.js"></script>
-    <link rel="stylesheet" crossorigin href="/gravity-gridlock/assets/index-DT43Q5gp.css">
+    <script type="module" crossorigin src="/gravity-gridlock/assets/index-CsbM2Dve.js"></script>
+    <link rel="stylesheet" crossorigin href="/gravity-gridlock/assets/index-CzuscvIV.css">
   </head>
   <body>
     <div class="page-shell">
@@ -21,63 +21,20 @@
 
       <main class="game-layout">
         <section class="arena-card" aria-label="Game board">
-          <details class="setup-panel" id="setup-panel">
-            <summary>Board setup</summary>
-            <div class="setup-body">
-              <div class="setup-control board-scale-control">
-                <div><strong>Board display size</strong><small>Visual size only · does not change grid rules</small></div>
-                <label for="board-scale"><span id="board-scale-value">100%</span><input id="board-scale" type="range" min="70" max="180" step="5" value="100" aria-label="Board display size"></label>
-              </div>
-              <div class="setup-control">
-                <div><strong>Player mode</strong><small>One local player or two local players</small></div>
-                <label class="setup-select-label" for="player-mode"><select id="player-mode" aria-label="Player mode"><option value="local">2 local players</option><option value="bot">1 player vs bot</option></select></label>
-              </div>
-              <div class="setup-control" id="bot-policy-control" hidden>
-                <div><strong>Bot difficulty</strong><small>Level 1 keeps its current policies; Level 2 can rotate</small></div>
-                <label class="setup-select-label" for="bot-policy"><select id="bot-policy" aria-label="Bot difficulty and policy"><optgroup label="Level 1"><option value="random-legal">Random legal move</option><option value="goal-seeking">Goal-seeking</option></optgroup><optgroup label="Level 2"><option value="rotation-aware">Rotation-aware goal-seeking</option></optgroup></select></label>
-              </div>
-              <div class="setup-control">
-                <div><strong>Square grid</strong><small>Rows = columns · bounds 8–24</small></div>
-                <div class="stepper"><button id="size-decrease" type="button" aria-label="Decrease grid size">−</button><output id="size-value">9 × 9</output><button id="size-increase" type="button" aria-label="Increase grid size">+</button></div>
-              </div>
-              <div class="setup-control">
-                <div><strong>Tile colors</strong><small>Bounds 3–12 varieties</small></div>
-                <div class="stepper"><button id="colors-decrease" type="button" aria-label="Decrease color varieties">−</button><output id="colors-value">6</output><button id="colors-increase" type="button" aria-label="Increase color varieties">+</button></div>
-              </div>
-              <div class="setup-control tile-art-control">
-                <div><strong>Tile art set</strong><small>Visual only · game values stay the same</small></div>
-                <label for="tile-art-set" class="tile-art-label">Set
-                  <select id="tile-art-set" aria-label="Tile art set">
-                    <option value="1">1 · Emoji</option>
-                    <option value="2">2 · Pop</option>
-                    <option value="3">3 · Etched</option>
-                    <option value="4">4 · Candy</option>
-                    <option value="5">5 · Pixel</option>
-                    <option value="6">6 · Neon</option>
-                  </select>
-                </label>
-              </div>
-              <div class="origin-settings">
-                <p class="origin-heading">Bubble origins <small>Two-cell edge margin · each target is the opposing player's origin</small></p>
-                <div class="origin-control"><strong>Mercury starts</strong><label>Row <input id="mercury-origin-row" type="number" min="2" max="10" value="3"></label><label>Column <input id="mercury-origin-col" type="number" min="2" max="10" value="3"></label><small>Target: <output id="mercury-target">K11</output> · Air's origin</small></div>
-                <div class="origin-control"><strong>Air starts</strong><label>Row <input id="air-origin-row" type="number" min="2" max="10" value="10"></label><label>Column <input id="air-origin-col" type="number" min="2" max="10" value="10"></label><small>Target: <output id="air-target">D4</output> · Mercury's origin</small></div>
-                <output id="origin-validation" aria-live="polite"></output>
-              </div>
-              <div class="seed-input-control">
-                <label for="seed-input"><strong>Replay seed</strong><small>Reuse a seed with the selected size, colors, and origins</small></label>
-                <input id="seed-input" type="text" spellcheck="false" autocomplete="off" aria-label="Board seed">
-                <button id="use-seed-button" type="button">Use seed</button>
-              </div>
-              <div class="setup-actions"><button id="regenerate-button" type="button">New random board</button><output id="settings-summary" aria-live="polite">Current board: 9 × 9 · 6 varieties</output></div>
-            </div>
-          </details>
+
           <div class="arena-topline">
             <div class="turn-copy">
               <span class="eyebrow" id="board-dimensions">SHARED ARENA · 9 × 9</span>
               <strong id="turn-label">Mercury's turn</strong>
               <small class="phase-label" id="phase-label" aria-live="polite">Swap neighboring tiles or your bubble with a tile</small>
             </div>
-            <div class="turn-pill" id="turn-pill">PLAYER 1</div>
+            <div class="turn-meta">
+              <div class="seat-statuses" id="seat-statuses" aria-label="Player connections" hidden>
+                <span class="seat-status" id="player1-connection" data-state="absent" aria-label="Player 1 absent"><span class="seat-dot"></span><span>P1</span></span>
+                <span class="seat-status" id="player2-connection" data-state="absent" aria-label="Player 2 absent"><span class="seat-dot"></span><span>P2</span></span>
+              </div>
+              <div class="turn-pill" id="turn-pill">PLAYER 1</div>
+            </div>
           </div>
           <div id="game-root"></div>
           <details class="event-log" id="event-log">
@@ -130,6 +87,60 @@
             </div>
           </section>
         </aside>
+          <details class="setup-panel" id="setup-panel">
+            <summary>Board setup</summary>
+            <div class="setup-body">
+              <div class="setup-control board-scale-control">
+                <div><strong>Board display size</strong><small>Visual size only · does not change grid rules</small></div>
+                <label for="board-scale"><span id="board-scale-value">100%</span><input id="board-scale" type="range" min="70" max="180" step="5" value="100" aria-label="Board display size"></label>
+              </div>
+              <div class="setup-control">
+                <div><strong>Player mode</strong><small>One local player or two local players</small></div>
+                <label class="setup-select-label" for="player-mode"><select id="player-mode" aria-label="Player mode"><option value="local">2 local players</option><option value="bot">1 player vs bot</option></select></label>
+              </div>
+              <div class="setup-control" id="bot-policy-control" hidden>
+                <div><strong>Bot difficulty</strong><small>Level 1 keeps its current policies; Level 2 can rotate</small></div>
+                <label class="setup-select-label" for="bot-policy"><select id="bot-policy" aria-label="Bot difficulty and policy"><optgroup label="Level 1"><option value="random-legal">Random legal move</option><option value="goal-seeking">Goal-seeking</option></optgroup><optgroup label="Level 2"><option value="rotation-aware">Rotation-aware goal-seeking</option></optgroup></select></label>
+              </div>
+              <div class="setup-control">
+                <div><strong>Square grid</strong><small>Rows = columns · bounds 8–24</small></div>
+                <div class="stepper"><button id="size-decrease" type="button" aria-label="Decrease grid size">−</button><output id="size-value">9 × 9</output><button id="size-increase" type="button" aria-label="Increase grid size">+</button></div>
+              </div>
+              <div class="setup-control">
+                <div><strong>Tile colors</strong><small>Bounds 3–12 varieties</small></div>
+                <div class="stepper"><button id="colors-decrease" type="button" aria-label="Decrease color varieties">−</button><output id="colors-value">6</output><button id="colors-increase" type="button" aria-label="Increase color varieties">+</button></div>
+              </div>
+              <div class="setup-control tile-art-control">
+                <div><strong>Tile art set</strong><small>Visual only · game values stay the same</small></div>
+                <label for="tile-art-set" class="tile-art-label">Set
+                  <select id="tile-art-set" aria-label="Tile art set">
+                    <option value="1">1 · Emoji</option>
+                    <option value="2">2 · Pop</option>
+                    <option value="3">3 · Etched</option>
+                    <option value="4">4 · Candy</option>
+                    <option value="5">5 · Pixel</option>
+                    <option value="6">6 · Neon</option>
+                  </select>
+                </label>
+              </div>
+              <div class="setup-control">
+                <div><strong>Bubble and goal style</strong><small>High contrast by default</small></div>
+                <label class="setup-select-label" for="actor-palette"><select id="actor-palette" aria-label="Bubble and goal style"><option value="contrast">High contrast</option><option value="classic">Classic teal and purple</option></select></label>
+              </div>
+              <div class="origin-settings">
+                <p class="origin-heading">Bubble origins <small>Two-cell edge margin · each target is the opposing player's origin</small></p>
+                <div class="origin-control"><strong>Mercury starts</strong><label>Row <input id="mercury-origin-row" type="number" min="2" max="10" value="3"></label><label>Column <input id="mercury-origin-col" type="number" min="2" max="10" value="3"></label><small>Target: <output id="mercury-target">K11</output> · Air's origin</small></div>
+                <div class="origin-control"><strong>Air starts</strong><label>Row <input id="air-origin-row" type="number" min="2" max="10" value="10"></label><label>Column <input id="air-origin-col" type="number" min="2" max="10" value="10"></label><small>Target: <output id="air-target">D4</output> · Mercury's origin</small></div>
+                <output id="origin-validation" aria-live="polite"></output>
+              </div>
+              <div class="seed-input-control">
+                <label for="seed-input"><strong>Replay seed</strong><small>Reuse a seed with the selected size, colors, and origins</small></label>
+                <input id="seed-input" type="text" spellcheck="false" autocomplete="off" aria-label="Board seed">
+                <button id="use-seed-button" type="button">Use seed</button>
+              </div>
+              <div class="setup-actions"><button id="regenerate-button" type="button">New random board</button><output id="settings-summary" aria-live="polite">Current board: 9 × 9 · 6 varieties</output></div>
+            </div>
+          </details>
       </main>
       <footer class="page-footer">A small shared-board experiment <span>•</span> Rules are still in motion</footer>
     </div>
